@@ -1,63 +1,69 @@
-using UnityEngine;
-using TMPro;
+#region Info
+// -----------------------------------------------------------------------
+// ResolutionManager.cs
+// 
+// Felix Jung 06.06.2023
+// -----------------------------------------------------------------------
+#endregion
+#region
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+#endregion
 
-public class ResolutionManager : MonoBehaviour
-{
-  public TMP_Dropdown resolutionDropdown;
-  public TextMeshProUGUI saveButtonText;
+namespace BT.Scripts {
+  public class ResolutionManager : MonoBehaviour {
+    #region Serialized Fields
+    public TMP_Dropdown resolutionDropdown;
+    public TextMeshProUGUI saveButtonText;
+    #endregion
+    private Resolution[] resolutions;
+    #region Event Functions
+    private void Start() {
+      resolutions = Screen.resolutions;
 
-  private Resolution[] resolutions;
+      // Create a HashSet to store unique resolution options
+      var uniqueOptions = new HashSet<string>();
 
-  private void Start()
-  {
-    resolutions = Screen.resolutions;
+      // Clear the dropdown options
+      resolutionDropdown.ClearOptions();
 
-    // Create a HashSet to store unique resolution options
-    HashSet<string> uniqueOptions = new HashSet<string>();
+      foreach (var resolution in resolutions) {
+        string option = resolution.width + "x" + resolution.height;
 
-    // Clear the dropdown options
-    resolutionDropdown.ClearOptions();
-
-    foreach (Resolution resolution in resolutions)
-    {
-      string option = resolution.width + "x" + resolution.height;
-
-      if (!uniqueOptions.Contains(option) && resolution.width >= 800 && resolution.height >= 600)
-      {
-        uniqueOptions.Add(option);
-        resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(option));
+        if (!uniqueOptions.Contains(option) && resolution.width >= 800 &&
+            resolution.height >= 600) {
+          uniqueOptions.Add(option);
+          resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(option));
+        }
       }
+
+      resolutionDropdown.value = GetCurrentResolutionIndex();
+      resolutionDropdown.RefreshShownValue();
+    }
+    #endregion
+
+    public void SaveResolution() {
+      string selectedOption
+          = resolutionDropdown.options[resolutionDropdown.value].text;
+
+      string[] resolutionValues = selectedOption.Split('x');
+      int width = int.Parse(resolutionValues[0]);
+      int height = int.Parse(resolutionValues[1]);
+
+      float aspectRatio = (float)width / height;
+      Screen.SetResolution(width, height, true);
+
+      saveButtonText.text = "Resolution Saved!";
     }
 
-    resolutionDropdown.value = GetCurrentResolutionIndex();
-    resolutionDropdown.RefreshShownValue();
-  }
-
-  public void SaveResolution()
-  {
-    string selectedOption = resolutionDropdown.options[resolutionDropdown.value].text;
-
-    string[] resolutionValues = selectedOption.Split('x');
-    int width = int.Parse(resolutionValues[0]);
-    int height = int.Parse(resolutionValues[1]);
-
-    float aspectRatio = (float)width / height;
-    Screen.SetResolution(width, height, true);
-
-    saveButtonText.text = "Resolution Saved!";
-  }
-
-  private int GetCurrentResolutionIndex()
-  {
-    Resolution currentResolution = Screen.currentResolution;
-    for (int i = 0; i < resolutions.Length; i++)
-    {
-      if (resolutions[i].width == currentResolution.width && resolutions[i].height == currentResolution.height)
-      {
-        return i;
-      }
+    private int GetCurrentResolutionIndex() {
+      var currentResolution = Screen.currentResolution;
+      for (int i = 0; i < resolutions.Length; i++)
+        if (resolutions[i].width == currentResolution.width &&
+            resolutions[i].height == currentResolution.height)
+          return i;
+      return 0;
     }
-    return 0;
   }
 }
