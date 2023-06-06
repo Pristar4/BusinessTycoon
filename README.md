@@ -5,7 +5,7 @@ Cash Reserves: $1,000,000
 Employees: 25
 
 ---
-
+ 
 ## Navigation Panel
 [Products] | [Marketing] | [Finance] | [HR]
 
