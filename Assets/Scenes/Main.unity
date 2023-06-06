@@ -1713,6 +1713,7 @@ MonoBehaviour:
   incomeText: {fileID: 1648353447}
   expensesText: {fileID: 1115928923}
   netProfitText: {fileID: 1505233801}
+  turnText: {fileID: 1784792192}
   managementDropdown: {fileID: 566020433}
   detailsText: {fileID: 1288243998}
   marketDropdown: {fileID: 573001591}
