@@ -2,138 +2,100 @@
 // -----------------------------------------------------------------------
 // GameManager.cs
 // 
-// Felix Jung 06.06.2023
+// Felix Jung 07.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
-
 using System.Collections.Generic;
-using BT.Scripts;
-using TMPro;
+using BT.Scripts.production;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 #endregion
 
 namespace BT.Scripts {
   public class GameManager : MonoBehaviour {
     #region Serialized Fields
-    // UI element to display the company name
-    public TMP_Text companyNameText;
-
-    // UI element to display the balance
-    public TMP_Text balanceText;
-
-    // UI element to display the income
-    public TMP_Text incomeText;
-
-    // UI element to display the expenses
-    public TMP_Text expensesText;
-
-    // UI element to display the net profit
-    public TMP_Text netProfitText;
-
-    // UI element to display the turn number
-    public TMP_Text turnText;
-
-    // Dropdown for management options
-    public TMP_Dropdown managementDropdown;
-
-    // Text field to display the details of the selected management option
-    public TMP_Text detailsText;
-
-    // Dropdown to display different market statistics
-    public TMP_Dropdown marketDropdown;
+    [SerializeField] private List<Company> companies;
+    [SerializeField] private Company companyPrefab;
+    [SerializeField] private AIManager aiManager;
+    [SerializeField] private PlayerManager playerManager;
     #endregion
+    private GameState currentState;
 
-    private float timeRemaining = 3;
-
-    // List of all startups in the game
-    public List<Startup> Startups { get; private set; }
-    private Market Market { get; set; }
-
-    private int Turn { get; set; }
+    [SerializeField] private MarketManager marketManager;
+    [SerializeField] private TurnManager turnManager;
+    [SerializeField] private UIManager uiManager;
     #region Event Functions
-    // This method is called at the start of the game
     private void Start() {
       // Initialize the market
-      Market = new Market();
+      marketManager.Initialize();
 
-      // Initialize the list of startups
-      Startups = new List<Startup>();
+      // Initialize the list of Companies
+      companies = new List<Company>();
+      var startup = CreateCompany();
+      companies.Add(startup);
+      startup.Finance.Balance = 1000;
+      startup.Finance.Income = 100;
+      startup.Finance.Expense = 50;
+      
+      var npcCompanies = CreateNpcCompanies(4);
+      companies.AddRange(npcCompanies);
 
-      // You should create startups here and add them to the Startups list
-      // For example:
-      Startups.Add(new Startup("My Startup"));
-      Startups[0].Finance.Balance = 1000;
-      Startups[0].Finance.Income = 100;
-      Startups[0].Finance.Expense = 200;
-      Startups[0].Finance.NetProfit = -100;
+      // Initialize all other managers
+      uiManager.Initialize(startup);
+      aiManager.Initialize(npcCompanies);
+      playerManager.Initialize(startup);
+      turnManager.Initialize();
 
-      Startups.Add(new Startup("McDonalds"));
-
-      // Initialize the turn number
-      Turn = 0;
-
-      // Set the company name text
-      // This assumes that the player controls the first startup in the list
-      companyNameText.text = Startups[0].CompanyName;
-
-      // Update the financial display to match the player's startup's finances
-      UpdateFinancialUI(Startups[0]);
+      // Set the current state.
+      currentState = GameState.Playing;
     }
 
-    // This method is called every frame
     private void Update() {
-      if (timeRemaining > 0) {
-        timeRemaining -= Time.deltaTime;
-        return;
-
+      if (currentState == GameState.Playing) {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame) {
+          turnManager.AdvanceTurn();
+          Debug.Log("Turn: " + turnManager.CurrentTurn);
+          UpdateGame();
+        }
       }
-
-      timeRemaining = 3;
-      Debug.Log("Turn: " + Turn);
-      AdvanceTurn();
-
-      // You can add code here to check for player input, advance turns, or manage other parts of the game state
     }
     #endregion
 
-    private void UpdateUI() {
-      UpdateFinancialUI(Startups[0]);
-      UpdateTurnUI();
-      Market.UpdateMarket();
+    private void UpdateGame() {
+      foreach (var company in companies) {
+        company.Produce();
+      }
+
+      foreach (var company in companies) {
+        // company.CreateOffer(marketManager);
+      }
+      
+
+      marketManager.UpdateMarket();
+      uiManager.UpdateUI(playerManager.PlayerCompany, turnManager.CurrentTurn);
+    }
+    
+
+    private List<Company> CreateNpcCompanies(int count) {
+      var npcCompanies = new List<Company>();
+
+      for (int i = 0; i < count; i++) {
+        var npc = aiManager.CreateCompany(companyPrefab, i);
+        npcCompanies.Add(npc);
+      }
+
+      return npcCompanies;
     }
 
-    // This method advances the game by one turn
-    public void AdvanceTurn() {
-      // Increment the turn number
-      Turn++;
-
-      // Simulate a turn for each startup
-      foreach (var startup in Startups) startup.RunTurn(Market);
-
-      // Update the market after all startups have run their turn
-      Market.UpdateMarket();
-
-      // Update the financial display to reflect changes from this turn
-      // Again, this assumes that the player controls the first startup in the list
-      UpdateUI();
-    }
-
-    // This method updates the financial display to match the provided startup's finances
-    private void UpdateFinancialUI(Startup startup) {
-      // Update the balance, income, expenses, and net profit text fields
-      balanceText.text = "Balance: " + startup.Finance.Balance;
-
-      incomeText.text = "Income: " + startup.Finance.Income;
-      expensesText.text = "Expenses: " + startup.Finance.Expense;
-      netProfitText.text
-          = "Net Profit: " + startup.Finance.NetProfit;
-    }
-
-    private void UpdateTurnUI() {
-      turnText.text = Turn.ToString();
+    private Company CreateCompany() {
+      return playerManager.CreateCompany(companyPrefab);
     }
   }
 
+  public enum GameState {
+    Playing,
+    Paused,
+    Ended,
+  }
 }
