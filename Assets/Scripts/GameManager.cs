@@ -67,9 +67,9 @@ namespace BT.Scripts {
         company.Produce();
       }
 
-      foreach (var company in companies) {
-        // company.CreateOffer(marketManager);
-      }
+      /*foreach (var company in companies) {
+        company.CreateOffer(marketManager);
+      }*/
       
 
       marketManager.UpdateMarket();
