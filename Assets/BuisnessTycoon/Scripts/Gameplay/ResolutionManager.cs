@@ -11,7 +11,7 @@ using TMPro;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts {
+namespace BT.Scripts.Gameplay {
   public class ResolutionManager : MonoBehaviour {
     #region Serialized Fields
     public TMP_Dropdown resolutionDropdown;

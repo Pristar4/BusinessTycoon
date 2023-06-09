@@ -8,7 +8,7 @@
 using BT.Scripts.production;
 using UnityEngine;
 
-namespace BT.Scripts {
+namespace BT.Scripts.Gameplay {
   public class PlayerManager : MonoBehaviour {
 
     public Company PlayerCompany { get; private set; }

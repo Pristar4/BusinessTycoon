@@ -1,24 +1,24 @@
 ﻿#region Info
 // -----------------------------------------------------------------------
-// MarketManager.cs
+// TurnManager.cs
 // 
 // Felix Jung 07.06.2023
 // -----------------------------------------------------------------------
 #endregion
-using BT.Scripts.production;
 using UnityEngine;
 
-namespace BT.Scripts {
-  public class MarketManager: MonoBehaviour {
+namespace BT.Scripts.Gameplay {
+  public class TurnManager : MonoBehaviour {
 
-    public Market Market { get; set; }
+    public int CurrentTurn { get; set; }
+
 
     public void Initialize() {
-      Market = new Market();
+      CurrentTurn = 0;
     }
 
-    public void UpdateMarket() {
-      Market.UpdateMarket();
+    public void AdvanceTurn() {
+      CurrentTurn++;
     }
   }
 }

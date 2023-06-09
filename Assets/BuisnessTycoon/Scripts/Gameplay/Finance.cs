@@ -5,7 +5,7 @@
 // Felix Jung 06.06.2023
 // -----------------------------------------------------------------------
 #endregion
-namespace BT.Scripts {
+namespace BT.Scripts.Gameplay {
   
   [System.Serializable]
   public class Finance {

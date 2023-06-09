@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using BT.Scripts.production;
 using UnityEngine;
 
-namespace BT.Scripts {
+namespace BT.Scripts.AI {
   internal class AIManager : MonoBehaviour {
 
     private List<Company> npcCompanies;
