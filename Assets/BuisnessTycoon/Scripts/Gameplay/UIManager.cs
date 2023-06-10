@@ -22,11 +22,8 @@ namespace BT.Scripts.Gameplay {
     [VerticalGroup("UI Elements/Top Bar")]
     public TMP_Text companyNameText;
      [VerticalGroup("UI Elements/Top Bar")]
-
-
     public TMP_Text balanceText;
    [VerticalGroup("UI Elements/Top Bar")]
-
     public TMP_Text incomeText;
   [VerticalGroup("UI Elements/Top Bar")]
     public TMP_Text expensesText;
@@ -34,24 +31,24 @@ namespace BT.Scripts.Gameplay {
     public TMP_Text netProfitText;
     [VerticalGroup("UI Elements/Top Bar")]
     public TMP_Text turnText;
-    [FoldoutGroup("UI Elements/Top Bar")]
+    [VerticalGroup("UI Elements")]
     public TMP_Dropdown managementDropdown;
-    [FoldoutGroup("UI Elements")]
+    [VerticalGroup("UI Elements")]
     public TMP_Text detailsText;
-    [FoldoutGroup("UI Elements")]
+    [VerticalGroup("UI Elements")]
     public TMP_Dropdown marketDropdown;
-    [FoldoutGroup("UI Elements")]
+    [VerticalGroup("UI Elements")]
     public Transform offerContainer;
 
     [SerializeField]
     private GameObject offerItemPrefab;
     #endregion
 
+    [SerializeField]
     private MarketManager marketManager;
     private IReadOnlyList<Offer> offers; // Read-only list of offers
 
     private void InitUI(Company startup) {
-      marketManager = FindObjectOfType<MarketManager>();
       offers = marketManager.GetOffers();
       UpdateFinancialUI(startup);
       UpdateOfferUI();

@@ -67,6 +67,9 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 0
@@ -3925,6 +3928,7 @@ MonoBehaviour:
   marketDropdown: {fileID: 573001591}
   offerContainer: {fileID: 1656862218}
   offerItemPrefab: {fileID: 34438020750052356, guid: a81fa633d9e7be441a4d9b258cbad569, type: 3}
+  marketManager: {fileID: 645320450}
 --- !u!1 &1648353445
 GameObject:
   m_ObjectHideFlags: 0
