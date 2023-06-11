@@ -7,12 +7,10 @@
 #endregion
 #region
 using System;
-using System.Collections.Generic;
 using BT.Scripts.production;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 #endregion
 
 namespace BT.Scripts.Gameplay {
@@ -41,8 +39,6 @@ namespace BT.Scripts.Gameplay {
       public TMP_Text detailsText;
       [FoldoutGroup("UI Elements")]
       public TMP_Dropdown marketDropdown;
-      [SerializeField]
-      private GameObject offerItemPrefab;
       [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private InventoryPanel inventoryPanel;
@@ -51,12 +47,8 @@ namespace BT.Scripts.Gameplay {
       private OfferPanel offerPanel;
       #endregion
       private IPanelDisplay currentPanel;
-      private MarketManager marketManager;
-      private IReadOnlyList<Offer> offers; // Read-only list of offers
 
       private void InitUI(Company startup) {
-        marketManager = FindFirstObjectByType<MarketManager>();
-        offers = marketManager.GetOffers();
         UpdateFinancialUI(startup);
         offerPanel.UpdatePanel();
       }

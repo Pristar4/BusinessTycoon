@@ -8,7 +8,6 @@
 #region
 using BT.Scripts.production;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 #endregion
 
