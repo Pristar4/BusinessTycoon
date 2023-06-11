@@ -81,7 +81,9 @@ namespace BT.Scripts.Gameplay {
 
       private void UpdateOfferUI() {
         // Clear existing offer items
-        foreach (Transform child in offerContainer) { Destroy(child.gameObject); }
+        foreach (Transform child in offerContainer) {
+          Destroy(child.gameObject);
+        }
 
 
         offers = marketManager.GetOffers();

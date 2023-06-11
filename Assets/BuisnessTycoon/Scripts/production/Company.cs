@@ -18,8 +18,8 @@ namespace BT.Scripts.production {
 
     [SerializeField] private string companyName = "DefaultCompany";
     #endregion
-    private FactorySo factory;
     [SerializeField] private readonly List<FactoryData> factoryInventory;
+    private FactorySo factory;
 
     public Company() {
       // make sure the inventory is initialized

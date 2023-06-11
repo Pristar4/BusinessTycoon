@@ -18,19 +18,22 @@ namespace BT.Scripts.Gameplay {
     private TurnState currentState;
 
     public TurnStateMachine(
-                            List<Company> companies, MarketManager marketManager,
-                            UIManager uiManager, PlayerManager playerManager,
-                            TurnManager turnManager) {
+        List<Company> companies, MarketManager marketManager,
+        UIManager uiManager, PlayerManager playerManager,
+        TurnManager turnManager) {
       idleTurnState = new IdleTurnState();
       idleTurnState.Initialize(this);
 
       productionTurnState
-          = new ProductionTurnState(companies, uiManager, playerManager, turnManager);
+          = new ProductionTurnState(companies, uiManager, playerManager,
+                                    turnManager);
       productionTurnState.Initialize(this);
-      createOfferTurnState = new CreateOfferTurnState(uiManager, playerManager, turnManager);
+      createOfferTurnState
+          = new CreateOfferTurnState(uiManager, playerManager, turnManager);
       createOfferTurnState.Initialize(this);
       aiCreateOfferTurnState
-          = new AiCreateOfferTurnState(companies, marketManager, uiManager, playerManager,
+          = new AiCreateOfferTurnState(companies, marketManager, uiManager,
+                                       playerManager,
                                        turnManager);
       aiCreateOfferTurnState.Initialize(this);
       chooseOfferTurnState = new ChooseOfferTurnState();
@@ -38,12 +41,14 @@ namespace BT.Scripts.Gameplay {
       showOfferTurnState = new ShowOfferTurnState();
       showOfferTurnState.Initialize(this);
       aiChooseOfferTurnState
-          = new AiChooseOfferTurnState(marketManager, uiManager, playerManager, turnManager);
+          = new AiChooseOfferTurnState(marketManager, uiManager, playerManager,
+                                       turnManager);
       aiChooseOfferTurnState.Initialize(this);
       offerResultTurnState = new OfferResultTurnState();
       offerResultTurnState.Initialize(this);
       deconstructOfferTurnState
-          = new DeconstructOfferTurnState(turnManager, marketManager, uiManager, playerManager);
+          = new DeconstructOfferTurnState(turnManager, marketManager, uiManager,
+                                          playerManager);
       deconstructOfferTurnState.Initialize(this);
       currentState = idleTurnState;
     }

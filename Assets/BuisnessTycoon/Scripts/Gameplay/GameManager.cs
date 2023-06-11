@@ -56,7 +56,7 @@ namespace BT.Scripts.Gameplay {
 
       // Set the current state.
       currentState = GameState.Playing;
-      turnStateMachine = new TurnStateMachine( companies,
+      turnStateMachine = new TurnStateMachine(companies,
                                               marketManager, uiManager,
                                               playerManager, turnManager);
 

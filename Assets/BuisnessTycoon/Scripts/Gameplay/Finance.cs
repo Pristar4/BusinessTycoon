@@ -32,9 +32,6 @@ namespace BT.Scripts.Gameplay {
       Balance += NetProfit;
 
 
-
-
-
     }
   }
 }
