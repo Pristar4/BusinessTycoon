@@ -38,7 +38,7 @@ namespace BT.Scripts.Gameplay {
     private string serializedTurnState;
     #endregion
 
-    private ITurnState currentTurnState = new IdleTurnState();
+    private TurnState currentTurnState = new IdleTurnState();
     private TurnStateContext turnStateContext;
     #region Event Functions
     private void Start() {
