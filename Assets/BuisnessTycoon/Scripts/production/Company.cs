@@ -42,7 +42,7 @@ namespace BT.Scripts.production {
     public void Produce() {
       foreach (var factoryData in FactoryInventory) {
         factory = factoryData.type;
-        string product = factory.Results[0].type.name;
+        string product = factory.Results[0].Type.name;
 
         for (int i = 0; i < factoryData.amount; i++) {
           if (TryProduction(out int amountProduced)) {
@@ -71,21 +71,21 @@ namespace BT.Scripts.production {
     private void UpdateProductInventory(ProductData result,
                                         ref int amountProduced) {
       var existingProduct
-          = productInventory.Find(data => data.type == result.type);
+          = productInventory.Find(data => data.Type == result.Type);
 
-      if (existingProduct != null) { existingProduct.amount += result.amount; } else {
+      if (existingProduct != null) { existingProduct.Amount += result.Amount; } else {
         productInventory.Add(result);
       }
 
-      amountProduced += result.amount;
+      amountProduced += result.Amount;
     }
 
     public void CreateOffer(MarketManager marketManager) {
       foreach (var product in productInventory) {
-        if (product.amount <= 0)
+        if (product.Amount <= 0)
           continue;
-        var offer = new Offer(this, product, product.amount,
-                              product.type.SellPrice);
+        var offer = new Offer(this, product, product.Amount,
+                              product.Type.SellPrice);
         Debug.Log("Created offer from CreateOffer");
         Offers.Add(offer);
         marketManager.AddOffer(offer);
@@ -99,10 +99,10 @@ namespace BT.Scripts.production {
 
     public void RemoveProduct(ProductSo productType, int quantityToBuy) {
 
-      var product = productInventory.Find(data => data.type == productType);
-      product.amount -= quantityToBuy;
+      var product = productInventory.Find(data => data.Type == productType);
+      product.Amount -= quantityToBuy;
 
-      if (product.amount <= 0) { productInventory.Remove(product); }
+      if (product.Amount <= 0) { productInventory.Remove(product); }
     }
   }
   public class Offer {
@@ -126,7 +126,7 @@ namespace BT.Scripts.production {
 
     public string GetOfferDetails() {
       return "Company: " + company.CompanyName + " Product: " +
-             product.type.name
+             product.Type.name
              + " Quantity: " + quantity + " Price: " + price;
     }
 

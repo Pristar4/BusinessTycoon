@@ -49,7 +49,7 @@ namespace BT.Scripts.Gameplay {
 
         // Set offer details in TMP Text component
         var productText = offerItem.GetComponentInChildren<TMP_Text>();
-        productText.text = item.type + " X " + item.amount;
+        productText.text = item.Type + " X " + item.Amount;
       }
     }
     #endregion

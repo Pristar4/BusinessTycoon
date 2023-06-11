@@ -56,12 +56,12 @@ namespace BT.Scripts.Gameplay {
 
     public void UpdateMarket() {
       //TODO: improve this logic to be more efficient
-      var products = new List<ProductSo>(productDemand.Keys);
+      var items = new List<ProductSo>(productDemand.Keys);
 
-      foreach (var productType in products) {
+      foreach (var productType in items) {
         int remainingDemand = productDemand[productType];
         var offersForProduct
-            = offers.FindAll(offer => offer.product.type == productType &&
+            = offers.FindAll(offer => offer.product.Type == productType &&
                                       !offer.isSold);
         SortOffersByScore(offersForProduct);
 
@@ -74,7 +74,7 @@ namespace BT.Scripts.Gameplay {
           offer.soldQuantity = quantityToBuy;
           offer.isSold = true;
           // Remove products from company
-          offer.company.RemoveProduct(offer.product.type, quantityToBuy);
+          offer.company.RemoveProduct(offer.product.Type, quantityToBuy);
           offer.soldQuantity = quantityToBuy;
           offer.quantity -= quantityToBuy;
           // Add money to company
@@ -86,7 +86,7 @@ namespace BT.Scripts.Gameplay {
             Debug.Log("Removed offer from market");
           }
 
-          Debug.Log("Sold " + quantityToBuy + " of " + offer.product.type.name +
+          Debug.Log("Sold " + quantityToBuy + " of " + offer.product.Type.name +
                     " for " + offer.price + " each");
 
           if (remainingDemand <= 0) { break; }
@@ -99,8 +99,8 @@ namespace BT.Scripts.Gameplay {
       Debug.Log("UpdateMarket");
     }
 
-    private void SortOffersByScore(List<Offer> offers) {
-      offers.Sort((a, b) => a.price.CompareTo(b.price));
+    private void SortOffersByScore(List<Offer> offerList) {
+      offerList.Sort((a, b) => a.price.CompareTo(b.price));
       //TODO: Add more factors and sorting logic in the future
     }
 
