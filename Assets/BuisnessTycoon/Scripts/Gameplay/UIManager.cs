@@ -14,8 +14,6 @@ using UnityEngine;
 #endregion
 
 namespace BT.Scripts.Gameplay {
-  #region
-  #endregion
 
   namespace BT.Scripts.Gameplay {
     public class UIManager : MonoBehaviour {
@@ -46,7 +44,6 @@ namespace BT.Scripts.Gameplay {
       [SerializeField]
       private OfferPanel offerPanel;
       #endregion
-      private IPanelDisplay currentPanel;
 
       private void InitUI(Company startup) {
         UpdateFinancialUI(startup);
@@ -70,7 +67,6 @@ namespace BT.Scripts.Gameplay {
       private void UpdateTurnUI(int turn) {
         turnText.text = "Turn: " + turn;
       }
-
 
       public void Initialize(Company startup) {
         InitUI(startup);

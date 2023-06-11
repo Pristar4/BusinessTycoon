@@ -23,7 +23,6 @@ namespace BT.Scripts.Gameplay {
     private IReadOnlyList<Offer> offers;
 
     private static MarketManager GetMarketManager => ManagerProvider.Current.MarketManager;
-
     #region IPanelDisplay Members
     public void Initialize() {
       Debug.Log("OfferPanel initialized");
@@ -38,7 +37,6 @@ namespace BT.Scripts.Gameplay {
       // Clear existing offer items
       foreach (Transform child in offerContainer) { Destroy(child.gameObject); }
 
-      
 
       offers = GetMarketManager.GetOffers();
 

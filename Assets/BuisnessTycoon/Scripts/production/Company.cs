@@ -15,8 +15,7 @@ namespace BT.Scripts.production {
   public class Company : MonoBehaviour {
     #region Serialized Fields
     [SerializeField] private List<ProductData> productInventory;
-    [SerializeField] private  List<FactoryData> factoryInventory;
-    
+    [SerializeField] private List<FactoryData> factoryInventory;
 
     [SerializeField] private string companyName = "DefaultCompany";
     #endregion
@@ -74,9 +73,9 @@ namespace BT.Scripts.production {
       var existingProduct
           = productInventory.Find(data => data.type == result.type);
 
-      if (existingProduct != null) {
-        existingProduct.amount += result.amount;
-      } else { productInventory.Add(result); }
+      if (existingProduct != null) { existingProduct.amount += result.amount; } else {
+        productInventory.Add(result);
+      }
 
       amountProduced += result.amount;
     }
@@ -108,10 +107,10 @@ namespace BT.Scripts.production {
   }
   public class Offer {
 
-    public  Company company;
-    public  decimal price;
-    public  ProductData product;
+    public Company company;
     public bool isSold;
+    public decimal price;
+    public ProductData product;
     public int quantity;
     public int soldQuantity; // TODO: Remove this
 

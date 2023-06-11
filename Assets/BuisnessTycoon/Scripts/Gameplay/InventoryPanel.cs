@@ -13,13 +13,16 @@ using UnityEngine;
 
 namespace BT.Scripts.Gameplay {
   public class InventoryPanel : MonoBehaviour, IPanelDisplay {
-    private readonly Company company;
+    #region Serialized Fields
     [SerializeField] private Transform inventoryContainer;
-    
+
     [SerializeField]
     private GameObject productItemPrefab;
+    #endregion
+    private readonly Company company;
+
     public InventoryPanel(Company selected = null) {
-      
+
       if (selected == null) { Debug.Log("No company selected"); }
 
       company = selected;
@@ -37,7 +40,6 @@ namespace BT.Scripts.Gameplay {
     public void UpdatePanel() {
 // Clear existing offer items
       foreach (Transform child in inventoryContainer) { Destroy(child.gameObject); }
-
 
 
       // Instantiate offer items for  all offers in market

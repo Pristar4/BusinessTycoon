@@ -48,9 +48,7 @@ namespace BT.Scripts.Gameplay {
     }
 
     public int GetProductDemand(ProductSo productType) {
-      if (productDemand.TryGetValue(productType, out int demand)) {
-        return demand;
-      }
+      if (productDemand.TryGetValue(productType, out int demand)) { return demand; }
 
       throw new Exception("Product" + productType +
                           "not found in productDemand");
@@ -122,9 +120,7 @@ namespace BT.Scripts.Gameplay {
       decimal sales = 0;
 
       foreach (var offer in offers) {
-        if (offer.company == company && offer.isSold) {
-          sales += offer.price * offer.soldQuantity;
-        }
+        if (offer.company == company && offer.isSold) { sales += offer.price * offer.soldQuantity; }
       }
 
       return sales;
