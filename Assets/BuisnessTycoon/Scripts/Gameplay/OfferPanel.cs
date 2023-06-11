@@ -20,11 +20,9 @@ namespace BT.Scripts.Gameplay {
     [SerializeField]
     private GameObject offerItemPrefab;
     #endregion
-    [SerializeField]
-    private MarketManager marketManager;
     private IReadOnlyList<Offer> offers;
 
-
+    private static MarketManager GetMarketManager => ManagerProvider.Current.MarketManager;
 
     #region IPanelDisplay Members
     public void Initialize() {
@@ -40,8 +38,9 @@ namespace BT.Scripts.Gameplay {
       // Clear existing offer items
       foreach (Transform child in offerContainer) { Destroy(child.gameObject); }
 
+      
 
-      offers = marketManager.GetOffers();
+      offers = GetMarketManager.GetOffers();
 
       // Instantiate offer items for  all offers in market
       foreach (var offer in offers) {
