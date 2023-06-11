@@ -2,27 +2,29 @@
 // -----------------------------------------------------------------------
 // MarketManager.cs
 // 
-// Felix Jung 07.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
+#region
 using System;
 using System.Collections.Generic;
 using BT.Scripts.production;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
+#endregion
 
 namespace BT.Scripts.Gameplay {
   public class MarketManager : SerializedMonoBehaviour {
-
+    #region Serialized Fields
     public ProductSo[] products;
+    #endregion
 
     [OdinSerialize]
     private List<Offer> offers;
 
     [OdinSerialize]
-    private Dictionary<ProductSo, int> productDemand
-        = new Dictionary<ProductSo, int>();
+    private Dictionary<ProductSo, int> productDemand = new();
 
     public void Initialize() {
       offers = new List<Offer>();
@@ -48,10 +50,10 @@ namespace BT.Scripts.Gameplay {
     public int GetProductDemand(ProductSo productType) {
       if (productDemand.TryGetValue(productType, out int demand)) {
         return demand;
-      } else {
-        throw new Exception("Product" + productType +
-                            "not found in productDemand");
       }
+
+      throw new Exception("Product" + productType +
+                          "not found in productDemand");
     }
 
     public void UpdateMarket() {
@@ -60,7 +62,7 @@ namespace BT.Scripts.Gameplay {
 
       foreach (var productType in products) {
         int remainingDemand = productDemand[productType];
-        List<Offer> offersForProduct
+        var offersForProduct
             = offers.FindAll(offer => offer.product.type == productType &&
                                       !offer.isSold);
         SortOffersByScore(offersForProduct);
@@ -79,12 +81,13 @@ namespace BT.Scripts.Gameplay {
           offer.quantity -= quantityToBuy;
           // Add money to company
           offer.company.AddMoney(quantityToBuy * offer.price);
+
           //remove offer if it is empty
           if (offer.quantity <= 0) {
             offers.Remove(offer);
             Debug.Log("Removed offer from market");
           }
-          
+
           Debug.Log("Sold " + quantityToBuy + " of " + offer.product.type.name +
                     " for " + offer.price + " each");
 

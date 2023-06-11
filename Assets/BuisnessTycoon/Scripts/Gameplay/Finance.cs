@@ -2,14 +2,18 @@
 // -----------------------------------------------------------------------
 // Finance.cs
 // 
-// Felix Jung 06.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
+#region
+using System;
+#endregion
+
 namespace BT.Scripts.Gameplay {
-  
-  [System.Serializable]
+
+  [Serializable]
   public class Finance {
-    
+
     public Finance() {
       Balance = 0;
       Income = 0;

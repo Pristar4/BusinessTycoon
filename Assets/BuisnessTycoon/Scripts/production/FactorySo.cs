@@ -2,11 +2,10 @@
 // -----------------------------------------------------------------------
 // FactorySo.cs
 // 
-// Felix Jung 06.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,11 +15,12 @@ namespace BT.Scripts.production {
   [CreateAssetMenu(fileName = "new_factory", menuName = "Production/Factory",
                    order = 0)]
   public class FactorySo : ProductSo {
-
+    #region Serialized Fields
     [SerializeField] private ProductData[] ingredients;
     [SerializeField] private ProductData[] results;
+    #endregion
 
-    public ProductData[] Ingredients => ingredients;
+    private ProductData[] Ingredients => ingredients;
     public ProductData[] Results => results;
 
     public bool TryProduce(List<ProductData> inputIngredients,

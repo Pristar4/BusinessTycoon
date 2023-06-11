@@ -12,17 +12,27 @@ using UnityEngine;
 
 namespace BT.Scripts.Gameplay {
   public class InventoryPanel : MonoBehaviour, IPanelDisplay {
-    private Company company;
+    private readonly Company company;
     private IPanelDisplay panelDisplayImplementation;
-    public void Initialize(Company selected = null) {
+
+    public InventoryPanel(Company selected = null) {
+      if (selected == null) { Debug.Log("No company selected"); }
+
       company = selected;
+    }
+
+    #region IPanelDisplay Members
+    public void Initialize() {
       Debug.Log(company + "InventoryPanel initialized");
     }
+
     public void SetActive(bool isActive) {
       gameObject.SetActive(isActive);
     }
-    public void UpdateUI() {
-      //update the inventory panel here and add product gameobjects with the correct data under the Scrollview the public Transform inventoryContainer; is in the uimanager under that gameobjects manage the produts
+
+    public void UpdatePanel() {
+      //update the inventory panel here and add product game-objects with the correct data under the Scroll-view the public Transform inventoryContainer; is in the ui-manager under that game-objects manage the products
     }
+    #endregion
   }
 }

@@ -2080,7 +2080,6 @@ MonoBehaviour:
   turnManager: {fileID: 1596400782}
   uiManager: {fileID: 1635852698}
   currentState: 0
-  serializedTurnState: 
 --- !u!4 &752998444
 Transform:
   m_ObjectHideFlags: 0
@@ -3927,8 +3926,9 @@ MonoBehaviour:
   detailsText: {fileID: 1288243998}
   marketDropdown: {fileID: 573001591}
   offerContainer: {fileID: 1656862218}
+  inventoryContainer: {fileID: 0}
   offerItemPrefab: {fileID: 34438020750052356, guid: a81fa633d9e7be441a4d9b258cbad569, type: 3}
-  marketManager: {fileID: 645320450}
+  inventoryPanel: {fileID: 0}
 --- !u!1 &1648353445
 GameObject:
   m_ObjectHideFlags: 0

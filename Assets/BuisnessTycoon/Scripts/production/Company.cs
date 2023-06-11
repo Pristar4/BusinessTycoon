@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // Company.cs
 // 
-// Felix Jung 08.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -15,13 +15,11 @@ namespace BT.Scripts.production {
   public class Company : MonoBehaviour {
     #region Serialized Fields
     [SerializeField] private List<ProductData> productInventory;
-    [SerializeField] private List<FactoryData> factoryInventory;
-    public List<ProductData> ProductInventory => productInventory;
-    public List<FactoryData> FactoryInventory => factoryInventory;
 
     [SerializeField] private string companyName = "DefaultCompany";
     #endregion
     private FactorySo factory;
+    [SerializeField] private readonly List<FactoryData> factoryInventory;
 
     public Company() {
       // make sure the inventory is initialized
@@ -29,7 +27,10 @@ namespace BT.Scripts.production {
       factoryInventory = new List<FactoryData>();
     }
 
-    private List<Offer> Offers { get; set; } = new();
+    public List<ProductData> ProductInventory => productInventory;
+    public List<FactoryData> FactoryInventory => factoryInventory;
+
+    private List<Offer> Offers { get; } = new();
 
     public string CompanyName {
       get => companyName;
@@ -44,7 +45,7 @@ namespace BT.Scripts.production {
         string product = factory.Results[0].type.name;
 
         for (int i = 0; i < factoryData.amount; i++) {
-          if (TryProduction(out var amountProduced)) {
+          if (TryProduction(out int amountProduced)) {
             Debug.Log($"Produced {amountProduced} {product}");
           }
         }
@@ -104,14 +105,24 @@ namespace BT.Scripts.production {
       if (product.amount <= 0) { productInventory.Remove(product); }
     }
   }
+  public class FactoryData {
+    public readonly int amount;
+
+    public readonly FactorySo type;
+
+    public FactoryData(FactorySo type, int amount) {
+      this.type = type;
+      this.amount = amount;
+    }
+  }
   public class Offer {
 
-    public Company company;
-    public ProductData product;
-    public int quantity;
-    public decimal price;
-    public int soldQuantity; // TODO: Remove this
+    public readonly Company company;
+    public readonly decimal price;
+    public readonly ProductData product;
     public bool isSold;
+    public int quantity;
+    public int soldQuantity; // TODO: Remove this
 
     public Offer(Company company, ProductData product, int quantity,
                  decimal price, int soldQuantity = 0, bool isSold = false) {
@@ -130,9 +141,9 @@ namespace BT.Scripts.production {
     }
 
     public void Sell(int quantityToBuy) {
-      this.soldQuantity = quantityToBuy;
-      this.isSold = true;
-      this.quantity -= quantityToBuy;
+      soldQuantity = quantityToBuy;
+      isSold = true;
+      quantity -= quantityToBuy;
     }
   }
 }

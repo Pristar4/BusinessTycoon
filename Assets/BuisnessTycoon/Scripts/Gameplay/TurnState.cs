@@ -1,6 +1,6 @@
 ﻿#region Info
 // -----------------------------------------------------------------------
-// ITurnState.cs
+// TurnState.cs
 // 
 // Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
@@ -16,26 +16,30 @@ using UnityEngine.InputSystem;
 namespace BT.Scripts.Gameplay {
   public abstract class TurnState {
     protected TurnStateMachine machine;
-    public virtual void Update() { }
-    public virtual void OnEnter() { }
-    public virtual void OnExit() { }
+
+    public virtual void SetMachine(TurnStateMachine instance) {
+      machine = instance;
+    }
+
+    public virtual void Update() {}
+    public virtual void OnEnter() {}
+    public virtual void OnExit() {}
   }
   // Specific turn state classes, for example:
   [Serializable]
   public class IdleTurnState : TurnState {
-    #region ITurnState Members
     public override void Update() {
       if (Keyboard.current.spaceKey.wasPressedThisFrame)
         machine.SetTurnState(machine.ProductionTurnState());
     }
-    #endregion
   }
   [Serializable]
   public class ProductionTurnState : TurnState {
     private List<Company> companies;
-    private UIManager uiManager;
     private PlayerManager playerManager;
     private TurnManager turnManager;
+    private UIManager uiManager;
+
     public ProductionTurnState(List<Company> companies, UIManager uiManager,
                                PlayerManager playerManager,
                                TurnManager turnManager) {
@@ -44,21 +48,21 @@ namespace BT.Scripts.Gameplay {
       this.playerManager = playerManager;
       this.turnManager = turnManager;
     }
-    #region ITurnState Members
+
     public override void Update() {
       foreach (var company in companies) company.Produce();
 
       uiManager.UpdateUI(playerManager.PlayerCompany,
-          turnManager.CurrentTurn);
+                         turnManager.CurrentTurn);
       machine.SetTurnState(machine.CreateOfferTurnState());
     }
-    #endregion
   }
   [Serializable]
   public class CreateOfferTurnState : TurnState {
-    private UIManager uiManager;
     private PlayerManager playerManager;
     private TurnManager turnManager;
+    private UIManager uiManager;
+
     public CreateOfferTurnState(UIManager uiManager,
                                 PlayerManager playerManager,
                                 TurnManager turnManager) {
@@ -66,7 +70,7 @@ namespace BT.Scripts.Gameplay {
       this.playerManager = playerManager;
       this.turnManager = turnManager;
     }
-    #region ITurnState Members
+
     public override void Update() {
       if (!Keyboard.current.spaceKey.wasPressedThisFrame)
         return;
@@ -75,22 +79,23 @@ namespace BT.Scripts.Gameplay {
 
       machine.SetTurnState(machine.AiCreateOfferTurnState());
     }
+
     public override void OnEnter() {
       // show offer panel
     }
+
     public override void OnExit() {
       // hide offer panel
     }
-    #endregion
   }
   [Serializable]
   public class AiCreateOfferTurnState : TurnState {
     private List<Company> companies;
     private MarketManager marketManager;
-    private UIManager uiManager;
     private PlayerManager playerManager;
     private TurnManager turnManager;
-    #region ITurnState Members
+    private UIManager uiManager;
+
     public AiCreateOfferTurnState(List<Company> companies,
                                   MarketManager marketManager,
                                   UIManager uiManager,
@@ -102,43 +107,40 @@ namespace BT.Scripts.Gameplay {
       this.playerManager = playerManager;
       this.turnManager = turnManager;
     }
+
     public override void Update() {
       foreach (var company in companies)
         if (company.CompanyName != "Player")
           company.CreateOffer(marketManager);
 
       uiManager.UpdateUI(playerManager.PlayerCompany,
-          turnManager.CurrentTurn);
+                         turnManager.CurrentTurn);
 
       machine.SetTurnState(machine.ChooseOfferTurnState());
     }
-    #endregion
   }
   [Serializable]
   public class ChooseOfferTurnState : TurnState {
-    #region ITurnState Members
     public override void Update() {
       machine.SetTurnState(machine.ShowOfferTurnState());
     }
-    #endregion
   }
   [Serializable]
   public class ShowOfferTurnState : TurnState {
-    #region ITurnState Members
     public override void Update() {
       if (!Keyboard.current.spaceKey.wasPressedThisFrame)
         return;
 
       machine.SetTurnState(machine.AiChooseOfferTurnState());
     }
-    #endregion
   }
   [Serializable]
   public class AiChooseOfferTurnState : TurnState {
     private MarketManager marketManager;
-    private UIManager uiManager;
     private PlayerManager playerManager;
     private TurnManager turnManager;
+    private UIManager uiManager;
+
     public AiChooseOfferTurnState(MarketManager marketManager,
                                   UIManager uiManager,
                                   PlayerManager playerManager,
@@ -148,30 +150,28 @@ namespace BT.Scripts.Gameplay {
       this.playerManager = playerManager;
       this.turnManager = turnManager;
     }
-    #region ITurnState Members
+
     public override void Update() {
       marketManager.UpdateMarket();
       uiManager.UpdateUI(playerManager.PlayerCompany,
-          turnManager.CurrentTurn);
+                         turnManager.CurrentTurn);
 
       machine.SetTurnState(machine.OfferResultTurnState());
     }
-    #endregion
   }
   [Serializable]
   public class OfferResultTurnState : TurnState {
-    #region ITurnState Members
     public override void Update() {
       machine.SetTurnState(machine.DeconstructOfferTurnState());
     }
-    #endregion
   }
   [Serializable]
   public class DeconstructOfferTurnState : TurnState {
-    private TurnManager turnManager;
     private MarketManager marketManager;
-    private UIManager uiManager;
     private PlayerManager playerManager;
+    private TurnManager turnManager;
+    private UIManager uiManager;
+
     public DeconstructOfferTurnState(TurnManager turnManager,
                                      MarketManager marketManager,
                                      UIManager uiManager,
@@ -181,7 +181,7 @@ namespace BT.Scripts.Gameplay {
       this.uiManager = uiManager;
       this.playerManager = playerManager;
     }
-    #region ITurnState Members
+
     public override void Update() {
       if (!Keyboard.current.spaceKey.wasPressedThisFrame)
         return;
@@ -189,9 +189,8 @@ namespace BT.Scripts.Gameplay {
       turnManager.AdvanceTurn();
       marketManager.ClearOffers();
       uiManager.UpdateUI(playerManager.PlayerCompany,
-          turnManager.CurrentTurn);
+                         turnManager.CurrentTurn);
       machine.SetTurnState(machine.IdleTurnState());
     }
-    #endregion
   }
 }

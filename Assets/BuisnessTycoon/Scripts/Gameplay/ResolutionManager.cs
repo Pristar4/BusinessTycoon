@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // ResolutionManager.cs
 // 
-// Felix Jung 06.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -31,8 +31,8 @@ namespace BT.Scripts.Gameplay {
       foreach (var resolution in resolutions) {
         string option = resolution.width + "x" + resolution.height;
 
-        if (!uniqueOptions.Contains(option) && resolution.width >= 800 &&
-            resolution.height >= 600) {
+        if (!uniqueOptions.Contains(option) && resolution is
+                { width: >= 800, height: >= 600 }) {
           uniqueOptions.Add(option);
           resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(option));
         }
@@ -51,7 +51,6 @@ namespace BT.Scripts.Gameplay {
       int width = int.Parse(resolutionValues[0]);
       int height = int.Parse(resolutionValues[1]);
 
-      float aspectRatio = (float)width / height;
       Screen.SetResolution(width, height, true);
 
       saveButtonText.text = "Resolution Saved!";

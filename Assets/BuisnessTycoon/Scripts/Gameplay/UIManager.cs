@@ -2,18 +2,20 @@
 // -----------------------------------------------------------------------
 // UIManager.cs
 // 
-// Felix Jung 08.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
+#region
+using System;
+using System.Collections.Generic;
 using BT.Scripts.production;
+using Sirenix.OdinInspector;
+using TMPro;
+using UnityEngine;
+#endregion
 
 namespace BT.Scripts.Gameplay {
   #region
-  using System;
-  using System.Collections.Generic;
-  using Sirenix.OdinInspector;
-  using TMPro;
-  using UnityEngine;
   #endregion
 
   namespace BT.Scripts.Gameplay {
@@ -44,23 +46,26 @@ namespace BT.Scripts.Gameplay {
       public Transform inventoryContainer;
       [SerializeField]
       private GameObject offerItemPrefab;
-      #endregion
-      private MarketManager marketManager;
-      private IReadOnlyList<Offer> offers; // Read-only list of offers
-      private IPanelDisplay currentPanel;
       [SerializeField]
       private InventoryPanel inventoryPanel;
+      #endregion
+      private IPanelDisplay currentPanel;
+      private MarketManager marketManager;
+      private IReadOnlyList<Offer> offers; // Read-only list of offers
+
       private void InitUI(Company startup) {
         marketManager = FindFirstObjectByType<MarketManager>();
         offers = marketManager.GetOffers();
         UpdateFinancialUI(startup);
         UpdateOfferUI();
       }
+
       public void UpdateUI(Company company, int turn) {
         UpdateFinancialUI(company);
         UpdateTurnUI(turn);
         UpdateOfferUI();
       }
+
       private void UpdateFinancialUI(Company company) {
         companyNameText.text = company.CompanyName;
         balanceText.text = "Balance: " + company.Finance.Balance;
@@ -68,9 +73,11 @@ namespace BT.Scripts.Gameplay {
         expensesText.text = "Expenses: " + company.Finance.Expense;
         netProfitText.text = "Net Profit: " + company.Finance.NetProfit;
       }
+
       private void UpdateTurnUI(int turn) {
         turnText.text = "Turn: " + turn;
       }
+
       private void UpdateOfferUI() {
         // Clear existing offer items
         foreach (Transform child in offerContainer) {
@@ -90,47 +97,28 @@ namespace BT.Scripts.Gameplay {
           offerText.text = offer.GetOfferDetails();
         }
       }
+
       public void Initialize(Company startup) {
         InitUI(startup);
-        inventoryPanel.Initialize(startup);
+        inventoryPanel.Initialize();
       }
+
       public void OnDropdownSelectionChanged(int selectedIndex) {
-
-        Debug.Log("Dropdown selection changed to " + selectedIndex);
-
-        // Deactivate all other screens
-        DeactivateAllPanels();
-
-// Activate the selected screen
-
-        switch (selectedIndex) {
-        case 0:
-          // Inventory
-          inventoryPanel.SetActive(true);
-          break;
-        }
-        // Activate the InventoryScreen using SetActive(true)
-        // Call Initialize() on the InventoryScreen with the Company reference if necessary
-        // Call UpdateUI() on the InventoryScreen to initially display the inventory data
-      }
-      public void OnDropdownSelectionChanged(int selectedIndex)
-      {
         Debug.Log("Dropdown selection changed to " + selectedIndex);
 
         // Deactivate all other panels
         DeactivateAllPanels();
 
         // Activate the selected panel
-        switch (selectedIndex)
-        {
+        switch (selectedIndex) {
         case 0:
           // Inventory
-          if (inventoryPanel.TryGetComponent(out InventoryPanel inventoryPanelComponent))
-          {
+          if (inventoryPanel.TryGetComponent(
+                  out InventoryPanel inventoryPanelComponent)) {
             inventoryPanelComponent.SetActive(true);
-            // inventoryPanelComponent.Initialize(company);
-            inventoryPanelComponent.UpdateUI();
+            inventoryPanelComponent.UpdatePanel();
           }
+
           break;
         // Add cases for other panels
         }
@@ -142,9 +130,7 @@ namespace BT.Scripts.Gameplay {
           // TODO: Deactivate other screens as well
 
 
-        } catch (Exception e) {
-          Debug.Log("Exception caught: " + inventoryPanel + " is null");
-        }
+        } catch (Exception e) { Debug.Log("Error deactivating panels: " + e); }
       }
     }
   }
