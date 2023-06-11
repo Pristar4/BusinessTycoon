@@ -7,15 +7,20 @@
 #endregion
 #region
 using BT.Scripts.production;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 #endregion
 
 namespace BT.Scripts.Gameplay {
   public class InventoryPanel : MonoBehaviour, IPanelDisplay {
     private readonly Company company;
-    private IPanelDisplay panelDisplayImplementation;
-
+    [SerializeField] private Transform inventoryContainer;
+    
+    [SerializeField]
+    private GameObject productItemPrefab;
     public InventoryPanel(Company selected = null) {
+      
       if (selected == null) { Debug.Log("No company selected"); }
 
       company = selected;
@@ -31,7 +36,20 @@ namespace BT.Scripts.Gameplay {
     }
 
     public void UpdatePanel() {
-      //update the inventory panel here and add product game-objects with the correct data under the Scroll-view the public Transform inventoryContainer; is in the ui-manager under that game-objects manage the products
+// Clear existing offer items
+      foreach (Transform child in inventoryContainer) { Destroy(child.gameObject); }
+
+
+
+      // Instantiate offer items for  all offers in market
+      foreach (var item in company.ProductInventory) {
+        // Instantiate offer item prefab
+        var offerItem = Instantiate(productItemPrefab, inventoryContainer);
+
+        // Set offer details in TMP Text component
+        var productText = offerItem.GetComponentInChildren<TMP_Text>();
+        productText.text = item.type + " X " + item.amount;
+      }
     }
     #endregion
   }

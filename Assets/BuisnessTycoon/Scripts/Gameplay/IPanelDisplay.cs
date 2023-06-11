@@ -8,8 +8,7 @@
 namespace BT.Scripts.Gameplay {
   public interface IPanelDisplay {
     void Initialize();
-    void UpdatePanel();
-
     void SetActive(bool isActive);
+    void UpdatePanel();
   }
 }

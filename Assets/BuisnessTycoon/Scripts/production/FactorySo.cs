@@ -14,7 +14,7 @@ using UnityEngine;
 namespace BT.Scripts.production {
   [CreateAssetMenu(fileName = "new_factory", menuName = "Production/Factory",
                    order = 0)]
-  public class FactorySo : ProductSo {
+  public class FactorySo : ScriptableObject {
     #region Serialized Fields
     [SerializeField] private ProductData[] ingredients;
     [SerializeField] private ProductData[] results;

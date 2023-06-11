@@ -15,10 +15,11 @@ namespace BT.Scripts.production {
   public class Company : MonoBehaviour {
     #region Serialized Fields
     [SerializeField] private List<ProductData> productInventory;
+    [SerializeField] private  List<FactoryData> factoryInventory;
+    
 
     [SerializeField] private string companyName = "DefaultCompany";
     #endregion
-    [SerializeField] private readonly List<FactoryData> factoryInventory;
     private FactorySo factory;
 
     public Company() {
@@ -40,7 +41,7 @@ namespace BT.Scripts.production {
     public Finance Finance { get; set; } = new();
 
     public void Produce() {
-      foreach (var factoryData in factoryInventory) {
+      foreach (var factoryData in FactoryInventory) {
         factory = factoryData.type;
         string product = factory.Results[0].type.name;
 
@@ -105,21 +106,11 @@ namespace BT.Scripts.production {
       if (product.amount <= 0) { productInventory.Remove(product); }
     }
   }
-  public class FactoryData {
-    public readonly int amount;
-
-    public readonly FactorySo type;
-
-    public FactoryData(FactorySo type, int amount) {
-      this.type = type;
-      this.amount = amount;
-    }
-  }
   public class Offer {
 
-    public readonly Company company;
-    public readonly decimal price;
-    public readonly ProductData product;
+    public  Company company;
+    public  decimal price;
+    public  ProductData product;
     public bool isSold;
     public int quantity;
     public int soldQuantity; // TODO: Remove this

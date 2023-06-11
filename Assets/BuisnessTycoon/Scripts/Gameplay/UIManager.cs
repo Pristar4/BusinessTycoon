@@ -12,6 +12,7 @@ using BT.Scripts.production;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 #endregion
 
 namespace BT.Scripts.Gameplay {
@@ -40,15 +41,14 @@ namespace BT.Scripts.Gameplay {
       public TMP_Text detailsText;
       [FoldoutGroup("UI Elements")]
       public TMP_Dropdown marketDropdown;
-      [FoldoutGroup("UI Elements")]
-      public Transform offerContainer;
-      [FoldoutGroup("UI Elements")]
-      public Transform inventoryContainer;
       [SerializeField]
       private GameObject offerItemPrefab;
       [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private InventoryPanel inventoryPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private OfferPanel offerPanel;
       #endregion
       private IPanelDisplay currentPanel;
       private MarketManager marketManager;
@@ -58,13 +58,13 @@ namespace BT.Scripts.Gameplay {
         marketManager = FindFirstObjectByType<MarketManager>();
         offers = marketManager.GetOffers();
         UpdateFinancialUI(startup);
-        UpdateOfferUI();
+        offerPanel.UpdatePanel();
       }
 
       public void UpdateUI(Company company, int turn) {
         UpdateFinancialUI(company);
         UpdateTurnUI(turn);
-        UpdateOfferUI();
+        offerPanel.UpdatePanel();
       }
 
       private void UpdateFinancialUI(Company company) {
@@ -79,29 +79,11 @@ namespace BT.Scripts.Gameplay {
         turnText.text = "Turn: " + turn;
       }
 
-      private void UpdateOfferUI() {
-        // Clear existing offer items
-        foreach (Transform child in offerContainer) {
-          Destroy(child.gameObject);
-        }
-
-
-        offers = marketManager.GetOffers();
-
-        // Instantiate offer items for  all offers in market
-        foreach (var offer in offers) {
-          // Instantiate offer item prefab
-          var offerItem = Instantiate(offerItemPrefab, offerContainer);
-
-          // Set offer details in TMP Text component
-          var offerText = offerItem.GetComponentInChildren<TMP_Text>();
-          offerText.text = offer.GetOfferDetails();
-        }
-      }
 
       public void Initialize(Company startup) {
         InitUI(startup);
         inventoryPanel.Initialize();
+        offerPanel.Initialize();
       }
 
       public void OnDropdownSelectionChanged(int selectedIndex) {
