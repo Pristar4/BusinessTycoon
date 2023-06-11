@@ -1,6 +1,6 @@
 ﻿#region Info
 // -----------------------------------------------------------------------
-// ProductData.cs
+// FactoryData.cs
 // 
 // Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
@@ -10,18 +10,17 @@ using System;
 #endregion
 
 namespace BT.Scripts.production {
-
   [Serializable]
-  public class ProductData {
+  public class FactoryData {
     #region Serialized Fields
-    public int Amount { get; set; }
-    public ProductSo Type { get; }
+    public int amount;
+
+    public FactorySo type;
     #endregion
 
-    public ProductData(ProductSo type, int amount) {
-      Type = type;
-      Amount = amount;
+    public FactoryData(FactorySo type, int amount) {
+      this.type = type;
+      this.amount = amount;
     }
-
   }
 }

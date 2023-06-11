@@ -2,20 +2,20 @@
 // -----------------------------------------------------------------------
 // AIManager.cs
 // 
-// Felix Jung 07.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
+#region
 using System.Collections.Generic;
 using BT.Scripts.production;
 using UnityEngine;
+#endregion
 
 namespace BT.Scripts.AI {
   internal class AIManager : MonoBehaviour {
 
-    private List<Company> npcCompanies;
-
-    public void Initialize(List<Company> npcCompanies) {
-      this.npcCompanies = npcCompanies;
+    public void Initialize(List<Company> companies) {
+      // implement initialization of AI
     }
 
     public Company CreateCompany(Company companyPrefab, int i) {

@@ -2,27 +2,29 @@
 // -----------------------------------------------------------------------
 // MarketManager.cs
 // 
-// Felix Jung 07.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
+#region
 using System;
 using System.Collections.Generic;
 using BT.Scripts.production;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
+#endregion
 
 namespace BT.Scripts.Gameplay {
   public class MarketManager : SerializedMonoBehaviour {
-
+    #region Serialized Fields
     public ProductSo[] products;
+    #endregion
 
     [OdinSerialize]
     private List<Offer> offers;
 
     [OdinSerialize]
-    private Dictionary<ProductSo, int> productDemand
-        = new Dictionary<ProductSo, int>();
+    private Dictionary<ProductSo, int> productDemand = new();
 
     public void Initialize() {
       offers = new List<Offer>();
@@ -46,22 +48,20 @@ namespace BT.Scripts.Gameplay {
     }
 
     public int GetProductDemand(ProductSo productType) {
-      if (productDemand.TryGetValue(productType, out int demand)) {
-        return demand;
-      } else {
-        throw new Exception("Product" + productType +
-                            "not found in productDemand");
-      }
+      if (productDemand.TryGetValue(productType, out int demand)) { return demand; }
+
+      throw new Exception("Product" + productType +
+                          "not found in productDemand");
     }
 
     public void UpdateMarket() {
       //TODO: improve this logic to be more efficient
-      var products = new List<ProductSo>(productDemand.Keys);
+      var items = new List<ProductSo>(productDemand.Keys);
 
-      foreach (var productType in products) {
+      foreach (var productType in items) {
         int remainingDemand = productDemand[productType];
-        List<Offer> offersForProduct
-            = offers.FindAll(offer => offer.product.type == productType &&
+        var offersForProduct
+            = offers.FindAll(offer => offer.product.Type == productType &&
                                       !offer.isSold);
         SortOffersByScore(offersForProduct);
 
@@ -74,18 +74,19 @@ namespace BT.Scripts.Gameplay {
           offer.soldQuantity = quantityToBuy;
           offer.isSold = true;
           // Remove products from company
-          offer.company.RemoveProduct(offer.product.type, quantityToBuy);
+          offer.company.RemoveProduct(offer.product.Type, quantityToBuy);
           offer.soldQuantity = quantityToBuy;
           offer.quantity -= quantityToBuy;
           // Add money to company
           offer.company.AddMoney(quantityToBuy * offer.price);
+
           //remove offer if it is empty
           if (offer.quantity <= 0) {
             offers.Remove(offer);
             Debug.Log("Removed offer from market");
           }
-          
-          Debug.Log("Sold " + quantityToBuy + " of " + offer.product.type.name +
+
+          Debug.Log("Sold " + quantityToBuy + " of " + offer.product.Type.name +
                     " for " + offer.price + " each");
 
           if (remainingDemand <= 0) { break; }
@@ -98,8 +99,8 @@ namespace BT.Scripts.Gameplay {
       Debug.Log("UpdateMarket");
     }
 
-    private void SortOffersByScore(List<Offer> offers) {
-      offers.Sort((a, b) => a.price.CompareTo(b.price));
+    private void SortOffersByScore(List<Offer> offerList) {
+      offerList.Sort((a, b) => a.price.CompareTo(b.price));
       //TODO: Add more factors and sorting logic in the future
     }
 
@@ -119,9 +120,7 @@ namespace BT.Scripts.Gameplay {
       decimal sales = 0;
 
       foreach (var offer in offers) {
-        if (offer.company == company && offer.isSold) {
-          sales += offer.price * offer.soldQuantity;
-        }
+        if (offer.company == company && offer.isSold) { sales += offer.price * offer.soldQuantity; }
       }
 
       return sales;

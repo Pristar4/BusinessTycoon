@@ -2,11 +2,10 @@
 // -----------------------------------------------------------------------
 // FactorySo.cs
 // 
-// Felix Jung 06.06.2023
+// Felix Jung 11.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,12 +14,13 @@ using UnityEngine;
 namespace BT.Scripts.production {
   [CreateAssetMenu(fileName = "new_factory", menuName = "Production/Factory",
                    order = 0)]
-  public class FactorySo : ProductSo {
-
+  public class FactorySo : ScriptableObject {
+    #region Serialized Fields
     [SerializeField] private ProductData[] ingredients;
     [SerializeField] private ProductData[] results;
+    #endregion
 
-    public ProductData[] Ingredients => ingredients;
+    private ProductData[] Ingredients => ingredients;
     public ProductData[] Results => results;
 
     public bool TryProduce(List<ProductData> inputIngredients,
@@ -30,7 +30,7 @@ namespace BT.Scripts.production {
       if (!AreIngredientsSufficient(inputIngredients)) { return false; }
 
       outputResults = results
-          .Select(result => new ProductData(result.type, result.amount))
+          .Select(result => new ProductData(result.Type, result.Amount))
           .ToList();
 
       //copy results into outputResults
@@ -40,9 +40,9 @@ namespace BT.Scripts.production {
     public void ConsumeIngredients(ref List<ProductData> inputIngredients) {
       foreach (var ingredient in Ingredients) {
         var foundIngredient
-            = inputIngredients.Find(data => data.type == ingredient.type);
+            = inputIngredients.Find(data => data.Type == ingredient.Type);
 
-        foundIngredient.amount -= ingredient.amount;
+        foundIngredient.Amount -= ingredient.Amount;
       }
     }
 
@@ -50,11 +50,11 @@ namespace BT.Scripts.production {
 
       foreach (var ingredient in Ingredients) {
         var foundIngredient
-            = inputIngredients.Find(data => data.type == ingredient.type);
+            = inputIngredients.Find(data => data.Type == ingredient.Type);
 
 
         if (foundIngredient is null ||
-            foundIngredient.amount < ingredient.amount) { return false; }
+            foundIngredient.Amount < ingredient.Amount) { return false; }
       }
 
       return true;

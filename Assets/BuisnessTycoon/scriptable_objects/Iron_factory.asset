@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78794cae691bda6489b94fae31f09c92, type: 3}
   m_Name: Iron_factory
   m_EditorClassIdentifier: 
-  productName: Iron
-  value: 1
   ingredients: []
   results:
   - amount: 1
