@@ -46,6 +46,7 @@ namespace BT.Scripts.Gameplay {
       public Transform inventoryContainer;
       [SerializeField]
       private GameObject offerItemPrefab;
+      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private InventoryPanel inventoryPanel;
       #endregion
@@ -80,9 +81,7 @@ namespace BT.Scripts.Gameplay {
 
       private void UpdateOfferUI() {
         // Clear existing offer items
-        foreach (Transform child in offerContainer) {
-          Destroy(child.gameObject);
-        }
+        foreach (Transform child in offerContainer) { Destroy(child.gameObject); }
 
 
         offers = marketManager.GetOffers();

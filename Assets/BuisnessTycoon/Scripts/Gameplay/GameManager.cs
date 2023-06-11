@@ -34,7 +34,6 @@ namespace BT.Scripts.Gameplay {
     private GameState currentState;
     #endregion
 
-    private TurnState currentTurnState = new IdleTurnState();
     private TurnStateMachine turnStateMachine;
     #region Event Functions
     private void Start() {
@@ -57,7 +56,7 @@ namespace BT.Scripts.Gameplay {
 
       // Set the current state.
       currentState = GameState.Playing;
-      turnStateMachine = new TurnStateMachine(currentTurnState, companies,
+      turnStateMachine = new TurnStateMachine( companies,
                                               marketManager, uiManager,
                                               playerManager, turnManager);
 
@@ -68,7 +67,7 @@ namespace BT.Scripts.Gameplay {
 
       turnStateMachine.Update(companies, marketManager, playerManager,
                               uiManager, turnManager);
-      currentTurnState = turnStateMachine.GetTurnState();
+      turnStateMachine.GetTurnState();
     }
     #endregion
 

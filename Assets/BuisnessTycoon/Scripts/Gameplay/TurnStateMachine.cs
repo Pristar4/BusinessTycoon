@@ -17,36 +17,44 @@ namespace BT.Scripts.Gameplay {
   public class TurnStateMachine {
     private TurnState currentState;
 
-    public TurnStateMachine(TurnState initialState, List<Company> companies,
-                            MarketManager marketManager, UIManager uiManager,
-                            PlayerManager playerManager,
+    public TurnStateMachine(
+                            List<Company> companies, MarketManager marketManager,
+                            UIManager uiManager, PlayerManager playerManager,
                             TurnManager turnManager) {
-      currentState = initialState;
       idleTurnState = new IdleTurnState();
-      productionTurnState = new ProductionTurnState(companies, uiManager,
-                                                    playerManager,
-                                                    turnManager);
-      createOfferTurnState = new CreateOfferTurnState(uiManager, playerManager,
-                                                      turnManager);
-      aiCreateOfferTurnState = new AiCreateOfferTurnState(companies,
-                                                          marketManager,
-                                                          uiManager,
-                                                          playerManager,
-                                                          turnManager);
+      idleTurnState.Initialize(this);
+
+      productionTurnState
+          = new ProductionTurnState(companies, uiManager, playerManager, turnManager);
+      productionTurnState.Initialize(this);
+      createOfferTurnState = new CreateOfferTurnState(uiManager, playerManager, turnManager);
+      createOfferTurnState.Initialize(this);
+      aiCreateOfferTurnState
+          = new AiCreateOfferTurnState(companies, marketManager, uiManager, playerManager,
+                                       turnManager);
+      aiCreateOfferTurnState.Initialize(this);
       chooseOfferTurnState = new ChooseOfferTurnState();
+      chooseOfferTurnState.Initialize(this);
       showOfferTurnState = new ShowOfferTurnState();
-      aiChooseOfferTurnState = new AiChooseOfferTurnState(marketManager,
-                                                          uiManager,
-                                                          playerManager,
-                                                          turnManager);
+      showOfferTurnState.Initialize(this);
+      aiChooseOfferTurnState
+          = new AiChooseOfferTurnState(marketManager, uiManager, playerManager, turnManager);
+      aiChooseOfferTurnState.Initialize(this);
       offerResultTurnState = new OfferResultTurnState();
-      deconstructOfferTurnState = new DeconstructOfferTurnState(turnManager,
-                                                                marketManager,
-                                                                uiManager,
-                                                                playerManager);
+      offerResultTurnState.Initialize(this);
+      deconstructOfferTurnState
+          = new DeconstructOfferTurnState(turnManager, marketManager, uiManager, playerManager);
+      deconstructOfferTurnState.Initialize(this);
+      currentState = idleTurnState;
     }
 
     public void SetTurnState(TurnState newState) {
+      if (currentState == null || currentState == newState ||
+          newState == null) {
+        Debug.Log("TurnState not changed");
+        return;
+      }
+
       currentState.OnExit();
       currentState = newState;
       newState.OnEnter();

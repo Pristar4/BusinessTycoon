@@ -17,8 +17,8 @@ namespace BT.Scripts.Gameplay {
   public abstract class TurnState {
     protected TurnStateMachine machine;
 
-    public virtual void SetMachine(TurnStateMachine instance) {
-      machine = instance;
+    public virtual void Initialize(TurnStateMachine stateMachine) {
+      machine = stateMachine;
     }
 
     public virtual void Update() {}
@@ -40,7 +40,8 @@ namespace BT.Scripts.Gameplay {
     private TurnManager turnManager;
     private UIManager uiManager;
 
-    public ProductionTurnState(List<Company> companies, UIManager uiManager,
+    public ProductionTurnState(List<Company> companies, UIManager
+                                   uiManager,
                                PlayerManager playerManager,
                                TurnManager turnManager) {
       this.companies = companies;
