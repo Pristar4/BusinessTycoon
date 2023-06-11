@@ -6,8 +6,6 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
-using System.Collections.Generic;
-using BT.Scripts.production;
 using TMPro;
 using UnityEngine;
 #endregion
@@ -20,7 +18,6 @@ namespace BT.Scripts.Gameplay {
     [SerializeField]
     private GameObject offerItemPrefab;
     #endregion
-    private IReadOnlyList<Offer> offers;
 
     private static MarketManager GetMarketManager => ManagerProvider.Current.MarketManager;
     #region IPanelDisplay Members
@@ -38,7 +35,7 @@ namespace BT.Scripts.Gameplay {
       foreach (Transform child in offerContainer) { Destroy(child.gameObject); }
 
 
-      offers = GetMarketManager.GetOffers();
+      var offers = GetMarketManager.GetOffers();
 
       // Instantiate offer items for  all offers in market
       foreach (var offer in offers) {

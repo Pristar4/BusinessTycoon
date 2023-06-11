@@ -13,14 +13,14 @@ namespace BT.Scripts.production {
   [Serializable]
   public class FactoryData {
     #region Serialized Fields
-    public int amount;
+    public int Amount { get; }
 
-    public FactorySo type;
+    public FactorySo Type { get; }
     #endregion
 
     public FactoryData(FactorySo type, int amount) {
-      this.type = type;
-      this.amount = amount;
+      Type = type;
+      Amount = amount;
     }
   }
 }

@@ -18,7 +18,7 @@ namespace BT.Scripts.Gameplay {
   public class GameManager : MonoBehaviour {
     private const int NpcCount = 4;
     #region Serialized Fields
-    [SerializeField] public List<Company> companies;
+    [SerializeField] private List<Company> companies;
     [SerializeField] private Company companyPrefab;
     [FoldoutGroup("Managers")]
     [SerializeField] private AIManager aiManager;
