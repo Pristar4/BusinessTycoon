@@ -17,7 +17,8 @@ using UnityEngine;
 namespace BT.Scripts.Gameplay {
   public class MarketManager : SerializedMonoBehaviour {
     #region Serialized Fields
-    public ProductSo[] products;
+    [SerializeField]
+    private List<ProductSo> products;
     #endregion
 
     [OdinSerialize]
@@ -26,6 +27,11 @@ namespace BT.Scripts.Gameplay {
     [OdinSerialize]
     private Dictionary<ProductSo, int> productDemand = new();
 
+    public List<ProductSo> Products => products;
+    public List<Offer> Offers => offers;
+
+    public Dictionary<ProductSo, int> ProductDemand => productDemand;
+
     public void Initialize() {
       offers = new List<Offer>();
 
@@ -33,13 +39,8 @@ namespace BT.Scripts.Gameplay {
       SetProductDemand(products[0], 500);
       SetProductDemand(products[1], 10);
 
-      Debug.Log("Demand for " + products[0].name + " is " +
-                GetProductDemand(products[0]));
-      Debug.Log("Demand for " + products[1].name + " is " +
-                GetProductDemand(products[1]));
 
-      if (Debug.isDebugBuild) { Debug.Log("MarketManager initialized"); }
-
+      Debug.Log("MarketManager initialized");
     }
 
     public void SetProductDemand(ProductSo productType, int demand) {
@@ -48,7 +49,9 @@ namespace BT.Scripts.Gameplay {
     }
 
     public int GetProductDemand(ProductSo productType) {
-      if (productDemand.TryGetValue(productType, out int demand)) { return demand; }
+      if (productDemand.TryGetValue(productType, out int demand)) {
+        return demand;
+      }
 
       throw new Exception("Product" + productType +
                           "not found in productDemand");
@@ -120,7 +123,9 @@ namespace BT.Scripts.Gameplay {
       decimal sales = 0;
 
       foreach (var offer in offers) {
-        if (offer.company == company && offer.isSold) { sales += offer.price * offer.soldQuantity; }
+        if (offer.company == company && offer.isSold) {
+          sales += offer.price * offer.soldQuantity;
+        }
       }
 
       return sales;

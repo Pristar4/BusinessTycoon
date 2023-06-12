@@ -19,7 +19,9 @@ namespace BT.Scripts.Gameplay {
     private GameObject offerItemPrefab;
     #endregion
 
-    private static MarketManager GetMarketManager => ManagerProvider.Current.MarketManager;
+    private static MarketManager GetMarketManager
+      => ManagerProvider.Current.MarketManager;
+
     #region IPanelDisplay Members
     public void Initialize() {
       Debug.Log("OfferPanel initialized");

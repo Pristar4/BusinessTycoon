@@ -38,6 +38,9 @@ namespace BT.Scripts.Gameplay {
     private TurnStateMachine turnStateMachine;
     #region Event Functions
     private void Start() {
+      turnStateMachine = new TurnStateMachine(companies,
+                                              marketManager, uiManager,
+                                              playerManager, turnManager);
       // Initialize the market
       marketManager.Initialize();
 
@@ -51,16 +54,14 @@ namespace BT.Scripts.Gameplay {
       companies.AddRange(npcCompanies);
 
       // Initialize all other managers
-      uiManager.Initialize(startup);
       aiManager.Initialize(npcCompanies);
       playerManager.Initialize(startup);
       turnManager.Initialize();
+      uiManager.Initialize(startup);
 
       // Set the current state.
       currentState = GameState.Playing;
-      turnStateMachine = new TurnStateMachine(companies,
-                                              marketManager, uiManager,
-                                              playerManager, turnManager);
+      
 
     }
 

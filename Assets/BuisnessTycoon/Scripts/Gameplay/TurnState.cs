@@ -25,7 +25,8 @@ namespace BT.Scripts.Gameplay {
     public virtual void OnEnter() {}
     public virtual void OnExit() {}
   }
-  // Specific turn state classes, for example:
+  //TODO: refactor these phases to Planning,Execution,Evaluation
+
   [Serializable]
   public class IdleTurnState : TurnState {
     public override void Update() {
@@ -194,4 +195,5 @@ namespace BT.Scripts.Gameplay {
       machine.SetTurnState(machine.IdleTurnState());
     }
   }
+
 }

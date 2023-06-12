@@ -11,6 +11,7 @@ using BT.Scripts.production;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 #endregion
 
 namespace BT.Scripts.Gameplay {
@@ -31,8 +32,9 @@ namespace BT.Scripts.Gameplay {
       public TMP_Text netProfitText;
       [VerticalGroup("UI Elements/Top Bar")]
       public TMP_Text turnText;
+      [FormerlySerializedAs("managementDropdown")]
       [VerticalGroup("UI Elements/Top Bar")]
-      public TMP_Dropdown managementDropdown;
+      public TMP_Dropdown repeatingTasksDropdown;
       [FoldoutGroup("UI Elements")]
       public TMP_Text detailsText;
       [FoldoutGroup("UI Elements")]
@@ -43,6 +45,25 @@ namespace BT.Scripts.Gameplay {
       [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private OfferPanel offerPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private MarketInfoPanel marketInfoPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private ResearchPanel researchPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private ProductionPanel productionPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private FinancingPanel financingPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private ContractsPanel contractsPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private BudgetingPanel budgetingPanel;
+      
       #endregion
 
       private void InitUI(Company startup) {
@@ -70,8 +91,19 @@ namespace BT.Scripts.Gameplay {
 
       public void Initialize(Company startup) {
         InitUI(startup);
+
+        marketInfoPanel.Initialize();
+        researchPanel.Initialize();
+        productionPanel.Initialize();
+        financingPanel.Initialize();
+        contractsPanel.Initialize();
+        budgetingPanel.Initialize();
         inventoryPanel.Initialize();
         offerPanel.Initialize();
+
+        // Activate default panel (e.g. MarketInfo)
+        OnDropdownSelectionChanged(0);
+        
       }
 
       public void OnDropdownSelectionChanged(int selectedIndex) {
@@ -83,22 +115,79 @@ namespace BT.Scripts.Gameplay {
         // Activate the selected panel
         switch (selectedIndex) {
         case 0:
-          // Inventory
+          // Market info
+          if (marketInfoPanel.TryGetComponent(
+                  out MarketInfoPanel marketInfoPanelComponent)) {
+            marketInfoPanelComponent.SetActive(true);
+            marketInfoPanelComponent.UpdatePanel();
+          }
+
+          break;
+        case 1:
+          // Research
+          if (researchPanel.TryGetComponent(
+                  out ResearchPanel researchPanelComponent)) {
+            researchPanelComponent.SetActive(true);
+            researchPanelComponent.UpdatePanel();
+          }
+
+          break;
+        case 2:
+          // Production
           if (inventoryPanel.TryGetComponent(
                   out InventoryPanel inventoryPanelComponent)) {
             inventoryPanelComponent.SetActive(true);
             inventoryPanelComponent.UpdatePanel();
           }
 
+          if (productionPanel.TryGetComponent(
+                  out ProductionPanel productionPanelComponent)) {
+            productionPanelComponent.SetActive(true);
+            productionPanelComponent.UpdatePanel();
+          }
+
           break;
-        // Add cases for other panels
+        case 3:
+          // Contracts
+          if (contractsPanel.TryGetComponent(
+                  out ContractsPanel contractsPanelComponent)) {
+            contractsPanelComponent.SetActive(true);
+            contractsPanelComponent.UpdatePanel();
+          }
+
+          break;
+
+        case 4:
+          // Financing
+          if (financingPanel.TryGetComponent(
+                  out FinancingPanel financingPanelComponent)) {
+            financingPanelComponent.SetActive(true);
+            financingPanelComponent.UpdatePanel();
+          }
+
+          break;
+        case 5:
+          // Budgeting
+          if (budgetingPanel.TryGetComponent(
+                  out BudgetingPanel budgetingPanelComponent)) {
+            budgetingPanelComponent.SetActive(true);
+            budgetingPanelComponent.UpdatePanel();
+          }
+
+          break;
         }
       }
 
       private void DeactivateAllPanels() {
         try {
+          marketInfoPanel.SetActive(false);
+          researchPanel.SetActive(false);
+          productionPanel.SetActive(false);
+          financingPanel.SetActive(false);
+          contractsPanel.SetActive(false);
+          budgetingPanel.SetActive(false);
           inventoryPanel.SetActive(false);
-          // TODO: Deactivate other screens as well
+          offerPanel.SetActive(false);
 
 
         } catch (Exception e) { Debug.Log("Error deactivating panels: " + e); }
