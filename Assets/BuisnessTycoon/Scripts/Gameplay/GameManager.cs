@@ -20,6 +20,7 @@ namespace BT.Scripts.Gameplay {
     #region Serialized Fields
     [SerializeField] private List<Company> companies;
     [SerializeField] private Company companyPrefab;
+    [SerializeField] private CompanyPreset companyPreset;
     [FoldoutGroup("Managers")]
     [SerializeField] private AIManager aiManager;
     [FoldoutGroup("Managers")]
@@ -44,6 +45,7 @@ namespace BT.Scripts.Gameplay {
       companies = new List<Company>();
       var startup = CreateCompany();
       companies.Add(startup);
+      // Initialize
 
       var npcCompanies = CreateNpcCompanies(NpcCount);
       companies.AddRange(npcCompanies);
@@ -83,7 +85,12 @@ namespace BT.Scripts.Gameplay {
     }
 
     private Company CreateCompany() {
-      return playerManager.CreateCompany(companyPrefab);
+      var newCompany = Instantiate(companyPrefab);
+      newCompany.Finance.Balance = companyPreset.startingBalance;
+      newCompany.ProductInventory = companyPreset.startingProductInventory;
+
+      newCompany.CompanyName = "Player";
+      return newCompany;
     }
   }
 

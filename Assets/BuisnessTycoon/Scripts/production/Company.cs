@@ -27,7 +27,10 @@ namespace BT.Scripts.production {
       factoryInventory = new List<FactoryData>();
     }
 
-    public List<ProductData> ProductInventory => productInventory;
+    public List<ProductData> ProductInventory {
+      get => productInventory;
+      set => productInventory = value;
+    }
     public List<FactoryData> FactoryInventory => factoryInventory;
 
     private List<Offer> Offers { get; } = new();

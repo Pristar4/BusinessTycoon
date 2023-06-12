@@ -19,18 +19,13 @@ namespace BT.Scripts.Gameplay {
     [SerializeField]
     private GameObject productItemPrefab;
     #endregion
-    private readonly Company company;
+    private Company company;
 
-    public InventoryPanel(Company selected = null) {
-
-      if (selected == null) { Debug.Log("No company selected"); }
-
-      company = selected;
-    }
 
     #region IPanelDisplay Members
     public void Initialize() {
-      Debug.Log(company + "InventoryPanel initialized");
+      company = ManagerProvider.Current.PlayerManager.PlayerCompany;
+      Debug.Log("InventoryPanel initialized");
     }
 
     public void SetActive(bool isActive) {

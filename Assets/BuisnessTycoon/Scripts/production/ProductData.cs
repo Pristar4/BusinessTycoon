@@ -7,21 +7,28 @@
 #endregion
 #region
 using System;
+using UnityEngine;
 #endregion
 
 namespace BT.Scripts.production {
-
   [Serializable]
   public class ProductData {
-    #region Serialized Fields
-    public int Amount { get; set; }
-    public ProductSo Type { get; }
-    #endregion
+    [SerializeField]
+    private int amount;
 
-    public ProductData(ProductSo type, int amount) {
-      Type = type;
-      Amount = amount;
+    [SerializeField]
+    private ProductSo type;
+
+    public int Amount {
+      get => amount;
+      set => amount = value;
     }
 
+    public ProductSo Type => type;
+
+    public ProductData(ProductSo type, int amount) {
+      this.type = type;
+      this.amount = amount;
+    }
   }
 }

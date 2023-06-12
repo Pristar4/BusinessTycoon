@@ -15,8 +15,12 @@ namespace BT.Scripts.Gameplay {
   public class ManagerProvider {
 
     private MarketManager marketManager;
+    private PlayerManager playerManager;
 
     public MarketManager MarketManager => TryGetAndCacheObjectOfType(ref marketManager);
+
+    public PlayerManager PlayerManager
+      => TryGetAndCacheObjectOfType(ref playerManager);
 
     private static T TryGetAndCacheObjectOfType<T>(ref T cache) where T : MonoBehaviour {
       try {

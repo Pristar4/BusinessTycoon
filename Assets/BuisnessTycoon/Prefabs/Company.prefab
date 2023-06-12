@@ -44,3 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a9e2d46797419e9d88ce8afed52e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  productInventory:
+  - amount: 5
+    type: {fileID: 11400000, guid: 7d0909b6a370ced4dad4708dfbbdc495, type: 2}
+  factoryInventory: []
+  companyName: DefaultCompany

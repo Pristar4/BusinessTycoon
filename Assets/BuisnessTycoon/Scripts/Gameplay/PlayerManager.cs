@@ -19,11 +19,5 @@ namespace BT.Scripts.Gameplay {
       PlayerCompany = startup;
     }
 
-    public Company CreateCompany(Company companyPrefab) {
-      var newCompany = Instantiate(companyPrefab);
-      newCompany.CompanyName = "Player";
-      return newCompany;
-
-    }
   }
 }

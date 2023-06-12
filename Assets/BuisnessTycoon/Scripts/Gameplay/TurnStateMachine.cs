@@ -19,8 +19,8 @@ namespace BT.Scripts.Gameplay {
 
     public TurnStateMachine(
         List<Company> companies, MarketManager marketManager,
-        UIManager uiManager, PlayerManager playerManager,
-        TurnManager turnManager) {
+        UIManager uiManager,
+        PlayerManager playerManager, TurnManager turnManager) {
       idleTurnState = new IdleTurnState();
       idleTurnState.Initialize(this);
 
@@ -63,7 +63,10 @@ namespace BT.Scripts.Gameplay {
       currentState.OnExit();
       currentState = newState;
       newState.OnEnter();
-      Debug.Log("TurnState changed to " + newState);
+      // print just the name of the class
+      Debug.Log("TurnState changed to " + newState.GetType().Name);
+
+
     }
 
     public TurnState GetTurnState() {

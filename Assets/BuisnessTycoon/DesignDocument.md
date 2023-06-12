@@ -1,106 +1,178 @@
-﻿# Game Overview:
-### Title:
-Tech Startup Simulator (working title)
+﻿
+# Design Document for Business Tycoon Game
 
-### Genre:
-Business Simulation
+## Game Description
 
-### Platform:
-PC (with potential for porting to mobile and console platforms)
- 
-### Description:
-Tech Startup Simulator is a business simulation game where players take on the role of an entrepreneur building a tech startup from scratch.\
-The game focuses on strategic decision-making, resource management, and competitive gameplay, as players navigate the challenges of the tech industry.
+Business Tycoon is a simulation game where players and AI opponents run their
+companies, competing against each other in a dynamic market. Each turn, players
+manage various aspects of their company, including production, marketing,
+financing, and budgeting. After taking their actions, they progress to the next
+quarter.
 
-## Gameplay:
-The core gameplay loop involves players making strategic decisions to manage their startup's operations and growth.
+## Game Phases
 
-This includes developing and launching new products, conducting market research, allocating resources, running marketing campaigns, hiring and managing employees, and securing funding from investors.
+1. **Planning Phase**: Player chooses an option from the dropdown menu and makes
+   decisions based on the selected panel.
+2. **Execution Phase**: The game implements the player's decisions and updates
+   the game state.
+3. **AI Turn**: AI companies take their turn.
+4. **Evaluation Phase**: The game evaluates the results of the quarter and
+   updates the game state accordingly.
 
-Players will manage resources such as capital, human resources, intellectual property, and time. The management of these resources will be critical for the startup's success and growth.
+## Game Components
 
-The game will feature AI competitors representing rival startups. These competitors will compete with the player for market share, talent, and funding.
+1. **Companies**: Player and AI run companies, which are the main entities of
+   the game. Each company has a balance, product inventory, and factory
+   inventory.
 
+2. **UIManager**: Manages the User Interface, including dropdown menu, financial
+   display, and updates panels based on player actions.
 
-### Story and Setting:
-The game follows the journey of an aspiring tech entrepreneur,\
-starting from the early days of a small startup and progressing towards building a successful tech empire.\
-The narrative will include key milestones, achievements, and challenges that the player encounters along the way.
+3. **AIManager**: Manages the AI companies' actions.
 
-### Art and Aesthetics:
-The game will feature a modern and sleek design aesthetic, with clean and minimalist UI elements, vibrant colors, and futuristic visuals.
+4. **PlayerManager**: Manages player actions.
 
-(We'll develop more specific art assets and UI design in the development phase.)
+5. **MarketManager**: Manages the game's market, including offers from different
+   companies.
 
-### Sound and Music:
-The game will feature ambient and background music to enhance the atmosphere and mood of the game.\
-Sound effects will be used to highlight important gameplay events and actions.
+6. **TurnManager**: Manages the game's turns and updates the game state.
 
-### Technical Specifications:
-The game will be developed using Unity, with potential for deployment on multiple platforms including PC, mobile, and consoles.
+7. **TurnStateMachine**: Controls the game's phases (Planning, Execution, AI
+   Turn, Evaluation).
 
-### Monetization and Marketing:
-The game will be sold as a premium product, with potential for additional revenue through in-game purchases or DLC. Marketing strategies will include online advertisements, social media campaigns, and partnerships with influencers in the gaming community.
+8. **GameManager**: Central manager that orchestrates the other components.
 
-This is a preliminary version of the Design Document. As we continue to refine our game's concept and begin the technical design and development, we'll continue to update and expand this document.
+## Player's Actions
 
-Next, we'll move on to the Technical Design  I'll create a simple class diagram to outline the structure of our game. Here's a basic example to get us started:
+Players can perform the following actions through different panels:
 
+1. **Market**: Players can view the current market offers and make new offers.
+2. **Research**: Players can conduct research to improve their products or
+   processes.
+3. **Production**: Players can manage their production facilities, producing
+   products based on their current inventory.
+4. **Financing**: Players can view their financial status, take loans, and pay
+   them back.
+5. **Contracts**: Players can view and manage their contracts with other
+   companies.
+6. **Budgeting**: Players can set their operational budget and cash flow budget.
+7. **Reports**: Players can view reports of their company's performance.
 
+Once the player has taken all the actions they want, they can proceed to the
+next quarter.
+
+---
+## Class Diagran
 ```mermaid
 classDiagram
-Player -- Company: owns
-Player -- Market: operates in
-Company -- Product: creates
-Product -- Market: competes in
-Company -- Employee: employs
-Player -- Investor: seeks funding from
-Company -- AI_Company: competes with
-AI_Company -- Product: creates
-AI_Company -- Employee: employs
+   
+
+   class ProductSo {
+   }
+
+   class ProductData {
+      -ProductSo type
+      -int amount
+   }
+
+   ProductData o-- ProductSo
+
+   class FactorySo {
+   }
+
+   class FactoryData {
+   }
+
+   FactoryData o-- FactorySo
+
+   class Company {
+      -List<ProductData> productInventory
+      -List<FactoryData> factoryInventory
+      -List<Offer> offers
+      -Finance finance
+      -string companyName
+      +Produce()
+      +CreateOffer(MarketManager)
+      +AddMoney(decimal)
+      +RemoveProduct(ProductSo, int)
+   }
+
+   Company o-- ProductData
+   Company o-- FactoryData
+   Company o-- Offer
+
+   class Offer {
+      -Company company
+      -ProductData product
+      -bool isSold
+      -decimal price
+      -int quantity
+      -int soldQuantity
+      +Sell(int)
+   }
+
+   Offer o-- ProductData
+   Offer o-- Company
+
+   class MarketManager {
+      -List<Offer> offers
+      -Dictionary<ProductSo, int> productDemand
+      +Initialize()
+      +SetProductDemand(ProductSo, int)
+      +GetProductDemand(ProductSo)
+      +UpdateMarket()
+      +SortOffersByScore(List<Offer>)
+      +ClearOffers()
+      +AddOffer(Offer)
+      +GetSales(Company)
+   }
+
+   MarketManager o-- Offer
+
+   class TurnStateMachine {
+      -TurnState currentState
+      +SetTurnState(TurnState)
+      +GetTurnState()
+      +Update(List<Company>, MarketManager, PlayerManager, UIManager, TurnManager)
+   }
+
+   class TurnState {
+   }
+
+   TurnStateMachine o-- TurnState
+
+   class UIManager {
+      +InitUI(Company)
+      +UpdateUI(Company, int)
+      +UpdateFinancialUI(Company)
+      +UpdateTurnUI(int)
+      +Initialize(Company)
+      +OnDropdownSelectionChanged(int)
+      +DeactivateAllPanels()
+   }
+
+   UIManager -- Company
+
+
 ```
-This is a very basic structure and we'll likely need to add more classes and relationships as we delve deeper into the technical design of our game. For example, we might want to add classes for different types of employees, products, or investors.
-Now, let's move on to the flowchart for our core gameplay loop. Here's a basic example:
+## Sequence Diagram for Turn Progression
 ```mermaid
-graph LR
-A[Start] --> B{Make Strategic Decision}
-B --> C[Manage Resources]
-C --> D[Develop and Launch Product]
-D --> E[Compete with AI Companies]
-E --> F[Seek Funding from Investors]
-F --> G{Achieve Milestones?}
-G --> H[Progress to Next Level]
-H --> B
-G --> I[Game Over]
+sequenceDiagram
+   Participant GameManager
+   Participant UIManager
+   Participant PlayerManager
+   Participant AIManager
+   Participant TurnManager
+   GameManager->>UIManager: InitUI(startup)
+   GameManager->>PlayerManager: Initialize(startup)
+   GameManager->>AIManager: Initialize(npcCompanies)
+   GameManager->>TurnManager: Initialize()
+   loop Each Turn
+      GM->>TurnManager: UpdateTurnUI()
+      TurnManager->>PlayerManager: UpdatePlayerActions()
+      PlayerManager->>AIManager: UpdateAIActions()
+      AIManager->>TurnManager: UpdateTurnState()
+   end
+
+
 ```
-
-
-## Class Diagram:
-Here's a basic structure of classes and their relationships:
-
-Player class with attributes such as capital, knowledge, and experience. The Player owns a Company and operates in a Market.
-
-Company class with attributes such as employees, products, and intellectualProperty. The Company creates Products and employs Employees. It competes with AI_Company.
-
-Product class with attributes such as developmentCost, marketValue, and competitiveness. The Product competes in the Market.
-
-Employee class with attributes such as salary, productivity, and morale.
-
-AI_Company class similar to the Company class, but controlled by the game's AI.
-
-Market class with attributes such as marketTrends, consumerDemands, and competitorProducts.
-
-Investor class with attributes such as investmentAmount and returnExpectations.
-
-## Flowchart for Core Gameplay Loop:
-Here's a basic structure of the core gameplay loop:
-
-# Start
-Make a strategic decision (e.g., develop a new product, conduct market research, allocate resources, start a marketing campaign, hire new employees, seek funding from investors) \
-Manage resources (e.g., financial capital, human resources, intellectual property, R&D budget, marketing budget, time) \
-Develop and launch a product \
-Compete with AI companies \
-Seek funding from investors \
-Check if milestones are achieved \
-If yes, progress to the next level and return to "Make a strategic decision" \
-If no, game over 
