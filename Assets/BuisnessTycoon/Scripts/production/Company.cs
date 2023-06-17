@@ -20,7 +20,10 @@ namespace BT.Scripts.production {
       set => productInventory = value;
     }
 
-    public List<FactoryData> FactoryInventory => factoryInventory;
+    public List<FactoryData> FactoryInventory {
+      get => factoryInventory;
+      set => factoryInventory = value;
+    }
 
     private List<Offer> Offers { get; } = new();
 
@@ -36,10 +39,10 @@ namespace BT.Scripts.production {
             ManagerProvider.Current.TurnManager.CurrentTurn)
           continue;
         // This assumes that one factory always produces one unit of output per quarter
-        AddProductToInventory(factoryData.Factory.FactoryType.ToString(),
+        AddProductToInventory(factoryData.Factory.productProduced.name,
             factoryData.Factory.OutputPerQuarter);
         Debug.Log(
-            $"Produced {factoryData.Factory.OutputPerQuarter} units of {factoryData.Factory.FactoryType}");
+            $"Produced {factoryData.Factory.OutputPerQuarter} units of {factoryData.Factory.productProduced.name}");
       }
     }
     private void AddProductToInventory(string productType, int amountProduced) {
