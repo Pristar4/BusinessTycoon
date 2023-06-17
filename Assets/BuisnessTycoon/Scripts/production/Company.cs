@@ -20,7 +20,6 @@ namespace BT.Scripts.production {
       set => productInventory = value;
     }
 
-    [SerializeField]
     public List<FactoryData> FactoryInventory => factoryInventory;
 
     private List<Offer> Offers { get; } = new();

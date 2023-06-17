@@ -7,39 +7,50 @@
 #endregion
 #region
 using System;
+using UnityEngine;
 #endregion
 
 namespace BT.Scripts.production {
   [Serializable]
   public class FactoryData {
-    public FactorySo Factory { get; }
-    public int CurrentOutput { get; private set; }
+    [SerializeField]
+    private FactorySo factory;
+    [SerializeField]
+    private int currentOutput;
+    [SerializeField]
     private int turnBuilt;
+    public FactorySo Factory => factory;
+    public int CurrentOutput => currentOutput;
+    public int TurnBuilt => turnBuilt;
+    
     public FactoryData(FactorySo factory, int currentTurn) {
-      Factory = factory;
-      CurrentOutput = 0;
+      this.factory = factory;
+      currentOutput = 0;
       turnBuilt = currentTurn;
     }
-    public int EndSetupTurn => turnBuilt + Factory.SetupTime;
+    public int EndSetupTurn => turnBuilt + factory.SetupTime;
     public void AdvanceTurn(int currentTurn) {
-      if (Factory.FactoryType == FactoryType.Build &&
+      if (factory.FactoryType == FactoryType.Build &&
           currentTurn >= EndSetupTurn)
-        CurrentOutput = Factory.OutputPerQuarter;
+        currentOutput = factory.OutputPerQuarter;
 
-      if (Factory.FactoryType == FactoryType.Rent &&
+      if (factory.FactoryType == FactoryType.Rent &&
           currentTurn >= EndSetupTurn)
-        CurrentOutput = Factory.OutputPerQuarter;
+        currentOutput = factory.OutputPerQuarter;
     }
     public int CalculateProductionCost() {
-      if (Factory.FactoryType == FactoryType.Build)
-        return CurrentOutput * Factory.LaborCostPerUnit +
-               Factory.MaintenancePerQuarter;
-      if (Factory.FactoryType == FactoryType.Rent) return CurrentOutput * Factory.OutsourcingFeePerUnit + Factory.MaintenancePerQuarter;
+      if (factory.FactoryType == FactoryType.Build)
+        return currentOutput * factory.LaborCostPerUnit +
+               factory.MaintenancePerQuarter;
+      if (factory.FactoryType == FactoryType.Rent)
+        return currentOutput * factory.OutsourcingFeePerUnit +
+               factory.MaintenancePerQuarter;
 
       return 0;
     }
     public void ResetOutput() {
-      CurrentOutput = 0;
+      currentOutput = 0;
     }
   }
+
 }
