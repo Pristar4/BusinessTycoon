@@ -20,13 +20,14 @@ namespace BT.Scripts.production {
       CurrentOutput = 0;
       turnBuilt = currentTurn;
     }
+    public int EndSetupTurn => turnBuilt + Factory.SetupTime;
     public void AdvanceTurn(int currentTurn) {
       if (Factory.FactoryType == FactoryType.Build &&
-          currentTurn >= turnBuilt + Factory.SetupTime)
+          currentTurn >= EndSetupTurn)
         CurrentOutput = Factory.OutputPerQuarter;
 
       if (Factory.FactoryType == FactoryType.Rent &&
-          currentTurn >= turnBuilt + Factory.SetupTime)
+          currentTurn >= EndSetupTurn)
         CurrentOutput = Factory.OutputPerQuarter;
     }
     public int CalculateProductionCost() {

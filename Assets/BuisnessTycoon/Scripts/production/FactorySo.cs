@@ -6,6 +6,7 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
+using Sirenix.OdinInspector;
 using UnityEngine;
 #endregion
 
@@ -14,16 +15,16 @@ namespace BT.Scripts.production {
       order = 0)]
   public class FactorySo : ScriptableObject {
     #region Serialized Fields
-    [SerializeField] private FactoryType factoryType;
-    [SerializeField] private int outputPerQuarter;
-    [SerializeField] private int buildCost;
-    [SerializeField] private int setupTime;
-    [SerializeField] private int outsourcingFeePerUnit;
-    [SerializeField] private int laborCostPerUnit;
-    [SerializeField] private int maintenancePerQuarter;
-    [SerializeField] private float percentageValueRetained;
-    [SerializeField] private int depreciationTime;
-    [SerializeField] private string depreciationMethod;
+    [ShowInInspector] private FactoryType factoryType;
+    [ShowInInspector] private int outputPerQuarter;
+    [ShowInInspector] private int buildCost;
+    [ShowInInspector] private int setupTime;
+    [ShowInInspector] private int outsourcingFeePerUnit;
+    [ShowInInspector] private int laborCostPerUnit;
+    [ShowInInspector] private int maintenancePerQuarter;
+    [ShowInInspector] private float percentageValueRetained;
+    [ShowInInspector] private int depreciationTime;
+    [ShowInInspector] private string depreciationMethod;
     #endregion
     public FactoryType FactoryType => factoryType;
     public int OutputPerQuarter => outputPerQuarter;

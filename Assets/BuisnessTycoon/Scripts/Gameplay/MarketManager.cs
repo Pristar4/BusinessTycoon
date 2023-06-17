@@ -118,5 +118,10 @@ namespace BT.Scripts.Gameplay {
     public IReadOnlyList<Offer> GetOffers() {
       return offers.AsReadOnly();
     }
+    public ProductSo GetProductByName(string productName) {
+      var product = products.Find(p => p.name == productName);
+      if (product != null) return product;
+      throw new Exception($"Product {productName} not found");
+    }
   }
 }
