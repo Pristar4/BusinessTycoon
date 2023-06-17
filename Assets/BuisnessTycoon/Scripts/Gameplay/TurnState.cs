@@ -100,7 +100,7 @@ namespace BT.Scripts.Gameplay {
     }
     public override void Update() {
       foreach (var company in companies)
-        if (company.CompanyName != "Player")
+          // if (company.CompanyName != "Player")
           company.CreateOffer(marketManager);
 
       uiManager.UpdateUI(playerManager.PlayerCompany,

@@ -90,9 +90,14 @@ namespace BT.Scripts.Gameplay {
     private Company CreateCompany() {
       var newCompany = Instantiate(companyPrefab);
       newCompany.Finance.Balance = companyPreset.startingBalance;
-      newCompany.ProductInventory = companyPreset.startingProductInventory;
-
-      newCompany.CompanyName = "Player";
+      // Deep copy of the ProductData list
+      newCompany.ProductInventory = new List<ProductData>();
+      foreach (var product in companyPreset.startingProductInventory) {
+        var newProductData
+            = new ProductData(product.Type, product.Amount);
+        newCompany.ProductInventory.Add(newProductData);
+      }
+      newCompany.CompanyName = companyPreset.companyName;
       return newCompany;
     }
   }
