@@ -67,8 +67,7 @@ namespace BT.Scripts.Gameplay {
       this.turnManager = turnManager;
     }
     public override void Update() {
-      if (!Keyboard.current.spaceKey.wasPressedThisFrame)
-        return;
+     
 
       uiManager.UpdateUI(playerManager.PlayerCompany, turnManager.CurrentTurn);
 
@@ -119,8 +118,7 @@ namespace BT.Scripts.Gameplay {
   [Serializable]
   public class ShowOfferTurnState : TurnState {
     public override void Update() {
-      if (!Keyboard.current.spaceKey.wasPressedThisFrame)
-        return;
+      
 
       machine.SetTurnState(machine.AiChooseOfferTurnState());
     }
@@ -170,8 +168,7 @@ namespace BT.Scripts.Gameplay {
       this.playerManager = playerManager;
     }
     public override void Update() {
-      if (!Keyboard.current.spaceKey.wasPressedThisFrame)
-        return;
+    
 
       turnManager.AdvanceTurn();
       marketManager.ClearOffers();

@@ -108,7 +108,7 @@ namespace BT.Scripts.Gameplay {
       }
 
       public void OnDropdownSelectionChanged(int selectedIndex) {
-        Debug.Log("Dropdown selection changed to " + selectedIndex);
+        // Debug.Log("Dropdown selection changed to " + selectedIndex);
 
         // Deactivate all other panels
         DeactivateAllPanels();

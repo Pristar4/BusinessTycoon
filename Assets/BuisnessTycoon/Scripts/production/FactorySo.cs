@@ -6,58 +6,39 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 #endregion
 
 namespace BT.Scripts.production {
   [CreateAssetMenu(fileName = "new_factory", menuName = "Production/Factory",
-                   order = 0)]
+      order = 0)]
   public class FactorySo : ScriptableObject {
     #region Serialized Fields
-    [SerializeField] private ProductData[] ingredients;
-    [SerializeField] private ProductData[] results;
+    [SerializeField] private FactoryType factoryType;
+    [SerializeField] private int outputPerQuarter;
+    [SerializeField] private int buildCost;
+    [SerializeField] private int setupTime;
+    [SerializeField] private int outsourcingFeePerUnit;
+    [SerializeField] private int laborCostPerUnit;
+    [SerializeField] private int maintenancePerQuarter;
+    [SerializeField] private float percentageValueRetained;
+    [SerializeField] private int depreciationTime;
+    [SerializeField] private string depreciationMethod;
     #endregion
-
-    private ProductData[] Ingredients => ingredients;
-    public ProductData[] Results => results;
-
-    public bool TryProduce(List<ProductData> inputIngredients,
-                           out List<ProductData> outputResults) {
-      outputResults = null;
-
-      if (!AreIngredientsSufficient(inputIngredients)) { return false; }
-
-      outputResults = results
-          .Select(result => new ProductData(result.Type, result.Amount))
-          .ToList();
-
-      //copy results into outputResults
-      return true;
-    }
-
-    public void ConsumeIngredients(ref List<ProductData> inputIngredients) {
-      foreach (var ingredient in Ingredients) {
-        var foundIngredient
-            = inputIngredients.Find(data => data.Type == ingredient.Type);
-
-        foundIngredient.Amount -= ingredient.Amount;
-      }
-    }
-
-    private bool AreIngredientsSufficient(List<ProductData> inputIngredients) {
-
-      foreach (var ingredient in Ingredients) {
-        var foundIngredient
-            = inputIngredients.Find(data => data.Type == ingredient.Type);
-
-
-        if (foundIngredient is null ||
-            foundIngredient.Amount < ingredient.Amount) { return false; }
-      }
-
-      return true;
-    }
+    public FactoryType FactoryType => factoryType;
+    public int OutputPerQuarter => outputPerQuarter;
+    public int BuildCost => buildCost;
+    public int SetupTime => setupTime;
+    public int OutsourcingFeePerUnit => outsourcingFeePerUnit;
+    public int LaborCostPerUnit => laborCostPerUnit;
+    public int MaintenancePerQuarter => maintenancePerQuarter;
+    public float PercentageValueRetained => percentageValueRetained;
+    public int DepreciationTime => depreciationTime;
+    public string DepreciationMethod => depreciationMethod;
+    public bool CanBenefitFromRD => FactoryType == FactoryType.Build;
+  }
+  public enum FactoryType {
+    Build,
+    Rent
   }
 }

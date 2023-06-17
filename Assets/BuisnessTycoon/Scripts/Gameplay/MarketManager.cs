@@ -51,6 +51,7 @@ namespace BT.Scripts.Gameplay {
       //TODO: improve this logic to be more efficient
       var items = new List<ProductSo>(productDemand.Keys);
 
+
       foreach (var productType in items) {
         var remainingDemand = productDemand[productType];
         var offersForProduct
@@ -76,10 +77,11 @@ namespace BT.Scripts.Gameplay {
           //remove offer if it is empty
           if (offer.quantity <= 0) {
             offers.Remove(offer);
-            Debug.Log("Removed offer from market");
+            // Debug.Log("Removed offer from market");
           }
 
-          Debug.Log("Sold " + quantityToBuy + " of " + offer.product.Type.name +
+          Debug.Log(offer.company.CompanyName + " Sold " + quantityToBuy +
+                    " of " + offer.product.Type.name +
                     " for " + offer.price + " each");
 
           if (remainingDemand <= 0) break;

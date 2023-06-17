@@ -64,7 +64,7 @@ namespace BT.Scripts.Gameplay {
       currentState = newState;
       newState.OnEnter();
       // print just the name of the class
-      Debug.Log("TurnState changed to " + newState.GetType().Name);
+      // Debug.Log("TurnState changed to " + newState.GetType().Name);
 
 
     }
