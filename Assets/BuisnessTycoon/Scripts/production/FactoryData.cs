@@ -15,17 +15,24 @@ namespace BT.Scripts.production {
   public class FactoryData {
     [SerializeField]
     private FactorySo factory;
+    [SerializeField] private int initialOutput;
     [SerializeField]
     private int currentOutput;
     [SerializeField]
     private int turnBuilt;
     public FactorySo Factory => factory;
-    public int CurrentOutput => currentOutput;
+    public int InitialOutput => initialOutput;
+
+    public int CurrentOutput {
+      get => currentOutput;
+      set => currentOutput = value;
+    }
     public int TurnBuilt => turnBuilt;
     
     public FactoryData(FactorySo factory, int currentTurn) {
       this.factory = factory;
-      currentOutput = factory.OutputPerQuarter;
+      initialOutput = factory.OutputPerQuarter;
+      currentOutput = initialOutput;
       turnBuilt = currentTurn;
     }
     public int EndSetupTurn => turnBuilt + factory.SetupTime;

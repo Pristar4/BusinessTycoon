@@ -41,9 +41,9 @@ namespace BT.Scripts.production {
           continue;
         // This assumes that one factory always produces one unit of output per quarter
         AddProductToInventory(factoryData.Factory.productProduced.name,
-            factoryData.Factory.OutputPerQuarter);
+            factoryData.CurrentOutput);
         Debug.Log(
-            $"Produced {factoryData.Factory.OutputPerQuarter} units of {factoryData.Factory.productProduced.name}");
+            $"Produced {factoryData.CurrentOutput} units of {factoryData.Factory.productProduced.name}");
       }
     }
     private void AddProductToInventory(string productType, int amountProduced) {
