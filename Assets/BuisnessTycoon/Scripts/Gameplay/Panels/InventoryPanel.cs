@@ -12,7 +12,7 @@ using UnityEngine;
 #endregion
 
 namespace BT.Scripts.Gameplay {
-  public class InventoryPanel : MonoBehaviour, IPanelDisplay {
+  public class InventoryPanel : MonoBehaviour, IPanel {
     #region Serialized Fields
     [SerializeField] private Transform inventoryContainer;
 
@@ -21,8 +21,9 @@ namespace BT.Scripts.Gameplay {
     #endregion
     private Company company;
     #region IPanelDisplay Members
-    public void Initialize() {
-      company = ManagerProvider.Current.PlayerManager.PlayerCompany;
+    public void Initialize(PanelData data = null) {
+      // company = PlayerManager.Instance.GetPlayerCompany();
+      company = ManagerProvider.Current.PlayerManager.GetPlayerCompany();
       Debug.Log("InventoryPanel initialized");
     }
 

@@ -12,8 +12,12 @@ using UnityEngine;
 
 namespace BT.Scripts.Gameplay {
   public class PlayerManager : MonoBehaviour {
-
+    public static PlayerManager Instance { get; }
+    
     public Company PlayerCompany { get; private set; }
+    public Company GetPlayerCompany() {
+      return PlayerCompany;
+    }
 
     public void Initialize(Company startup) {
       PlayerCompany = startup;

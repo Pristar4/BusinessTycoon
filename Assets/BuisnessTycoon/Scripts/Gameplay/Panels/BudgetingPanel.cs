@@ -1,10 +1,10 @@
 using System;
+using BT.Scripts.production;
 using UnityEngine;
 
 namespace BT.Scripts.Gameplay {
-  public class BudgetingPanel : MonoBehaviour, IPanelDisplay {
-
-    public void Initialize() {
+  public class BudgetingPanel : MonoBehaviour, IPanel {
+    public void Initialize(PanelData data = null) {
       Debug.Log("BudgetingPanel initialized");
     }
 

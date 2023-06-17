@@ -1,10 +1,10 @@
 using System;
+using BT.Scripts.production;
 using UnityEngine;
 
 namespace BT.Scripts.Gameplay {
-  public class FinancingPanel : MonoBehaviour, IPanelDisplay {
-
-    public void Initialize() {
+  public class FinancingPanel : MonoBehaviour, IPanel {
+    public void Initialize(PanelData data = null) {
       Debug.Log("FinancingPanel initialized");
     }
 

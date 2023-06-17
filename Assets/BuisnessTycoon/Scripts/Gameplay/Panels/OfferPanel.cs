@@ -6,12 +6,13 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
+using BT.Scripts.production;
 using TMPro;
 using UnityEngine;
 #endregion
 
 namespace BT.Scripts.Gameplay {
-  public class OfferPanel : MonoBehaviour, IPanelDisplay {
+  public class OfferPanel : MonoBehaviour, IPanel {
     #region Serialized Fields
     [SerializeField]
     private Transform offerContainer;
@@ -23,7 +24,7 @@ namespace BT.Scripts.Gameplay {
       => ManagerProvider.Current.MarketManager;
 
     #region IPanelDisplay Members
-    public void Initialize() {
+    public void Initialize(PanelData data = null) {
       Debug.Log("OfferPanel initialized");
     }
 

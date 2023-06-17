@@ -13,16 +13,21 @@ using Object = UnityEngine.Object;
 
 namespace BT.Scripts.Gameplay {
   public class ManagerProvider {
-
     private MarketManager marketManager;
     private PlayerManager playerManager;
+    private PanelManager panelManager;
 
-    public MarketManager MarketManager => TryGetAndCacheObjectOfType(ref marketManager);
+    public MarketManager MarketManager
+      => TryGetAndCacheObjectOfType(ref marketManager);
 
     public PlayerManager PlayerManager
       => TryGetAndCacheObjectOfType(ref playerManager);
 
-    private static T TryGetAndCacheObjectOfType<T>(ref T cache) where T : MonoBehaviour {
+    public PanelManager PanelManager
+      => TryGetAndCacheObjectOfType(ref panelManager);
+
+    private static T TryGetAndCacheObjectOfType<T>(ref T cache)
+        where T : MonoBehaviour {
       try {
         if (cache.gameObject == null) { cache = null; }
       } catch (Exception e) {
@@ -32,22 +37,20 @@ namespace BT.Scripts.Gameplay {
 
       return cache ??= GetObjectOfType<T>();
     }
-
     private static T GetObjectOfType<T>() where T : Object {
-      var obj = Object.FindObjectOfType<T>();
+      var obj = Object.FindFirstObjectByType<T>();
 
       if (obj is null) {
-        Debug.LogWarning($"{typeof(T)} not Found, but was requested from GetObjectOfType");
+        Debug.LogWarning(
+            $"{typeof(T)} not Found, but was requested from GetObjectOfType");
       }
 
       return obj;
     }
-
     #region Lazy Singelton
     //https://csharpindepth.com/Articles/Singleton
-
-    private static readonly Lazy<ManagerProvider> Lazy = new(() => new ManagerProvider());
-
+    private static readonly Lazy<ManagerProvider> Lazy = new(()
+        => new ManagerProvider());
     public static ManagerProvider Current => Lazy.Value;
     #endregion
   }

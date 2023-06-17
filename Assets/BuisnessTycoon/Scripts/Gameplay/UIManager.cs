@@ -86,7 +86,8 @@ namespace BT.Scripts.Gameplay {
       }
 
       private void UpdateTurnUI(int turn) {
-        turnText.text = "Turn: " + turn;
+        // 4 Quarters per year
+        turnText.text = "Y " + (turn / 4 + 1) + " Q " + (turn % 4 + 1); 
       }
 
       public void Initialize(Company startup) {

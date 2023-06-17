@@ -1,28 +1,29 @@
 ﻿#region Info
 // -----------------------------------------------------------------------
-// ResearchPanel.cs
+// BasePanel.cs
 // 
-// Felix Jung 12.06.2023
+// Felix Jung 17.06.2023
 // -----------------------------------------------------------------------
 #endregion
-using System;
 using BT.Scripts.production;
+using TMPro;
 using UnityEngine;
 
 namespace BT.Scripts.Gameplay {
-  public class ResearchPanel : MonoBehaviour, IPanel {
-    #region IPanelDisplay Members
-    public void Initialize(PanelData data = null) {
-      Debug.Log("ResearchPanel initialized");
+  public class BasePanel : MonoBehaviour, IPanel {
+    [SerializeField]
+    private TMP_Text titleText;
+    [SerializeField]
+    private GameObject panelBackground;
+    public void Initialize(PanelData data) {
+      titleText.text = data.title;
+      panelBackground = data.background;
     }
-
     public void SetActive(bool isActive) {
       gameObject.SetActive(isActive);
     }
-
     public void UpdatePanel() {
-      throw new NotImplementedException();
+
     }
-    #endregion
   }
 }
