@@ -15,5 +15,9 @@ MonoBehaviour:
   startingProductInventory:
   - amount: 25
     type: {fileID: 11400000, guid: 7d0909b6a370ced4dad4708dfbbdc495, type: 2}
+  startingFactoryInventory:
+  - factory: {fileID: 11400000, guid: 1b7b44eb222165242b54ca065e049c39, type: 2}
+    currentOutput: 10
+    turnBuilt: 0
   startingBalance: 250000
   companyName: Phenix Corp.

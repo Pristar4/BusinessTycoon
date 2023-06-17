@@ -25,6 +25,7 @@ namespace BT.Scripts.production {
     [ShowInInspector] private float percentageValueRetained;
     [ShowInInspector] private int depreciationTime;
     [ShowInInspector] private string depreciationMethod;
+    [SerializeField] public ProductSo productProduced;
     #endregion
     public FactoryType FactoryType => factoryType;
     public int OutputPerQuarter => outputPerQuarter;

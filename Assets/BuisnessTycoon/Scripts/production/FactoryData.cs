@@ -25,7 +25,7 @@ namespace BT.Scripts.production {
     
     public FactoryData(FactorySo factory, int currentTurn) {
       this.factory = factory;
-      currentOutput = 0;
+      currentOutput = factory.OutputPerQuarter;
       turnBuilt = currentTurn;
     }
     public int EndSetupTurn => turnBuilt + factory.SetupTime;

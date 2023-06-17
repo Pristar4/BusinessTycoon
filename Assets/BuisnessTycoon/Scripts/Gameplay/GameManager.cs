@@ -34,12 +34,11 @@ namespace BT.Scripts.Gameplay {
     [SerializeField] [ReadOnly]
     private GameState currentState;
     #endregion
-
     private TurnStateMachine turnStateMachine;
     #region Event Functions
     private void Start() {
       // TODO: refactor so the order of initialization is not important
-      
+
       // Initialize the market
       marketManager.Initialize();
 
@@ -47,7 +46,7 @@ namespace BT.Scripts.Gameplay {
       companies = new List<Company>();
       var startup = CreateCompany();
       companies.Add(startup);
-      
+
       // Initialize
       var npcCompanies = CreateNpcCompanies(NpcCount);
       companies.AddRange(npcCompanies);
@@ -61,21 +60,19 @@ namespace BT.Scripts.Gameplay {
       currentState = GameState.Playing;
       // Initialize the TurnStateMachine before the UIManager.
       turnStateMachine = new TurnStateMachine(companies,
-                                              marketManager, uiManager,
-                                              playerManager, turnManager);
+          marketManager, uiManager,
+          playerManager, turnManager);
 
       uiManager.Initialize(startup);
     }
-
     private void Update() {
       if (currentState != GameState.Playing) { return; }
 
       turnStateMachine.Update(companies, marketManager, playerManager,
-                              uiManager, turnManager);
+          uiManager, turnManager);
       turnStateMachine.GetTurnState();
     }
     #endregion
-
     private List<Company> CreateNpcCompanies(int count) {
       var npcCompanies = new List<Company>();
 
@@ -86,7 +83,6 @@ namespace BT.Scripts.Gameplay {
 
       return npcCompanies;
     }
-
     private Company CreateCompany() {
       var newCompany = Instantiate(companyPrefab);
       newCompany.Finance.Balance = companyPreset.startingBalance;
@@ -97,11 +93,17 @@ namespace BT.Scripts.Gameplay {
             = new ProductData(product.Type, product.Amount);
         newCompany.ProductInventory.Add(newProductData);
       }
+      newCompany.FactoryInventory = new List<FactoryData>();
+      foreach (var factory in companyPreset.startingFactoryInventory) {
+        var newFactoryData
+            = new FactoryData(factory.Factory,
+                ManagerProvider.Current.TurnManager.CurrentTurn);
+        newCompany.FactoryInventory.Add(newFactoryData);
+      }
       newCompany.CompanyName = companyPreset.companyName;
       return newCompany;
     }
   }
-
   public enum GameState {
     Playing,
     Paused,

@@ -18,12 +18,16 @@ namespace BT.Scripts.production {
     [SerializeField]
     public List<ProductData> startingProductInventory;
     [SerializeField]
+    public List<FactoryData> startingFactoryInventory;
+    [SerializeField]
     public int startingBalance;
     [SerializeField]
     public string companyName;
     public CompanyPreset(List<ProductData> startingProductInventory,
+                         List<FactoryData> startingFactoryInventory,
                          int startingBalance, string companyName) {
       this.startingProductInventory = startingProductInventory;
+      this.startingFactoryInventory = startingFactoryInventory;
       this.startingBalance = startingBalance;
       this.companyName = companyName;
     }
