@@ -32,7 +32,8 @@ namespace BT.Scripts.production {
       set => companyName = value;
     }
 
-    public Finance Finance { get; set; } = new();
+    [SerializeField] private Finance finance;
+    public Finance Finance { get => finance; set => finance = value; }
     public void Produce() {
       foreach (var factoryData in FactoryInventory) {
         if (factoryData.EndSetupTurn >
