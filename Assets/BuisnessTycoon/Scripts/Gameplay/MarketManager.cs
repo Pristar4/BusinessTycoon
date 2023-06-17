@@ -29,10 +29,8 @@ namespace BT.Scripts.Gameplay {
     public Dictionary<ProductSo, int> ProductDemand => productDemand;
     public void Initialize() {
       offers = new List<Offer>();
-
-      //TODO: remove this test code
-      SetProductDemand(products[0], 500);
-      SetProductDemand(products[1], 10);
+      foreach (var product in products)
+        productDemand.Add(product, product.productDemand);
 
 
       Debug.Log("MarketManager initialized");

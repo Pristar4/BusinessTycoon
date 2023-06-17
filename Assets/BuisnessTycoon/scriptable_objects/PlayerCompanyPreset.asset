@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5150330657034725bea98907c6416e03, type: 3}
   m_Name: PlayerCompanyPreset
   m_EditorClassIdentifier: 
-  startingProductInventory:
-  - amount: 25
-    type: {fileID: 11400000, guid: 7d0909b6a370ced4dad4708dfbbdc495, type: 2}
+  startingProductInventory: []
   startingFactoryInventory:
   - factory: {fileID: 11400000, guid: 1b7b44eb222165242b54ca065e049c39, type: 2}
-    currentOutput: 10
+    initialOutput: 1000
+    currentOutput: 1000
     turnBuilt: 0
-  startingBalance: 250000
+  startingBalance: 200000
   companyName: Phenix Corp.
