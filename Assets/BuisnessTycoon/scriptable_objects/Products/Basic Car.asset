@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5150330657034725bea98907c6416e03, type: 3}
-  m_Name: PlayerCompanyPreset
+  m_Script: {fileID: 11500000, guid: 283f3aedab1a42e59f49f4bbf248463a, type: 3}
+  m_Name: Basic Car
   m_EditorClassIdentifier: 
-  startingProductInventory:
-  - amount: 25
-    type: {fileID: 11400000, guid: 7d0909b6a370ced4dad4708dfbbdc495, type: 2}
-  startingBalance: 250000
-  companyName: Phenix Corp.
+  priceRange: {x: 228, y: 264}
+  contractsAppear: 0
+  productDemand: 6200
+  contracts: 5
+  growthInPricePerQuarter: -1
+  growthPerQuarter: 300

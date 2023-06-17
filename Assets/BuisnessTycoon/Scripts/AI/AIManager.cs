@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // AIManager.cs
 // 
-// Felix Jung 11.06.2023
+// Felix Jung 17.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -13,11 +13,9 @@ using UnityEngine;
 
 namespace BT.Scripts.AI {
   internal class AIManager : MonoBehaviour {
-
     public void Initialize(List<Company> companies) {
       // implement initialization of AI
     }
-
     public Company CreateCompany(Company companyPrefab, int i) {
       var newCompany = Instantiate(companyPrefab);
       newCompany.CompanyName = "NPC " + i;

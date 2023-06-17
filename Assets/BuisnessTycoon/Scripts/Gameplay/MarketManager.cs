@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // MarketManager.cs
 // 
-// Felix Jung 11.06.2023
+// Felix Jung 17.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -20,18 +20,13 @@ namespace BT.Scripts.Gameplay {
     [SerializeField]
     private List<ProductSo> products;
     #endregion
-
     [OdinSerialize]
     private List<Offer> offers;
-
     [OdinSerialize]
     private Dictionary<ProductSo, int> productDemand = new();
-
     public List<ProductSo> Products => products;
     public List<Offer> Offers => offers;
-
     public Dictionary<ProductSo, int> ProductDemand => productDemand;
-
     public void Initialize() {
       offers = new List<Offer>();
 
@@ -42,27 +37,22 @@ namespace BT.Scripts.Gameplay {
 
       Debug.Log("MarketManager initialized");
     }
-
     public void SetProductDemand(ProductSo productType, int demand) {
       productDemand[productType] = demand;
 
     }
-
     public int GetProductDemand(ProductSo productType) {
-      if (productDemand.TryGetValue(productType, out int demand)) {
-        return demand;
-      }
+      if (productDemand.TryGetValue(productType, out var demand)) return demand;
 
       throw new Exception("Product" + productType +
                           "not found in productDemand");
     }
-
     public void UpdateMarket() {
       //TODO: improve this logic to be more efficient
       var items = new List<ProductSo>(productDemand.Keys);
 
       foreach (var productType in items) {
-        int remainingDemand = productDemand[productType];
+        var remainingDemand = productDemand[productType];
         var offersForProduct
             = offers.FindAll(offer => offer.product.Type == productType &&
                                       !offer.isSold);
@@ -70,7 +60,7 @@ namespace BT.Scripts.Gameplay {
 
 
         foreach (var offer in offersForProduct) {
-          int quantityToBuy = Mathf.Min(remainingDemand, offer.quantity);
+          var quantityToBuy = Mathf.Min(remainingDemand, offer.quantity);
           remainingDemand -= quantityToBuy;
 
 
@@ -92,7 +82,7 @@ namespace BT.Scripts.Gameplay {
           Debug.Log("Sold " + quantityToBuy + " of " + offer.product.Type.name +
                     " for " + offer.price + " each");
 
-          if (remainingDemand <= 0) { break; }
+          if (remainingDemand <= 0) break;
         }
 
         productDemand[productType] = remainingDemand;
@@ -101,36 +91,28 @@ namespace BT.Scripts.Gameplay {
       AdjustPrices();
       Debug.Log("UpdateMarket");
     }
-
     private void SortOffersByScore(List<Offer> offerList) {
       offerList.Sort((a, b) => a.price.CompareTo(b.price));
       //TODO: Add more factors and sorting logic in the future
     }
-
     private void AdjustPrices() {
       // TODO: Implement price adjustment logic based on supply and demand
     }
-
     public void ClearOffers() {
       offers.Clear();
     }
-
     public void AddOffer(Offer offer) {
       offers.Add(offer);
     }
-
     public decimal GetSales(Company company) {
       decimal sales = 0;
 
-      foreach (var offer in offers) {
-        if (offer.company == company && offer.isSold) {
+      foreach (var offer in offers)
+        if (offer.company == company && offer.isSold)
           sales += offer.price * offer.soldQuantity;
-        }
-      }
 
       return sales;
     }
-
     public IReadOnlyList<Offer> GetOffers() {
       return offers.AsReadOnly();
     }

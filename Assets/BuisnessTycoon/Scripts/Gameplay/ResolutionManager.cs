@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // ResolutionManager.cs
 // 
-// Felix Jung 11.06.2023
+// Felix Jung 17.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -13,10 +13,6 @@ using UnityEngine;
 
 namespace BT.Scripts.Gameplay {
   public class ResolutionManager : MonoBehaviour {
-    #region Serialized Fields
-    public TMP_Dropdown resolutionDropdown;
-    public TextMeshProUGUI saveButtonText;
-    #endregion
     private Resolution[] resolutions;
     #region Event Functions
     private void Start() {
@@ -29,7 +25,7 @@ namespace BT.Scripts.Gameplay {
       resolutionDropdown.ClearOptions();
 
       foreach (var resolution in resolutions) {
-        string option = resolution.width + "x" + resolution.height;
+        var option = resolution.width + "x" + resolution.height;
 
         if (!uniqueOptions.Contains(option) && resolution is
                 { width: >= 800, height: >= 600 }) {
@@ -42,27 +38,29 @@ namespace BT.Scripts.Gameplay {
       resolutionDropdown.RefreshShownValue();
     }
     #endregion
-
     public void SaveResolution() {
-      string selectedOption
+      var selectedOption
           = resolutionDropdown.options[resolutionDropdown.value].text;
 
-      string[] resolutionValues = selectedOption.Split('x');
-      int width = int.Parse(resolutionValues[0]);
-      int height = int.Parse(resolutionValues[1]);
+      var resolutionValues = selectedOption.Split('x');
+      var width = int.Parse(resolutionValues[0]);
+      var height = int.Parse(resolutionValues[1]);
 
       Screen.SetResolution(width, height, true);
 
       saveButtonText.text = "Resolution Saved!";
     }
-
     private int GetCurrentResolutionIndex() {
       var currentResolution = Screen.currentResolution;
-      for (int i = 0; i < resolutions.Length; i++)
+      for (var i = 0; i < resolutions.Length; i++)
         if (resolutions[i].width == currentResolution.width &&
             resolutions[i].height == currentResolution.height)
           return i;
       return 0;
     }
+    #region Serialized Fields
+    public TMP_Dropdown resolutionDropdown;
+    public TextMeshProUGUI saveButtonText;
+    #endregion
   }
 }

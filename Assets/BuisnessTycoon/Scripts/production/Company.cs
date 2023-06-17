@@ -88,7 +88,7 @@ namespace BT.Scripts.production {
         if (product.Amount <= 0)
           continue;
         var offer = new Offer(this, product, product.Amount,
-                              product.Type.SellPrice);
+            product.Type.MiddlePrice);
         Debug.Log("Created offer from CreateOffer");
         Offers.Add(offer);
         marketManager.AddOffer(offer);

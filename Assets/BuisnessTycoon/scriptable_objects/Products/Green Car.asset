@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 283f3aedab1a42e59f49f4bbf248463a, type: 3}
-  m_Name: Car
+  m_Name: Green Car
   m_EditorClassIdentifier: 
-  productName: Car
-  value: 1
+  priceRange: {x: 253, y: 295}
+  contractsAppear: 7
+  productDemand: 3000
+  contracts: 5
+  growthInPricePerQuarter: 1
+  growthPerQuarter: 1000

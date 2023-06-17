@@ -16,6 +16,7 @@ namespace BT.Scripts.Gameplay {
     private MarketManager marketManager;
     private PlayerManager playerManager;
     private PanelManager panelManager;
+    private TurnManager turnManager;
 
     public MarketManager MarketManager
       => TryGetAndCacheObjectOfType(ref marketManager);
@@ -25,6 +26,9 @@ namespace BT.Scripts.Gameplay {
 
     public PanelManager PanelManager
       => TryGetAndCacheObjectOfType(ref panelManager);
+
+    public TurnManager TurnManager
+      => TryGetAndCacheObjectOfType(ref turnManager);
 
     private static T TryGetAndCacheObjectOfType<T>(ref T cache)
         where T : MonoBehaviour {
