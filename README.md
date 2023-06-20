@@ -37,8 +37,8 @@ Once the project is open, navigate to the main scene (e.g., Assets/_Scenes/Main.
 Contributing
 Contributions to Business Tycoon are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request. Make sure to follow the existing code style and project guidelines.
 
-License
+## License
 This project is licensed under the MIT License. You are free to use, modify, and distribute the code in your own projects.
 
-Acknowledgement
+## Acknowledgement
 This prototype is inspired by Hubro Business Simulation.
