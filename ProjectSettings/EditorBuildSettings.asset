@@ -6,8 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BusinessTycoon/_Scenes/Menu.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/BusinessTycoon/_Scenes/Main.unity
+    guid: c55866350097fc9498d782f89dc87f37
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: fab372cf034e83d46ae1870af8844c16, type: 2}
-  m_UseUCBPForAssetBundles: 0

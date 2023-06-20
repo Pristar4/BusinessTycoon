@@ -19,7 +19,8 @@ Business Tycoon is a business simulation game developed in Unity, where players 
 
 ### Prerequisites
 
-- Unity 2023.1.b20 or later
+- Unity 2023.2.0a19 or later
+- ~~Unity 2023.1.b20~~ currently causes a shader bug for this project revisit later
 
 ### Getting Started
 
