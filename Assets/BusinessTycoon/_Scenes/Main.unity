@@ -4117,9 +4117,9 @@ MonoBehaviour:
       Data: 
   products:
   - {fileID: 11400000, guid: 7d0909b6a370ced4dad4708dfbbdc495, type: 2}
-  - {fileID: 11400000, guid: 33fe172754f065a4badb5f2c0b82d1f1, type: 2}
-  - {fileID: 11400000, guid: ca4e624d8f3aad14ab11542364e80c66, type: 2}
   - {fileID: 11400000, guid: abeaffbaf3bb4f44c9a6e3638bcdeaca, type: 2}
+  - {fileID: 11400000, guid: ca4e624d8f3aad14ab11542364e80c66, type: 2}
+  - {fileID: 11400000, guid: 33fe172754f065a4badb5f2c0b82d1f1, type: 2}
 --- !u!4 &645320451
 Transform:
   m_ObjectHideFlags: 0
@@ -5495,6 +5495,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &802830963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6671541960413993172, guid: 26a082ae4d1460947a9ab05084ebf593, type: 3}
+  m_PrefabInstance: {fileID: 926784880780028260}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &810127147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5507,7 +5518,7 @@ GameObject:
   - component: {fileID: 810127150}
   - component: {fileID: 810127149}
   m_Layer: 0
-  m_Name: '@InputManager'
+  m_Name: InputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5555,7 +5566,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: 272f6d14-89ba-496f-b7ff-215263d3219f
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 519420031}
 --- !u!114 &810127150
@@ -6326,7 +6337,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 909088682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13ea270c0e527af45a8fa9fd06dd3edd, type: 3}
+  m_Script: {fileID: 11500000, guid: 668c6d7648e67e14cb5063882e25697d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &915579699
@@ -8342,17 +8353,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1379535993328005342, guid: a81fa633d9e7be441a4d9b258cbad569, type: 3}
   m_PrefabInstance: {fileID: 908539372}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1288243998 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9142004560085939561, guid: 840ba68234b934bd9a85e178d951342f, type: 3}
-  m_PrefabInstance: {fileID: 1415618235}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1295416333
 GameObject:
   m_ObjectHideFlags: 0
@@ -10684,8 +10684,8 @@ MonoBehaviour:
   netProfitText: {fileID: 1505233801}
   turnText: {fileID: 1784792192}
   repeatingTasksDropdown: {fileID: 1034435099}
-  detailsText: {fileID: 1288243998}
-  marketDropdown: {fileID: 573001591}
+  detailsText: {fileID: 802830963}
+  marketDropdown: {fileID: 566020433}
   inventoryPanel: {fileID: 1656312238}
   offerPanel: {fileID: 1970469024}
   marketInfoPanel: {fileID: 1857576869}
