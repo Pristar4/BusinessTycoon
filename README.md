@@ -1,6 +1,7 @@
 # Business Tycoon
 
-![Game Screenshot](screenshot.png)
+![Game Screenshot](https://github.com/Pristar4/BuisnessTycoon/assets/42582409/c09bd426-5763-4512-b4ac-2851f223648d)
+
 
 Business Tycoon is a business simulation game developed in Unity, where players take on the role of an entrepreneur building a tech startup from scratch. The game focuses on strategic decision-making, resource management, and competitive gameplay, as players navigate the challenges of the tech industry.
 
