@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // GameManager.cs
 // 
-// Felix Jung 20.06.2023
+// Felix Jung 22.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -35,6 +35,7 @@ namespace BT.Scripts.Managers {
     private GameState currentState;
     #endregion
     private TurnStateMachine turnStateMachine;
+    #region Constructors
     public GameManager(
         AIManager aiManager,
         PlayerManager playerManager,
@@ -48,35 +49,10 @@ namespace BT.Scripts.Managers {
       this.turnManager = turnManager;
       this.uiManager = uiManager;
     }
+    #endregion
     #region Event Functions
     private void Start() {
-      // TODO: refactor so the order of initialization is not important
-
-      // Initialize the market
-      marketManager.Initialize();
-
-      // Initialize the list of Companies
-      companies = new List<Company>();
-      var startup = CreateCompany();
-      companies.Add(startup);
-
-      // Initialize
-      var npcCompanies = CreateNpcCompanies(NpcCount);
-      companies.AddRange(npcCompanies);
-
-      // Initialize all other managers
-      aiManager.Initialize();
-      playerManager.Initialize(startup);
-      turnManager.Initialize();
-
-      // Set the current state.
-      currentState = GameState.Playing;
-      // Initialize the TurnStateMachine before the UIManager.
-      turnStateMachine = new TurnStateMachine(companies,
-          marketManager, uiManager,
-          playerManager, turnManager);
-
-      uiManager.Initialize(startup);
+      Initialize();
     }
     private void Update() {
       if (currentState != GameState.Playing) return;
@@ -84,18 +60,9 @@ namespace BT.Scripts.Managers {
       turnStateMachine.Update(companies, marketManager, playerManager,
           uiManager, turnManager);
       turnStateMachine.GetTurnState();
+
     }
     #endregion
-    private List<Company> CreateNpcCompanies(int count) {
-      var npcCompanies = new List<Company>();
-
-      for (var i = 0; i < count; i++) {
-        var npc = aiManager.CreateCompany(companyPrefab, i);
-        npcCompanies.Add(npc);
-      }
-
-      return npcCompanies;
-    }
     private Company CreateCompany() {
       var newCompany = Instantiate(companyPrefab);
       newCompany.Finance.Balance = companyPreset.startingBalance;
@@ -119,6 +86,37 @@ namespace BT.Scripts.Managers {
 
       newCompany.CompanyName = companyPreset.companyName;
       return newCompany;
+    }
+    private List<Company> CreateNpcCompanies(int count) {
+      var npcCompanies = new List<Company>();
+
+      for (var i = 0; i < count; i++) {
+        var npc = aiManager.CreateCompany(companyPrefab, i);
+        npcCompanies.Add(npc);
+      }
+
+      return npcCompanies;
+    }
+    private void Initialize() {
+      marketManager.Initialize();
+      var startup = CreateCompany();
+      companies.Add(startup);
+      var npcCompanies = CreateNpcCompanies(NpcCount);
+      companies.AddRange(npcCompanies);
+
+      // Initialize all other managers
+      aiManager.Initialize();
+      playerManager.Initialize(startup);
+      turnManager.Initialize();
+
+      // Set the current state.
+      currentState = GameState.Playing;
+      // Initialize the TurnStateMachine before the UIManager.
+      turnStateMachine = new TurnStateMachine(companies,
+          marketManager, uiManager,
+          playerManager, turnManager);
+
+      uiManager.Initialize(startup);
     }
   }
 }

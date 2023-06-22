@@ -13,12 +13,16 @@ using BT.Scripts.Panels;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 #endregion
 
 namespace BT.Scripts.Managers {
   namespace BT.Scripts.Gameplay {
     public class UIManager : MonoBehaviour, IManager {
+      private void Start() {
+        // Method intentionally left empty.
+      }
       #region Serialized Fields
       //collapsable fields
       [VerticalGroup("UI Elements/Top Bar")]
@@ -65,29 +69,9 @@ namespace BT.Scripts.Managers {
       [SerializeField]
       private BudgetingPanel budgetingPanel;
       #endregion
-      private IManager managerImplementation;
-      #region IManager Members
-      public void Initialize() { }
-      #endregion
-      private void InitUI(Company startup) {
-        UpdateFinancialUI(startup);
-        offerPanel.UpdatePanel();
-      }
-      public void UpdateUI(Company company, int turn) {
-        UpdateFinancialUI(company);
-        UpdateTurnUI(turn);
-        offerPanel.UpdatePanel();
-      }
-      private void UpdateFinancialUI(Company company) {
-        companyNameText.text = company.CompanyName;
-        balanceText.text = "Balance: " + company.Finance.Balance;
-        incomeText.text = "Income: " + company.Finance.Income;
-        expensesText.text = "Expenses: " + company.Finance.Expense;
-        netProfitText.text = "Net Profit: " + company.Finance.NetProfit;
-      }
-      private void UpdateTurnUI(int turn) {
-        // 4 Quarters per year
-        turnText.text = "Y " + (turn / 4 + 1) + " Q " + (turn % 4 + 1);
+      private InputManager inputManager;
+      public void Initialize() {
+        // Method intentionally left empty.
       }
       public void Initialize(Company startup) {
         InitUI(startup);
@@ -105,8 +89,12 @@ namespace BT.Scripts.Managers {
         OnDropdownSelectionChanged(0);
 
       }
+      public void UpdateUI(Company company, int turn) {
+        UpdateFinancialUI(company);
+        UpdateTurnUI(turn);
+        offerPanel.UpdatePanel();
+      }
       public void OnDropdownSelectionChanged(int selectedIndex) {
-        // Debug.Log("Dropdown selection changed to " + selectedIndex);
 
         // Deactivate all other panels
         DeactivateAllPanels();
@@ -176,6 +164,25 @@ namespace BT.Scripts.Managers {
           break;
         }
       }
+      public event UnityAction OnEndTurnPressed;
+      public void EndTurnPressed() {
+        OnEndTurnPressed?.Invoke();
+      }
+      private void InitUI(Company startup) {
+        UpdateFinancialUI(startup);
+        offerPanel.UpdatePanel();
+      }
+      private void UpdateFinancialUI(Company company) {
+        companyNameText.text = company.CompanyName;
+        balanceText.text = "Balance: " + company.Finance.Balance;
+        incomeText.text = "Income: " + company.Finance.Income;
+        expensesText.text = "Expenses: " + company.Finance.Expense;
+        netProfitText.text = "Net Profit: " + company.Finance.NetProfit;
+      }
+      private void UpdateTurnUI(int turn) {
+        // 4 Quarters per year
+        turnText.text = "Y " + (turn / 4 + 1) + " Q " + (turn % 4 + 1);
+      }
       private void DeactivateAllPanels() {
         try {
           marketInfoPanel.SetActive(false);
@@ -186,7 +193,6 @@ namespace BT.Scripts.Managers {
           budgetingPanel.SetActive(false);
           inventoryPanel.SetActive(false);
           offerPanel.SetActive(false);
-
 
         } catch (Exception e) { Debug.Log("Error deactivating panels: " + e); }
       }

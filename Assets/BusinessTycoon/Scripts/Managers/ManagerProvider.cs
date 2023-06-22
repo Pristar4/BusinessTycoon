@@ -13,10 +13,14 @@ using Object = UnityEngine.Object;
 
 namespace BT.Scripts.Managers {
   public class ManagerProvider {
+    private InputManager inputManager;
     private MarketManager marketManager;
     private PanelManager panelManager;
     private PlayerManager playerManager;
     private TurnManager turnManager;
+
+    public InputManager InputManager
+      => TryGetAndCacheObjectOfType(ref inputManager);
 
     public MarketManager MarketManager
       => TryGetAndCacheObjectOfType(ref marketManager);
