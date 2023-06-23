@@ -181,7 +181,7 @@ namespace BT.Scripts.Managers {
       }
       private void UpdateTurnUI(int turn) {
         // 4 Quarters per year
-        turnText.text = "Y " + (turn / 4 + 1) + " Q " + (turn % 4 + 1);
+        turnText.text = "Y " + (turn / 4 + 1) + " Q " + (turn % 4 + 0);
       }
       private void DeactivateAllPanels() {
         try {
