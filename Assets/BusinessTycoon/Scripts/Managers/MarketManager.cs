@@ -10,23 +10,20 @@ using System;
 using System.Collections.Generic;
 using BT.Scripts.Interfaces;
 using BT.Scripts.Models;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
-#if ODIN_INSPECTOR
-#endif
 #endregion
+
 namespace BT.Scripts.Managers {
-  public class MarketManager : MonoBehaviour, IManager {
+  public class MarketManager : SerializedMonoBehaviour, IManager {
     #region Serialized Fields
     [SerializeField]
     private List<ProductSo> products;
     #endregion
-    #if ODIN_INSPECTOR
     [OdinSerialize]
-    #endif
     private List<Offer> offers;
-    #if ODIN_INSPECTOR
     [OdinSerialize]
-    #endif
     private Dictionary<ProductSo, int> productDemand = new();
     public List<ProductSo> Products => products;
     public List<Offer> Offers => offers;

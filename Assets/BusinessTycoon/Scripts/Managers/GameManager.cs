@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using BT.Scripts.Gameplay;
 using BT.Scripts.Managers.BT.Scripts.Gameplay;
 using BT.Scripts.Models;
+using Sirenix.OdinInspector;
 using UnityEngine;
-#if ODIN_INSPECTOR
-#endif
 #endregion
+
 namespace BT.Scripts.Managers {
   public class GameManager : MonoBehaviour {
     private const int NpcCount = 4;
@@ -21,31 +21,17 @@ namespace BT.Scripts.Managers {
     [SerializeField] private List<Company> companies;
     [SerializeField] private Company companyPrefab;
     [SerializeField] private CompanyPreset companyPreset;
-    #if ODIN_INSPECTOR 
     [FoldoutGroup("Managers")]
-    #endif
     [SerializeField] private AIManager aiManager;
-    #if ODIN_INSPECTOR 
     [FoldoutGroup("Managers")]
-    #endif
     [SerializeField] private PlayerManager playerManager;
-    #if ODIN_INSPECTOR 
     [FoldoutGroup("Managers")]
-    #endif
     [SerializeField] private MarketManager marketManager;
-    #if ODIN_INSPECTOR 
     [FoldoutGroup("Managers")]
-    #endif
     [SerializeField] private TurnManager turnManager;
-    #if ODIN_INSPECTOR 
     [FoldoutGroup("Managers")]
-    #endif
     [SerializeField] private UIManager uiManager;
-    #if ODIN_INSPECTOR
-    [ReadOnly]
-    #endif
-    [SerializeField] 
-  
+    [SerializeField] [ReadOnly]
     private GameState currentState;
     #endregion
     private TurnStateMachine turnStateMachine;

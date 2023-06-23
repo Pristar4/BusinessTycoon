@@ -6,9 +6,8 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
+using Sirenix.OdinInspector;
 using UnityEngine;
-#if ODIN_INSPECTOR
-#endif
 #endregion
 
 namespace BT.Scripts.Models {
@@ -17,8 +16,7 @@ namespace BT.Scripts.Models {
   public class FactorySo : ScriptableObject {
     #region Serialized Fields
     [SerializeField] public ProductSo productProduced;
-    #region Odin Inspector
-    #if ODIN_INSPECTOR
+    #endregion
     [ShowInInspector] private int buildCost;
     [ShowInInspector] private string depreciationMethod;
     [ShowInInspector] private int depreciationTime;
@@ -29,21 +27,6 @@ namespace BT.Scripts.Models {
     [ShowInInspector] private int outsourcingFeePerUnit;
     [ShowInInspector] private float percentageValueRetained;
     [ShowInInspector] private int setupTime;
-    #endif
-    #endregion
-    #if !ODIN_INSPECTOR
-    private int buildCost;
-    [SerializeField] private string depreciationMethod;
-    [SerializeField] private int depreciationTime;
-    [SerializeField] private FactoryType factoryType;
-    [SerializeField] private int laborCostPerUnit;
-    [SerializeField] private int maintenancePerQuarter;
-    [SerializeField] private int outputPerQuarter;
-    [SerializeField] private int outsourcingFeePerUnit;
-    [SerializeField] private float percentageValueRetained;
-    [SerializeField] private int setupTime;
-    #endif
-    #endregion
     public FactoryType FactoryType => factoryType;
     public int OutputPerQuarter => outputPerQuarter;
     public int BuildCost => buildCost;

@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // UIManager.cs
 // 
-// Felix Jung 23.06.2023
+// Felix Jung 20.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -10,108 +10,69 @@ using System;
 using BT.Scripts.Interfaces;
 using BT.Scripts.Models;
 using BT.Scripts.Panels;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-#if ODIN_INSPECTOR
-#endif
+using UnityEngine.Serialization;
 #endregion
-
 
 namespace BT.Scripts.Managers {
   namespace BT.Scripts.Gameplay {
     public class UIManager : MonoBehaviour, IManager {
-      #region Serialized Fields
-      //collapsable fields
-      [Header("UI Elements")]
-      #if ODIN_INSPECTOR
-      [VerticalGroup("UI Elements/Top Bar")]
-      #endif
-      public TMP_Text companyNameText;
-      #if ODIN_INSPECTOR
-      [VerticalGroup("UI Elements/Top Bar")]
-      #endif
-      public TMP_Text balanceText;
-      #if ODIN_INSPECTOR
-      [VerticalGroup("UI Elements/Top Bar")]
-      #endif
-      public TMP_Text incomeText;
-      #if ODIN_INSPECTOR
-      [VerticalGroup("UI Elements/Top Bar")]
-      #endif
-      public TMP_Text expensesText;
-      #if ODIN_INSPECTOR
-      [VerticalGroup("UI Elements/Top Bar")]
-      #endif
-      public TMP_Text netProfitText;
-      #if ODIN_INSPECTOR
-      [VerticalGroup("UI Elements/Top Bar")]
-      #endif
-      public TMP_Text turnText;
-      #if ODIN_INSPECTOR
-      [VerticalGroup("UI Elements/Top Bar")]
-      #endif
-      public TMP_Dropdown repeatingTasksDropdown;
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements")]
-      #endif
-      public TMP_Text detailsText;
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements")]
-      #endif
-      public TMP_Dropdown marketDropdown;
-      [SerializeField]
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements/Panels")]
-      #endif
-      private InventoryPanel inventoryPanel;
-      [SerializeField]
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements/Panels")]
-      #endif
-      private OfferPanel offerPanel;
-      [SerializeField]
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements/Panels")]
-      #endif
-      private MarketInfoPanel marketInfoPanel;
-      [SerializeField]
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements/Panels")]
-      #endif
-      private ResearchPanel researchPanel;
-      [SerializeField]
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements/Panels")]
-      #endif
-      private ProductionPanel productionPanel;
-      [SerializeField]
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements/Panels")]
-      #endif
-      private FinancingPanel financingPanel;
-      [SerializeField]
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements/Panels")]
-      #endif
-      private ContractsPanel contractsPanel;
-      [SerializeField]
-      #if ODIN_INSPECTOR
-      [FoldoutGroup("UI Elements/Panels")]
-      #endif
-      private BudgetingPanel budgetingPanel;
-      #endregion
-      private InputManager inputManager;
-      #region Event Functions
       private void Start() {
         // Method intentionally left empty.
       }
+      #region Serialized Fields
+      //collapsable fields
+      [VerticalGroup("UI Elements/Top Bar")]
+      public TMP_Text companyNameText;
+      [VerticalGroup("UI Elements/Top Bar")]
+      public TMP_Text balanceText;
+      [VerticalGroup("UI Elements/Top Bar")]
+      public TMP_Text incomeText;
+      [VerticalGroup("UI Elements/Top Bar")]
+      public TMP_Text expensesText;
+      [VerticalGroup("UI Elements/Top Bar")]
+      public TMP_Text netProfitText;
+      [VerticalGroup("UI Elements/Top Bar")]
+      public TMP_Text turnText;
+      [FormerlySerializedAs("managementDropdown")]
+      [VerticalGroup("UI Elements/Top Bar")]
+      public TMP_Dropdown repeatingTasksDropdown;
+      [FoldoutGroup("UI Elements")]
+      public TMP_Text detailsText;
+      [FoldoutGroup("UI Elements")]
+      public TMP_Dropdown marketDropdown;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private InventoryPanel inventoryPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private OfferPanel offerPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private MarketInfoPanel marketInfoPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private ResearchPanel researchPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private ProductionPanel productionPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private FinancingPanel financingPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private ContractsPanel contractsPanel;
+      [FoldoutGroup("UI Elements/Panels")]
+      [SerializeField]
+      private BudgetingPanel budgetingPanel;
       #endregion
-      #region IManager Members
+      private InputManager inputManager;
       public void Initialize() {
         // Method intentionally left empty.
       }
-      #endregion
       public void Initialize(Company startup) {
         InitUI(startup);
 
