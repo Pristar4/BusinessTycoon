@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f28a5ef629babf74781e3b2e78ea8ffe, type: 3}
-  m_Name: Factory
+  m_Name: Sporty_Factory
   m_EditorClassIdentifier: 
-  productProduced: {fileID: 11400000, guid: 7d0909b6a370ced4dad4708dfbbdc495, type: 2}
+  productProduced: {fileID: 11400000, guid: 33fe172754f065a4badb5f2c0b82d1f1, type: 2}

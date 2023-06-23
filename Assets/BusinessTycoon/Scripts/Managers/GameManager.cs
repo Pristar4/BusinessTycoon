@@ -103,6 +103,10 @@ namespace BT.Scripts.Managers {
       companies.Add(startup);
       var npcCompanies = CreateNpcCompanies(NpcCount);
       companies.AddRange(npcCompanies);
+      // Initialize the TurnStateMachine
+      turnStateMachine = new TurnStateMachine(companies,
+          marketManager, uiManager,
+          playerManager, turnManager);
 
       // Initialize all other managers
       aiManager.Initialize();
@@ -111,10 +115,7 @@ namespace BT.Scripts.Managers {
 
       // Set the current state.
       currentState = GameState.Playing;
-      // Initialize the TurnStateMachine before the UIManager.
-      turnStateMachine = new TurnStateMachine(companies,
-          marketManager, uiManager,
-          playerManager, turnManager);
+      
 
       uiManager.Initialize(startup);
     }
