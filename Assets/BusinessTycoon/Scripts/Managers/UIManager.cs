@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // UIManager.cs
 // 
-// Felix Jung 20.06.2023
+// Felix Jung 23.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -10,69 +10,108 @@ using System;
 using BT.Scripts.Interfaces;
 using BT.Scripts.Models;
 using BT.Scripts.Panels;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
+#if ODIN_INSPECTOR
+#endif
 #endregion
+
 
 namespace BT.Scripts.Managers {
   namespace BT.Scripts.Gameplay {
     public class UIManager : MonoBehaviour, IManager {
-      private void Start() {
-        // Method intentionally left empty.
-      }
       #region Serialized Fields
       //collapsable fields
+      [Header("UI Elements")]
+      #if ODIN_INSPECTOR
       [VerticalGroup("UI Elements/Top Bar")]
+      #endif
       public TMP_Text companyNameText;
+      #if ODIN_INSPECTOR
       [VerticalGroup("UI Elements/Top Bar")]
+      #endif
       public TMP_Text balanceText;
+      #if ODIN_INSPECTOR
       [VerticalGroup("UI Elements/Top Bar")]
+      #endif
       public TMP_Text incomeText;
+      #if ODIN_INSPECTOR
       [VerticalGroup("UI Elements/Top Bar")]
+      #endif
       public TMP_Text expensesText;
+      #if ODIN_INSPECTOR
       [VerticalGroup("UI Elements/Top Bar")]
+      #endif
       public TMP_Text netProfitText;
+      #if ODIN_INSPECTOR
       [VerticalGroup("UI Elements/Top Bar")]
+      #endif
       public TMP_Text turnText;
-      [FormerlySerializedAs("managementDropdown")]
+      #if ODIN_INSPECTOR
       [VerticalGroup("UI Elements/Top Bar")]
+      #endif
       public TMP_Dropdown repeatingTasksDropdown;
+      #if ODIN_INSPECTOR
       [FoldoutGroup("UI Elements")]
+      #endif
       public TMP_Text detailsText;
+      #if ODIN_INSPECTOR
       [FoldoutGroup("UI Elements")]
+      #endif
       public TMP_Dropdown marketDropdown;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
+      #if ODIN_INSPECTOR
+      [FoldoutGroup("UI Elements/Panels")]
+      #endif
       private InventoryPanel inventoryPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
+      #if ODIN_INSPECTOR
+      [FoldoutGroup("UI Elements/Panels")]
+      #endif
       private OfferPanel offerPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
+      #if ODIN_INSPECTOR
+      [FoldoutGroup("UI Elements/Panels")]
+      #endif
       private MarketInfoPanel marketInfoPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
+      #if ODIN_INSPECTOR
+      [FoldoutGroup("UI Elements/Panels")]
+      #endif
       private ResearchPanel researchPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
+      #if ODIN_INSPECTOR
+      [FoldoutGroup("UI Elements/Panels")]
+      #endif
       private ProductionPanel productionPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
+      #if ODIN_INSPECTOR
+      [FoldoutGroup("UI Elements/Panels")]
+      #endif
       private FinancingPanel financingPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
+      #if ODIN_INSPECTOR
+      [FoldoutGroup("UI Elements/Panels")]
+      #endif
       private ContractsPanel contractsPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
+      #if ODIN_INSPECTOR
+      [FoldoutGroup("UI Elements/Panels")]
+      #endif
       private BudgetingPanel budgetingPanel;
       #endregion
       private InputManager inputManager;
+      #region Event Functions
+      private void Start() {
+        // Method intentionally left empty.
+      }
+      #endregion
+      #region IManager Members
       public void Initialize() {
         // Method intentionally left empty.
       }
+      #endregion
       public void Initialize(Company startup) {
         InitUI(startup);
 
