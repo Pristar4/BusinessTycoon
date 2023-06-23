@@ -52,7 +52,7 @@
       "url": "https://packages.unity.com"
     },
     "odininspector": {
-      "version": "file:/BuisnessTycoon/Odin",
+      "version": "file:../Odin",
       "depth": 0,
       "source": "local",
       "dependencies": {}
