@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "odininspector": "file:../Odin",
     "com.unity.ide.rider": "3.0.24",
     "com.unity.inputsystem": "1.6.1",
     "com.unity.mathematics": "1.2.6",
