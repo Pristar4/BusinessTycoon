@@ -138,7 +138,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.aab
-*.unitypackage
+#*.unitypackage
 *.app
 
 # Crashlytics generated file
@@ -164,3 +164,6 @@ sysinfo.txt
 
 # But keep the demo packages themselves.
 !/Assets/Plugins/Sirenix/Demos/*.unitypackage 
+
+# Ignore TextMesh Pro Folder
+/Assets/TextMesh*Pro
