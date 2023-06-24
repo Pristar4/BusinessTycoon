@@ -20,9 +20,6 @@ using UnityEngine.Serialization;
 namespace BT.Scripts.Managers {
   namespace BT.Scripts.Gameplay {
     public class UIManager : MonoBehaviour, IManager {
-      private void Start() {
-        // Method intentionally left empty.
-      }
       #region Serialized Fields
       //collapsable fields
       [VerticalGroup("UI Elements/Top Bar")]

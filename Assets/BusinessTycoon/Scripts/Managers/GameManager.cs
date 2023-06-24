@@ -87,6 +87,7 @@ namespace BT.Scripts.Managers {
       newCompany.CompanyName = companyPreset.companyName;
       return newCompany;
     }
+
     private List<Company> CreateNpcCompanies(int count) {
       var npcCompanies = new List<Company>();
 
