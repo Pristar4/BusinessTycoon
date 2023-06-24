@@ -15,7 +15,7 @@ namespace BT.Scripts.Managers {
     public int CurrentTurn { get; private set; }
     #region IManager Members
     public void Initialize() {
-      CurrentTurn = 0;
+      CurrentTurn = 1;
     }
     #endregion
     public void AdvanceTurn() {
