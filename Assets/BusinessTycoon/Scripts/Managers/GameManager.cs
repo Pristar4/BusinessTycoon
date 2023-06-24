@@ -66,27 +66,29 @@ namespace BT.Scripts.Managers {
     private Company CreateCompany() {
       var newCompany = Instantiate(companyPrefab);
       newCompany.Finance.Balance = companyPreset.startingBalance;
-      // Deep copy of the ProductData list
-      newCompany.ProductInventory = new List<ProductData>();
 
-      foreach (var product in companyPreset.startingProductInventory) {
-        var newProductData
-            = new ProductData(product.Type, product.Amount);
-        newCompany.ProductInventory.Add(newProductData);
-      }
+      // Deep copy of the ProductData list
+      newCompany.ProductInventory
+          = new List<ProductData>(companyPreset.startingProductInventory);
 
       newCompany.FactoryInventory = new List<FactoryData>();
 
-      foreach (var factory in companyPreset.startingFactoryInventory) {
-        var newFactoryData
-            = new FactoryData(factory.Factory,
-                ManagerProvider.Current.TurnManager.CurrentTurn);
+      foreach (var factoryData in companyPreset.startingFactoryInventory) {
+        // Get the corresponding FactorySo from the FactoryData
+        var factorySo = factoryData.Factory;
+
+        // Create a new FactoryData instance and set its properties
+        var newFactoryData = new FactoryData(factorySo,
+            ManagerProvider.Current.TurnManager.CurrentTurn);
+        newFactoryData.CurrentOutput
+            = factoryData.CurrentOutput; // Set the current output if necessary
         newCompany.FactoryInventory.Add(newFactoryData);
       }
 
       newCompany.CompanyName = companyPreset.companyName;
       return newCompany;
     }
+
     private List<Company> CreateNpcCompanies(int count) {
       var npcCompanies = new List<Company>();
 
