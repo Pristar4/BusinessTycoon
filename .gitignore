@@ -168,6 +168,7 @@ sysinfo.txt
 
 # Ignore TextMesh Pro Folder
 /Assets/TextMesh*Pro
+/Assets/TextMesh*Pro.meta
 ### Unity template
 # This .gitignore file should be placed at the root of your Unity project directory
 #
