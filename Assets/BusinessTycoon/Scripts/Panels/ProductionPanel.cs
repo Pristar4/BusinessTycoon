@@ -13,12 +13,15 @@ using UnityEngine;
 
 namespace BT.Scripts.Panels {
   public class ProductionPanel : MonoBehaviour, IPanel {
+
+    [SerializeField] private GameObject factoryPanel;
     #region IPanel Members
     public void Initialize(PanelData data = null) {
       // TODO: Implement
     }
     public void SetActive(bool isActive) {
       gameObject.SetActive(isActive);
+      factoryPanel.SetActive(isActive);
     }
     public void UpdatePanel() {
       // TODO: Implement
