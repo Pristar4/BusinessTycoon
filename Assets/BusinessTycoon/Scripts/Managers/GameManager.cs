@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // GameManager.cs
 // 
-// Felix Jung 22.06.2023
+// Felix Jung 20.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using BT.Scripts.Gameplay;
 using BT.Scripts.Managers.BT.Scripts.Gameplay;
 using BT.Scripts.Models;
-using Sirenix.OdinInspector;
 using UnityEngine;
 #endregion
 
@@ -66,21 +65,22 @@ namespace BT.Scripts.Managers {
     private Company CreateCompany() {
       var newCompany = Instantiate(companyPrefab);
       newCompany.Finance.Balance = companyPreset.startingBalance;
-      // Deep copy of the ProductData list
-      newCompany.ProductInventory = new List<ProductData>();
 
-      foreach (var product in companyPreset.startingProductInventory) {
-        var newProductData
-            = new ProductData(product.Type, product.Amount);
-        newCompany.ProductInventory.Add(newProductData);
-      }
+      // Deep copy of the ProductData list
+      newCompany.ProductInventory
+          = new List<ProductData>(companyPreset.startingProductInventory);
 
       newCompany.FactoryInventory = new List<FactoryData>();
 
-      foreach (var factory in companyPreset.startingFactoryInventory) {
-        var newFactoryData
-            = new FactoryData(factory.Factory,
-                ManagerProvider.Current.TurnManager.CurrentTurn);
+      foreach (var factoryData in companyPreset.startingFactoryInventory) {
+        // Get the corresponding FactorySo from the FactoryData
+        var factorySo = factoryData.Factory;
+
+        // Create a new FactoryData instance and set its properties
+        var newFactoryData = new FactoryData(factorySo,
+            ManagerProvider.Current.TurnManager.CurrentTurn);
+        newFactoryData.CurrentOutput
+            = factoryData.CurrentOutput; // Set the current output if necessary
         newCompany.FactoryInventory.Add(newFactoryData);
       }
 
@@ -115,7 +115,6 @@ namespace BT.Scripts.Managers {
 
       // Set the current state.
       currentState = GameState.Playing;
-      
 
       uiManager.Initialize(startup);
     }
