@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using BT.Scripts.Managers;
 using BT.Scripts.Managers.BT.Scripts.Gameplay;
 using BT.Scripts.Models;
-using UnityEngine.InputSystem;
+using UnityEngine;
 #endregion
 
 namespace BT.Scripts.Gameplay {
@@ -27,11 +27,20 @@ namespace BT.Scripts.Gameplay {
   //TODO: refactor these phases to Planning,Execution,Evaluation
   [Serializable]
   public class IdleTurnState : TurnState {
-    public override void Update() {
-      if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        machine.SetTurnState(machine.ProductionTurnState());
+    public IdleTurnState(UIManager uiManager) {
+      uiManager.OnEndTurnPressed += EndTurn;
     }
+    public override void Update() {
+
+      
+    }
+    private void EndTurn() {
+      machine.SetTurnState(machine.ProductionTurnState());
+      Debug.Log("End Turn");
+    }
+    
   }
+  
   [Serializable]
   public class ProductionTurnState : TurnState {
     private List<Company> companies;
@@ -101,7 +110,6 @@ namespace BT.Scripts.Gameplay {
     }
     public override void Update() {
       foreach (var company in companies)
-          // if (company.CompanyName != "Player")
         company.CreateOffer(marketManager);
 
       uiManager.UpdateUI(playerManager.PlayerCompany,

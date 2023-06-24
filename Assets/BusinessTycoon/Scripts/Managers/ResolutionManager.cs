@@ -14,8 +14,13 @@ using UnityEngine;
 namespace BT.Scripts.Managers {
   public class ResolutionManager : MonoBehaviour {
     #region Serialized Fields
-    public TMP_Dropdown resolutionDropdown;
-    public TextMeshProUGUI saveButtonText;
+    [SerializeField]
+    private TMP_Dropdown resolutionDropdown;
+    [SerializeField]
+    private TextMeshProUGUI saveButtonText;
+    [SerializeField]
+    private Sprite resolutionSprite;
+    
     #endregion
     private Resolution[] resolutions;
     #region Event Functions
@@ -34,7 +39,11 @@ namespace BT.Scripts.Managers {
         if (!uniqueOptions.Contains(option) && resolution is
                 { width: >= 800, height: >= 600 }) {
           uniqueOptions.Add(option);
-          resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(option));
+          // Color : 93887A (RGB)
+          // Color : 153,142,127 (RGB) use it on the option added
+          resolutionDropdown.options.Add(
+              new TMP_Dropdown.OptionData(option, resolutionSprite,
+                  new Color(153, 142, 127, 255)));
         }
       }
 

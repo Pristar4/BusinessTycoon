@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------
 // TurnStateMachine.cs
 // 
-// Felix Jung 20.06.2023
+// Felix Jung 22.06.2023
 // -----------------------------------------------------------------------
 #endregion
 #region
@@ -16,12 +16,24 @@ using UnityEngine;
 namespace BT.Scripts.Gameplay {
 // TurnStateMachine.cs
   public class TurnStateMachine {
+    #region Fields
+    private readonly TurnState aiChooseOfferTurnState;
+    private readonly TurnState aiCreateOfferTurnState;
+    private readonly TurnState chooseOfferTurnState;
+    private readonly TurnState createOfferTurnState;
+    private readonly TurnState deconstructOfferTurnState;
+    private readonly TurnState idleTurnState;
+    private readonly TurnState offerResultTurnState;
+    private readonly TurnState productionTurnState;
+    private readonly TurnState showOfferTurnState;
     private TurnState currentState;
+    #endregion
+    #region Constructors
     public TurnStateMachine(
         List<Company> companies, MarketManager marketManager,
         UIManager uiManager,
         PlayerManager playerManager, TurnManager turnManager) {
-      idleTurnState = new IdleTurnState();
+      idleTurnState = new IdleTurnState(uiManager);
       idleTurnState.Initialize(this);
 
       productionTurnState
@@ -33,8 +45,7 @@ namespace BT.Scripts.Gameplay {
       createOfferTurnState.Initialize(this);
       aiCreateOfferTurnState
           = new AiCreateOfferTurnState(companies, marketManager, uiManager,
-              playerManager,
-              turnManager);
+              playerManager, turnManager);
       aiCreateOfferTurnState.Initialize(this);
       chooseOfferTurnState = new ChooseOfferTurnState();
       chooseOfferTurnState.Initialize(this);
@@ -52,40 +63,6 @@ namespace BT.Scripts.Gameplay {
       deconstructOfferTurnState.Initialize(this);
       currentState = idleTurnState;
     }
-    public void SetTurnState(TurnState newState) {
-      if (currentState == null || currentState == newState ||
-          newState == null) {
-        Debug.Log("TurnState not changed");
-        return;
-      }
-
-      currentState.OnExit();
-      currentState = newState;
-      newState.OnEnter();
-      // print just the name of the class
-      // Debug.Log("TurnState changed to " + newState.GetType().Name);
-
-
-    }
-    public TurnState GetTurnState() {
-      return currentState;
-
-    }
-    public void Update(List<Company> companies, MarketManager marketManager,
-                       PlayerManager playerManager, UIManager uiManager,
-                       TurnManager turnManager) {
-      currentState.Update();
-    }
-    #region Fields
-    private readonly TurnState idleTurnState;
-    private readonly TurnState productionTurnState;
-    private readonly TurnState createOfferTurnState;
-    private readonly TurnState aiCreateOfferTurnState;
-    private readonly TurnState chooseOfferTurnState;
-    private readonly TurnState showOfferTurnState;
-    private readonly TurnState aiChooseOfferTurnState;
-    private readonly TurnState offerResultTurnState;
-    private readonly TurnState deconstructOfferTurnState;
     #endregion
     #region Properties
     public TurnState IdleTurnState() {
@@ -116,5 +93,24 @@ namespace BT.Scripts.Gameplay {
       return deconstructOfferTurnState;
     }
     #endregion
+    public void SetTurnState(TurnState newState) {
+      if (currentState == null || currentState == newState ||
+          newState == null) {
+        Debug.Log("TurnState not changed");
+        return;
+      }
+      currentState.OnExit();
+      currentState = newState;
+      newState.OnEnter();
+    }
+    public TurnState GetTurnState() {
+      return currentState;
+    }
+    public void Update(List<Company> companies, MarketManager marketManager,
+                       PlayerManager playerManager, UIManager uiManager,
+                       TurnManager turnManager) {
+      currentState.Update();
+    }
+    
   }
 }
