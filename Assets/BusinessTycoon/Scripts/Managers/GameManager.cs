@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using BT.Scripts.Gameplay;
 using BT.Scripts.Managers.BT.Scripts.Gameplay;
 using BT.Scripts.Models;
+using Sirenix.OdinInspector;
 using UnityEngine;
 #endregion
 
