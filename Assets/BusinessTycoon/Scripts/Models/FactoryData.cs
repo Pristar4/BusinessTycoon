@@ -49,16 +49,30 @@ namespace BT.Scripts.Models {
     }
     public int CalculateProductionCost() {
       if (factory.FactoryType == FactoryType.Build)
-        return currentOutput * factory.LaborCostPerUnit +
+        return currentOutput * factory.LaborCostPerUnit + currentOutput *
+               factory.productProduced.MaterialCostPerUnit +
                factory.MaintenancePerQuarter;
       if (factory.FactoryType == FactoryType.Rent)
-        return currentOutput * factory.OutsourcingFeePerUnit +
+        return currentOutput * factory.OutsourcingFeePerUnit + currentOutput *
+               factory.productProduced.MaterialCostPerUnit +
                factory.MaintenancePerQuarter;
 
       return 0;
     }
     public void ResetOutput() {
       currentOutput = 0;
+    }
+    public int CalculateMaterialCost() {
+      return currentOutput * Factory.productProduced.MaterialCostPerUnit;
+
+    }
+    public float CalculateLaborCost() {
+      // 110€ per hour divided by 1000 to make everything in 1000s
+      var wage = 0.11f;
+      // 8 hours per day, 22 days per month, 3 months per quarter = 528 hours per quarter
+      var hoursPerQuarter = 528;
+      return Factory.LaborForce * hoursPerQuarter * wage;
+
     }
   }
 }
