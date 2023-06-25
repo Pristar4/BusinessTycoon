@@ -13,3 +13,14 @@ MonoBehaviour:
   m_Name: Safe_Factory
   m_EditorClassIdentifier: 
   productProduced: {fileID: 11400000, guid: ca4e624d8f3aad14ab11542364e80c66, type: 2}
+  buildCost: 200000
+  depreciationMethod: linear
+  depreciationTime: 20
+  factoryType: 0
+  laborCostPerUnit: 58
+  laborForce: 1000
+  maintenancePerQuarter: 20000
+  outputPerQuarter: 1000
+  outsourcingFeePerUnit: 0
+  percentageValueRetained: 70
+  setupTime: 1
