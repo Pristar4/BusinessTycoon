@@ -1,37 +1,23 @@
 version: '2.1'
 orbs:
-  unity: game-ci/unity@1.3.0
+  unity: game-ci/unity@1.4.0
 workflows:
-  test-build-with-executors:
+  build-unity-project:
     jobs:
       - checkout
       - unity/build:
+          step-name: 'Build StandaloneWindows64'
+          unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+          unity-password-var-name: 'UNITY_PASSWORD'
+          unity-username-var-name: 'UNITY_USERNAME'
+          executor:
+            name: 'unity/windows-2023'
+            target_platform: 'windows-il2cpp'
+            editor_version: '2023.2.0a19'
+            name: 'unity/windows-2023'
+            resource-class: 'large'
+          name: build-Windows64-il2cpp
+          project-path: BuisnessTycoon/
           build-target: StandaloneWindows64
           compress: true
           context: unity
-          executor:
-            editor_version: 2023.2.0a19
-            name: unity/windows-2019
-            size: large
-            target_platform: windows-il2cpp
-          name: build-Windows64-il2cpp
-          project-path: Unity2D-Demo-Game-CI-CD/src
-          requires:
-            - test-windows
-          step-name: Build StandaloneWindows64 il2cpp
-          unity-license-var-name: UNITY_ENCODED_LICENSE
-          unity-password-var-name: UNITY_PASSWORD
-          unity-username-var-name: UNITY_USERNAME
-      - unity/test:
-          context: unity
-          executor:
-            editor_version: 2023.2.0a19
-            name: unity/macos
-            resource_class: large
-          name: test-osx
-          project-path: Unity2D-Demo-Game-CI-CD/src
-          step-name: Check if the tests run and results are uploaded
-          test-platform: playmode
-          unity-license-var-name: UNITY_ENCODED_LICENSE
-          unity-password-var-name: UNITY_PASSWORD
-          unity-username-var-name: UNITY_USERNAME
