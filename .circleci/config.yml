@@ -12,7 +12,7 @@ workflows:
             size: large
             target_platform: windows-il2cpp
           name: test-windows
-          project-path: BusinessTycoon/
+          project-path: .
           step-name: Check if the tests run and results are uploaded
           test-platform: playmode
           unity-license-var-name: UNITY_ENCODED_LICENSE
@@ -28,7 +28,7 @@ workflows:
             size: large
             target_platform: windows-il2cpp
           name: build-Windows64-il2cpp
-          project-path: 
+          project-path: .
           requires:
             - test-windows
           step-name: Build StandaloneWindows64 il2cpp
