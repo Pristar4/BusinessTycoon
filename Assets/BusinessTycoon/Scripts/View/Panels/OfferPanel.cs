@@ -7,6 +7,7 @@
 #endregion
 #region
 using BT.Scripts.Controller.Managers;
+using BT.Scripts.Models;
 using TMPro;
 using UnityEngine;
 #endregion
@@ -24,10 +25,12 @@ namespace BT.Scripts.View.Panels {
       => ManagerProvider.Current.MarketManager;
 
     #region IPanel Members
+    public override void Initialize(PanelData data = null) {
+      // Intentionally left blank
+    }
     public override void UpdatePanel() {
       // Clear existing offer items
       foreach (Transform child in offerContainer) Destroy(child.gameObject);
-
 
       var offers = GetMarketManager.GetOffers();
 
