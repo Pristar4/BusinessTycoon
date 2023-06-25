@@ -13,3 +13,14 @@ MonoBehaviour:
   m_Name: Sporty_Factory
   m_EditorClassIdentifier: 
   productProduced: {fileID: 11400000, guid: 33fe172754f065a4badb5f2c0b82d1f1, type: 2}
+  buildCost: 200000
+  depreciationMethod: linear
+  depreciationTime: 20
+  factoryType: 0
+  laborCostPerUnit: 58
+  laborForce: 1000
+  maintenancePerQuarter: 20000
+  outputPerQuarter: 1000
+  outsourcingFeePerUnit: 0
+  percentageValueRetained: 70
+  setupTime: 1

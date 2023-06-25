@@ -13,3 +13,14 @@ MonoBehaviour:
   m_Name: Green_Factory
   m_EditorClassIdentifier: 
   productProduced: {fileID: 11400000, guid: abeaffbaf3bb4f44c9a6e3638bcdeaca, type: 2}
+  buildCost: 200000
+  depreciationMethod: linear
+  depreciationTime: 20
+  factoryType: 0
+  laborCostPerUnit: 58
+  laborForce: 1000
+  maintenancePerQuarter: 20000
+  outputPerQuarter: 1000
+  outsourcingFeePerUnit: 0
+  percentageValueRetained: 70
+  setupTime: 1
