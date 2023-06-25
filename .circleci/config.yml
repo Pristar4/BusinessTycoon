@@ -7,8 +7,8 @@ workflows:
       - unity/test:
           context: unity
           executor:
-            editor_version: 2023.2.0a19
-            name: unity/windows-2022
+            editor_version: 2023.1.1f1
+            name: unity/windows-2023
             size: large
             target_platform: windows-il2cpp
           name: test-windows
@@ -23,8 +23,8 @@ workflows:
           compress: true
           context: unity
           executor:
-            editor_version: 2023.2.0a19
-            name: unity/windows-2019
+            editor_version: 2023.1.1f1
+            name: unity/windows-2023
             size: large
             target_platform: windows-il2cpp
           name: build-Windows64-il2cpp
