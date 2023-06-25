@@ -11,7 +11,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class ManagerProvider {
     private InputManager inputManager;
     private MarketManager marketManager;

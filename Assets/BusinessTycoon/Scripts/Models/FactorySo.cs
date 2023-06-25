@@ -9,7 +9,7 @@
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Models {
+namespace BT.BusinessTycoon.Scripts.Models {
   [CreateAssetMenu(fileName = "new_factory", menuName = "Production/Factory",
       order = 0)]
   public class FactorySo : ScriptableObject {

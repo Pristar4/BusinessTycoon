@@ -8,13 +8,13 @@
 #region
 using System;
 using System.Collections.Generic;
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Models;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class MarketManager : SerializedMonoBehaviour, IManager {
     #region Serialized Fields
     [SerializeField]

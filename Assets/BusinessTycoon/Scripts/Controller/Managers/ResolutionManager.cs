@@ -11,7 +11,7 @@ using TMPro;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class ResolutionManager : MonoBehaviour {
     #region Serialized Fields
     [SerializeField]

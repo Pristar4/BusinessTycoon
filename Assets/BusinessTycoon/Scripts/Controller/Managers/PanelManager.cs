@@ -7,12 +7,12 @@
 #endregion
 #region
 using System.Collections.Generic;
-using BT.Scripts.Models;
-using BT.Scripts.View.Panels;
+using BT.BusinessTycoon.Scripts.Models;
+using BT.BusinessTycoon.Scripts.View.Panels;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class PanelManager : MonoBehaviour, IManager {
     private readonly Dictionary<string, IPanel> panels = new();
     #region IManager Members

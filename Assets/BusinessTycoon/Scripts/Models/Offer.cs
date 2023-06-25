@@ -5,7 +5,7 @@
 // Felix Jung 25.06.2023
 // -----------------------------------------------------------------------
 #endregion
-namespace BT.Scripts.Models {
+namespace BT.BusinessTycoon.Scripts.Models {
   public class Offer {
     public Company company;
     public bool isSold;

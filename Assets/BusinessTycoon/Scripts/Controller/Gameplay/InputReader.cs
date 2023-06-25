@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace BT.Scripts.Controller.Gameplay {
+namespace BT.BusinessTycoon.Scripts.Controller.Gameplay {
   [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader",
       order = 0)]
   public class InputReader : ScriptableObject, GameInput.IUIActions {

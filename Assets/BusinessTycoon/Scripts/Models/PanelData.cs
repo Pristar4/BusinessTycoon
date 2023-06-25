@@ -9,7 +9,7 @@
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Models {
+namespace BT.BusinessTycoon.Scripts.Models {
   [CreateAssetMenu(menuName = "Panel Data")]
   public class PanelData : ScriptableObject {
     #region Serialized Fields

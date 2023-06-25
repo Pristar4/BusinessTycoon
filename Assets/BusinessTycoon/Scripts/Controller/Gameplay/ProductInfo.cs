@@ -10,7 +10,7 @@ using TMPro;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Gameplay {
+namespace BT.BusinessTycoon.Scripts.Controller.Gameplay {
   public class ProductInfo : MonoBehaviour {
     #region Serialized Fields
     public TMP_Text productName;

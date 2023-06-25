@@ -6,11 +6,11 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Models;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class PlayerManager : MonoBehaviour, IManager {
     public static PlayerManager Instance { get; }
     public Company PlayerCompany { get; private set; }

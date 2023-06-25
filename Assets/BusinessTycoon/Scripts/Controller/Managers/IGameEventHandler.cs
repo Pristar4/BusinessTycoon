@@ -5,7 +5,7 @@
 // Felix Jung 22.06.2023
 // -----------------------------------------------------------------------
 #endregion
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public interface IGameEventHandler {
     //end turn 
     void OnEndTurn();

@@ -9,7 +9,7 @@
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class TurnManager : MonoBehaviour, IManager {
     public int CurrentTurn { get; private set; }
     #region IManager Members

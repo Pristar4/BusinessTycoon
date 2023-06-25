@@ -6,10 +6,10 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Models;
 #endregion
 
-namespace BT.Scripts.View.Panels {
+namespace BT.BusinessTycoon.Scripts.View.Panels {
   public interface IPanel {
     void Initialize(PanelData data = null);
     void Open();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BT.Scripts.View {
+namespace BT.BusinessTycoon.Scripts.View {
   public class MainMenu : MonoBehaviour {
     [SerializeField]
     private GameObject resolutionPanel;
