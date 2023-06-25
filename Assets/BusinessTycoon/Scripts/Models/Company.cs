@@ -7,7 +7,7 @@
 #endregion
 #region
 using System.Collections.Generic;
-using BT.Scripts.Managers;
+using BT.Scripts.Controller.Managers;
 using UnityEngine;
 #endregion
 
@@ -84,32 +84,12 @@ namespace BT.Scripts.Models {
 
       if (product.Amount <= 0) productInventory.Remove(product);
     }
-  }
-  public class Offer {
-    public Company company;
-    public bool isSold;
-    public decimal price;
-    public ProductData product;
-    public int quantity;
-    public int soldQuantity; // TODO: Remove this
-    public Offer(Company company, ProductData product, int quantity,
-                 decimal price, int soldQuantity = 0, bool isSold = false) {
-      this.company = company;
-      this.product = product;
-      this.quantity = quantity;
-      this.price = price;
-      this.soldQuantity = soldQuantity;
-      this.isSold = isSold;
-    }
-    public string GetOfferDetails() {
-      return "Company: " + company.CompanyName + " Product: " +
-             product.Type.name
-             + " Quantity: " + quantity + " Price: " + price;
-    }
-    public void Sell(int quantityToBuy) {
-      soldQuantity = quantityToBuy;
-      isSold = true;
-      quantity -= quantityToBuy;
+    public float CalculateTotalCost() {
+      var totalCost = 0f;
+      foreach (var factoryData in factoryInventory)
+        totalCost += factoryData.CalculateProductionCost();
+
+      return totalCost;
     }
   }
 }
