@@ -42,8 +42,7 @@ namespace BT.Scripts.Controller.Managers {
           // Color : 93887A (RGB)
           // Color : 153,142,127 (RGB) use it on the option added
           resolutionDropdown.options.Add(
-              new TMP_Dropdown.OptionData(option, resolutionSprite,
-                  new Color(153, 142, 127, 255)));
+              new TMP_Dropdown.OptionData(option, resolutionSprite));
         }
       }
 
