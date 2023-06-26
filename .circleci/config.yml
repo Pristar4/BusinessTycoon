@@ -1,0 +1,63 @@
+version: 2.1
+
+orbs:
+  unity: game-ci/unity@1.4.0
+
+workflows:
+  build-unity-project:
+    jobs:
+      # - unity/test:
+      #     context: unity
+      #     executor:
+      #       editor_version: 2023.1.1f1
+      #       name: unity/windows-runner
+      #       resource_class: pristar4/default
+      #       target_platform: windows-il2cpp
+      #     name: test-windows
+      #     project-path: .
+      #     step-name: Check if the tests run and results are uploaded
+      #     test-platform: playmode
+      #     unity-serial-var-name: UNITY_SERIAL
+      #     unity-password-var-name: UNITY_PASSWORD
+      #     unity-username-var-name: UNITY_USERNAME
+      - unity/build:
+          build-target: StandaloneWindows64
+          compress: true
+          context: unity
+          executor:
+            editor_version: 2023.1.1f1
+            name: unity/windows-runner
+            resource_class: pristar4/default
+            target_platform: windows-il2cpp
+          name: build-Windows
+          project-path: .
+          # requires:
+            # - test-windows
+          step-name: Build StandaloneWindows64 il2cpp
+          unity-serial-var-name: UNITY_SERIAL
+          unity-password-var-name: UNITY_PASSWORD
+          unity-username-var-name: UNITY_EMAIL
+# version: 2.1
+
+# orbs:
+#   unity: game-ci/unity@1.4
+
+# workflows:
+#   build-unity-project:
+#     jobs:
+#        # Windows IL2CPP
+#       - unity/build:
+#           name: 'build-Windows64-il2cpp'
+#           step-name: 'Build StandaloneWindows64 il2cpp'
+#           unity-serial-var-name: 'UNITY_SERIAL'
+#           unity-username-var-name: 'UNITY_USERNAME'
+#           unity-password-var-name: 'UNITY_PASSWORD'
+#           executor:
+#             name: 'unity/windows-runner'
+#             target_platform: 'windows-il2cpp'
+#             editor_version: '2023.1.1f1'
+#             resource_class: 'pristar4/default'
+#           project-path: '.'
+#           build-target: StandaloneWindows64
+#           compress: true
+#           context: unity

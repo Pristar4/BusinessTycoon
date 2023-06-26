@@ -1,7 +1,7 @@
-﻿namespace BT.BusinessTycoon.Scripts.Controller.Gameplay {
-  public enum GameState {
-    Playing,
-    Paused,
-    Ended
-  }
+﻿namespace BT {
+    public enum GameState {
+        Playing,
+        Paused,
+        Ended,
+    }
 }
