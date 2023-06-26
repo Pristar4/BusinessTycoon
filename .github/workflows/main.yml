@@ -44,7 +44,7 @@ jobs:
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Build/StandaloneWindows64
+          name: StandaloneWindows64
           path: build/StandaloneWindows64
           
       # Return License
