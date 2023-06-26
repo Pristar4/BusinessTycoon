@@ -9,11 +9,9 @@
 using System;
 using BT.BusinessTycoon.Scripts.Models;
 using BT.BusinessTycoon.Scripts.View.Panels;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 #endregion
 
 namespace BT.BusinessTycoon.Scripts.Controller.Managers {
@@ -21,47 +19,41 @@ namespace BT.BusinessTycoon.Scripts.Controller.Managers {
     public class UIManager : MonoBehaviour, IManager {
       #region Serialized Fields
       //collapsable fields
-      [VerticalGroup("UI Elements/Top Bar")]
-      public TMP_Text companyNameText;
-      [VerticalGroup("UI Elements/Top Bar")]
-      public TMP_Text balanceText;
-      [VerticalGroup("UI Elements/Top Bar")]
-      public TMP_Text incomeText;
-      [VerticalGroup("UI Elements/Top Bar")]
-      public TMP_Text expensesText;
-      [VerticalGroup("UI Elements/Top Bar")]
-      public TMP_Text netProfitText;
-      [VerticalGroup("UI Elements/Top Bar")]
-      public TMP_Text turnText;
-      [FormerlySerializedAs("managementDropdown")]
-      [VerticalGroup("UI Elements/Top Bar")]
-      public TMP_Dropdown repeatingTasksDropdown;
-      [FoldoutGroup("UI Elements")]
-      public TMP_Text detailsText;
-      [FoldoutGroup("UI Elements")]
-      public TMP_Dropdown marketDropdown;
-      [FoldoutGroup("UI Elements/Panels")]
+      [Header("UI Elements")]
+      [SerializeField]
+      private TMP_Text companyNameText;
+      [SerializeField]
+      private TMP_Text balanceText;
+      [SerializeField]
+      private TMP_Text incomeText;
+      [SerializeField]
+      private TMP_Text expensesText;
+      [SerializeField]
+      private TMP_Text netProfitText;
+      [SerializeField]
+      private TMP_Text turnText;
+      [SerializeField]
+      private TMP_Dropdown repeatingTasksDropdown;
+      [SerializeField]
+      private TMP_Text detailsText;
+      [SerializeField]
+      private TMP_Dropdown marketDropdown;
+      [Header("Panels")]
       [SerializeField]
       private InventoryPanel inventoryPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private OfferPanel offerPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private MarketInfoPanel marketInfoPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private ResearchPanel researchPanel;
-      [FoldoutGroup("UI Elements/Panels")]
+      // [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private ProductionPanel productionPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private FinancingPanel financingPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private ContractsPanel contractsPanel;
-      [FoldoutGroup("UI Elements/Panels")]
       [SerializeField]
       private BudgetingPanel budgetingPanel;
       #endregion

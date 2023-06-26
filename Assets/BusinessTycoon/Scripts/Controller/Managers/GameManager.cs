@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using BT.BusinessTycoon.Scripts.Controller.Gameplay;
 using BT.BusinessTycoon.Scripts.Controller.Managers.BT.Scripts.Gameplay;
 using BT.BusinessTycoon.Scripts.Models;
-using Sirenix.OdinInspector;
 using UnityEngine;
 #endregion
 
@@ -18,21 +17,17 @@ namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class GameManager : MonoBehaviour {
     private const int NpcCount = 4;
     #region Serialized Fields
+    [Header("Gameplay")]
     [SerializeField] private List<Company> companies;
     [SerializeField] private Company companyPrefab;
     [SerializeField] private CompanyPreset companyPreset;
-    [FoldoutGroup("Managers")]
+    [SerializeField] private GameState currentState;
+    [Header("Managers")]
     [SerializeField] private AIManager aiManager;
-    [FoldoutGroup("Managers")]
     [SerializeField] private PlayerManager playerManager;
-    [FoldoutGroup("Managers")]
     [SerializeField] private MarketManager marketManager;
-    [FoldoutGroup("Managers")]
     [SerializeField] private TurnManager turnManager;
-    [FoldoutGroup("Managers")]
     [SerializeField] private UIManager uiManager;
-    [SerializeField] [ReadOnly]
-    private GameState currentState;
     #endregion
     private TurnStateMachine turnStateMachine;
     #region Constructors

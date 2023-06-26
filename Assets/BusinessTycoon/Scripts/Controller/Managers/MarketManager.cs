@@ -9,20 +9,16 @@
 using System;
 using System.Collections.Generic;
 using BT.BusinessTycoon.Scripts.Models;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
 #endregion
 
 namespace BT.BusinessTycoon.Scripts.Controller.Managers {
-  public class MarketManager : SerializedMonoBehaviour, IManager {
+  public class MarketManager : MonoBehaviour, IManager {
     #region Serialized Fields
     [SerializeField]
     private List<ProductSo> products;
     #endregion
-    [OdinSerialize]
     private List<Offer> offers;
-    [OdinSerialize]
     private Dictionary<ProductSo, int> productDemand = new();
     public List<ProductSo> Products => products;
     public List<Offer> Offers => offers;

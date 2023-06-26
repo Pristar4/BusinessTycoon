@@ -6,7 +6,6 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
-using Sirenix.OdinInspector;
 using UnityEngine;
 #endregion
 
@@ -32,7 +31,6 @@ namespace BT.BusinessTycoon.Scripts.Models {
 
     public int MaterialCostPerUnit { get; }
 
-    [ShowInInspector]
     public int MiddlePrice => (priceRange.x + priceRange.y) / 2;
 
     public Vector2Int PriceRange => priceRange;
