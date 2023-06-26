@@ -1,24 +1,24 @@
 version: 2.1
 
 orbs:
-  unity: game-ci/unity@x.y
+  unity: game-ci/unity@1.4.0
 
 workflows:
   build-unity-project:
     jobs:
       - unity/build:
-          name: 'build-linux64-il2cpp'
-          step-name: 'Build StandaloneLinux64'
+          name: 'build-windows-il2cpp'
+          step-name: 'Build StandaloneWindows64'
           unity-serial-var-name: 'UNITY_SERIAL'
           unity-username-var-name: 'UNITY_USERNAME'
           unity-password-var-name: 'UNITY_PASSWORD'
           executor:
-            name: 'unity/ubuntu'
-            target_platform: 'linux-il2cpp'
+            name: 'unity/windows-runner'
+            target_platform: 'windows-il2cpp'
             editor_version: '2023.1.1f1'
-            resource_class: 'large'
+            resource_class: 'Pristar4/default'
           project-path: '.'
-          build-target: StandaloneLinux64
+          build-target: StandaloneWindows64
           compress: true
           context: unity
 # version: 2.1
