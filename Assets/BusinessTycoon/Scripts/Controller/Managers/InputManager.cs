@@ -9,7 +9,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class InputManager : MonoBehaviour, IManager, GameInput.IUIActions {
     // Define the events that will be fired by the InputManager
     public event Action<Vector2> OnNavigateEvent;

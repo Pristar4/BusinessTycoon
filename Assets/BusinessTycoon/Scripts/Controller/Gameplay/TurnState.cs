@@ -8,13 +8,13 @@
 #region
 using System;
 using System.Collections.Generic;
-using BT.Scripts.Controller.Managers;
-using BT.Scripts.Controller.Managers.BT.Scripts.Gameplay;
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Controller.Managers;
+using BT.BusinessTycoon.Scripts.Controller.Managers.BT.Scripts.Gameplay;
+using BT.BusinessTycoon.Scripts.Models;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Gameplay {
+namespace BT.BusinessTycoon.Scripts.Controller.Gameplay {
   public abstract class TurnState {
     protected TurnStateMachine machine;
     public virtual void Initialize(TurnStateMachine stateMachine) {

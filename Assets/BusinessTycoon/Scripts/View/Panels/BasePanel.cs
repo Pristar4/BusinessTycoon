@@ -6,10 +6,10 @@
 // -----------------------------------------------------------------------
 #endregion
 using System;
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Models;
 using UnityEngine;
 
-namespace BT.Scripts.View.Panels {
+namespace BT.BusinessTycoon.Scripts.View.Panels {
   public class BasePanel : MonoBehaviour, IPanel {
     public virtual void Initialize(PanelData data = null) {
       throw new NotImplementedException();

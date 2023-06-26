@@ -1,8 +1,8 @@
-using BT.Scripts.Controller.Managers;
+using BT.BusinessTycoon.Scripts.Controller.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BT.Scripts.View {
+namespace BT.BusinessTycoon.Scripts.View {
   public class PauseMenu : MonoBehaviour {
     // Reference to the pause menu panel
     [SerializeField]

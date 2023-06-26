@@ -10,7 +10,7 @@ using System;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Models {
+namespace BT.BusinessTycoon.Scripts.Models {
   [Serializable]
   public class ProductData {
     #region Serialized Fields

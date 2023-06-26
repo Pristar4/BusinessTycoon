@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Models {
+namespace BT.BusinessTycoon.Scripts.Models {
   [CreateAssetMenu(fileName = "New CompanyPreset", menuName = "CompanyPreset",
       order = 0)]
   public class CompanyPreset : ScriptableObject {

@@ -10,7 +10,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Models {
+namespace BT.BusinessTycoon.Scripts.Models {
   [CreateAssetMenu(fileName = "new_product", menuName = "Production/Product",
       order = 0)]
   public class ProductSo : ScriptableObject {

@@ -7,11 +7,11 @@
 #endregion
 #region
 using System.Collections.Generic;
-using BT.Scripts.Controller.Managers;
+using BT.BusinessTycoon.Scripts.Controller.Managers;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Models {
+namespace BT.BusinessTycoon.Scripts.Models {
   public class Company : MonoBehaviour {
     #region Serialized Fields
     [SerializeField] private Finance finance;

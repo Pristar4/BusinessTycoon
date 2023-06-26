@@ -7,13 +7,13 @@
 #endregion
 #region
 using System.Collections.Generic;
-using BT.Scripts.Controller.Gameplay;
-using BT.Scripts.Controller.Managers;
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Controller.Gameplay;
+using BT.BusinessTycoon.Scripts.Controller.Managers;
+using BT.BusinessTycoon.Scripts.Models;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.View.Panels {
+namespace BT.BusinessTycoon.Scripts.View.Panels {
   public class MarketInfoPanel : BasePanel {
     #region Serialized Fields
     [SerializeField]

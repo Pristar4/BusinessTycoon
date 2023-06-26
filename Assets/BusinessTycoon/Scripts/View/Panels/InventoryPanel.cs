@@ -6,13 +6,13 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
-using BT.Scripts.Controller.Managers;
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Controller.Managers;
+using BT.BusinessTycoon.Scripts.Models;
 using TMPro;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.View.Panels {
+namespace BT.BusinessTycoon.Scripts.View.Panels {
   public class InventoryPanel : BasePanel {
     #region Serialized Fields
     [SerializeField] private Transform inventoryContainer;

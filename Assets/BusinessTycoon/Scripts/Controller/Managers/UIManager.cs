@@ -7,8 +7,8 @@
 #endregion
 #region
 using System;
-using BT.Scripts.Models;
-using BT.Scripts.View.Panels;
+using BT.BusinessTycoon.Scripts.Models;
+using BT.BusinessTycoon.Scripts.View.Panels;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -16,7 +16,7 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   namespace BT.Scripts.Gameplay {
     public class UIManager : MonoBehaviour, IManager {
       #region Serialized Fields

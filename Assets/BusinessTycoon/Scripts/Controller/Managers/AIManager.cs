@@ -6,11 +6,11 @@
 // -----------------------------------------------------------------------
 #endregion
 #region
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Models;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class AIManager : MonoBehaviour, IManager {
     #region IManager Members
     public void Initialize() {

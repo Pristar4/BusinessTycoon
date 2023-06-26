@@ -7,14 +7,14 @@
 #endregion
 #region
 using System.Collections.Generic;
-using BT.Scripts.Controller.Gameplay;
-using BT.Scripts.Controller.Managers.BT.Scripts.Gameplay;
-using BT.Scripts.Models;
+using BT.BusinessTycoon.Scripts.Controller.Gameplay;
+using BT.BusinessTycoon.Scripts.Controller.Managers.BT.Scripts.Gameplay;
+using BT.BusinessTycoon.Scripts.Models;
 using Sirenix.OdinInspector;
 using UnityEngine;
 #endregion
 
-namespace BT.Scripts.Controller.Managers {
+namespace BT.BusinessTycoon.Scripts.Controller.Managers {
   public class GameManager : MonoBehaviour {
     private const int NpcCount = 4;
     #region Serialized Fields
