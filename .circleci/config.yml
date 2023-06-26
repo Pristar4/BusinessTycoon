@@ -36,6 +36,6 @@ workflows:
             # - test-windows
           step-name: Build StandaloneWindows64 il2cpp
           # step-name: Build StandaloneWindows64
-          unity-serial-var-name: UNITY_SERIAL
+          unity-license-var-name: UNITY_SERIAL
           unity-password-var-name: UNITY_PASSWORD
           unity-username-var-name: UNITY_USERNAME
