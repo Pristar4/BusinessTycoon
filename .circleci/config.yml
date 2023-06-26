@@ -52,10 +52,10 @@ workflows:
           unity-username-var-name: 'UNITY_USERNAME'
           unity-password-var-name: 'UNITY_PASSWORD'
           executor:
-            name: 'unity/ubuntu'
-            target_platform: 'windows-mono'
+            name: 'unity/windows-runner'
+            target_platform: 'windows-il2cpp'
             editor_version: '2023.1.1f1'
-            resource_class: 'large'
+            resource_class: 'pristar4/default'
           project-path: '.'
           build-target: StandaloneWindows64
           compress: true
