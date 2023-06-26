@@ -31,7 +31,7 @@ workflows:
             target_platform: windows-mono
           name: build-Windows
           project-path: .
-          requires:
+          # requires:
             # - test-windows
           step-name: Build StandaloneWindows64 il2cpp
           unity-license-var-name: 'UNITY_SERIAL'
