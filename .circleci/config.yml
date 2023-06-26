@@ -14,10 +14,10 @@ workflows:
           unity-password-var-name: UNITY_PASSWORD
           unity-license-var-name: UNITY_LICENSE
           executor:
-            name: 'unity/windows-runner'
+            name: 'unity/windows-2022'
             target_platform: 'windows-il2cpp'
             editor_version: '2023.1.1f1'
-            resource_class: 'pristar4/default'
+            size: 'large'
           project-path: '.'
           build-target: StandaloneWindows64
           compress: true
