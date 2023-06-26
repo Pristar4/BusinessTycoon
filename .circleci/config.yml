@@ -1,26 +1,48 @@
-
 version: 2.1
 
 orbs:
-  unity: game-ci/unity@1.4
+  unity: game-ci/unity@x.y
 
 workflows:
   build-unity-project:
     jobs:
-       # Windows IL2CPP
       - unity/build:
-          name: 'build-Windows64-il2cpp'
-          step-name: 'Build StandaloneWindows64 il2cpp'
+          name: 'build-linux64-il2cpp'
+          step-name: 'Build StandaloneLinux64'
           unity-serial-var-name: 'UNITY_SERIAL'
           unity-username-var-name: 'UNITY_USERNAME'
           unity-password-var-name: 'UNITY_PASSWORD'
           executor:
-            name: 'unity/windows-runner'
-            target_platform: 'windows-il2cpp'
+            name: 'unity/ubuntu'
+            target_platform: 'linux-il2cpp'
             editor_version: '2023.1.1f1'
-            resource_class: 'pristar4/default'
+            resource_class: 'large'
           project-path: '.'
-          build-target: StandaloneWindows64
+          build-target: StandaloneLinux64
           compress: true
           context: unity
+# version: 2.1
+
+# orbs:
+#   unity: game-ci/unity@1.4
+
+# workflows:
+#   build-unity-project:
+#     jobs:
+#        # Windows IL2CPP
+#       - unity/build:
+#           name: 'build-Windows64-il2cpp'
+#           step-name: 'Build StandaloneWindows64 il2cpp'
+#           unity-serial-var-name: 'UNITY_SERIAL'
+#           unity-username-var-name: 'UNITY_USERNAME'
+#           unity-password-var-name: 'UNITY_PASSWORD'
+#           executor:
+#             name: 'unity/windows-runner'
+#             target_platform: 'windows-il2cpp'
+#             editor_version: '2023.1.1f1'
+#             resource_class: 'pristar4/default'
+#           project-path: '.'
+#           build-target: StandaloneWindows64
+#           compress: true
+#           context: unity
           
