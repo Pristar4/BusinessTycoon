@@ -16,7 +16,7 @@ workflows:
             name: 'unity/windows-runner'
             target_platform: 'windows-il2cpp'
             editor_version: '2023.1.1f1'
-            resource_class: 'Pristar4/default'
+            resource_class: 'pristar4/default'
           project-path: '.'
           build-target: StandaloneWindows64
           compress: true
