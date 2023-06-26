@@ -48,6 +48,6 @@ jobs:
           path: build/StandaloneWindows64
           
       # Return License
-      - name: Return license
-        uses: game-ci/unity-return-license@v2
-        if: always()
+#       - name: Return license
+#         uses: game-ci/unity-return-license@v2
+#         if: always()
