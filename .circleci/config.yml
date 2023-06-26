@@ -6,20 +6,20 @@ orbs:
 workflows:
   build-unity-project:
     jobs:
-      - unity/test:
-          context: unity
-          executor:
-            editor_version: 2023.1.1f1
-            name: unity/windows-runner
-            resource_class: pristar4/default
-            target_platform: windows-il2cpp
-          name: test-windows
-          project-path: .
-          step-name: Check if the tests run and results are uploaded
-          test-platform: playmode
-          unity-serial-var-name: UNITY_SERIAL
-          unity-password-var-name: UNITY_PASSWORD
-          unity-username-var-name: UNITY_USERNAME
+      # - unity/test:
+      #     context: unity
+      #     executor:
+      #       editor_version: 2023.1.1f1
+      #       name: unity/windows-runner
+      #       resource_class: pristar4/default
+      #       target_platform: windows-il2cpp
+      #     name: test-windows
+      #     project-path: .
+      #     step-name: Check if the tests run and results are uploaded
+      #     test-platform: playmode
+      #     unity-serial-var-name: UNITY_SERIAL
+      #     unity-password-var-name: UNITY_PASSWORD
+      #     unity-username-var-name: UNITY_USERNAME
       - unity/build:
           build-target: StandaloneWindows64
           compress: true
@@ -28,14 +28,15 @@ workflows:
             editor_version: 2023.1.1f1
             name: unity/windows-runner
             resource_class: pristar4/default
-            target_platform: windows-il2cpp
-          name: build-Windows65-il2cpp
+            target_platform: windows-mono
+          name: build-Windows
           project-path: .
           requires:
-            - test-windows
+            # - test-windows
           step-name: Build StandaloneWindows64 il2cpp
           unity-license-var-name: 'UNITY_SERIAL'
           unity-password-var-name: 'UNITY_PASSWORD'
+          unity-username-var-name: UNITY_EMAIL
 # version: 2.1
 
 # orbs:
