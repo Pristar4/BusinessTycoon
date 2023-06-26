@@ -1,4 +1,4 @@
-testname: Unity - Activate
+name: Unity - Activate
 on:
   workflow_dispatch: {}
 jobs:
