@@ -1,23 +1,13 @@
-﻿#region Info
-
-// -----------------------------------------------------------------------
-// FactoryData.cs
-// 
-// Felix Jung 20.06.2023
-// -----------------------------------------------------------------------
-
-#endregion
-
-#region
-
-using System;
+﻿using System;
 using UnityEngine;
 
-#endregion
-
-namespace BT {
-    [Serializable]
-    public class FactoryData {
+namespace BT
+{
+    /// <summary>
+    /// Holds data for a factory.
+    /// </summary>
+    [Serializable] public class FactoryData 
+    {
         #region Serialized Fields
 
         [SerializeField] private FactorySo factory;
@@ -27,7 +17,11 @@ namespace BT {
 
         #endregion
 
-        public FactoryData(FactorySo factory, int currentTurn) {
+        private const float WagePerHour = 0.11f;
+        private const int HoursPerQuarter = 528;
+
+        public FactoryData(FactorySo factory, int currentTurn)
+        {
             this.factory = factory;
             initialOutput = factory.OutputPerQuarter;
             currentOutput = initialOutput;
@@ -46,43 +40,39 @@ namespace BT {
         public int TurnBuilt => turnBuilt;
         public int EndSetupTurn => turnBuilt + factory.SetupTime;
 
-        public void AdvanceTurn(int currentTurn) {
-            if (factory.FactoryType == FactoryType.Build &&
-                currentTurn >= EndSetupTurn)
+        public void AdvanceTurn(int currentTurn)
+        {
+            if ((factory.FactoryType == FactoryType.Build || factory.FactoryType == FactoryType.Rent) && currentTurn >= EndSetupTurn)
+            {
                 currentOutput = factory.OutputPerQuarter;
-
-            if (factory.FactoryType == FactoryType.Rent &&
-                currentTurn >= EndSetupTurn)
-                currentOutput = factory.OutputPerQuarter;
+            }
         }
 
-        public int CalculateProductionCost() {
-            if (factory.FactoryType == FactoryType.Build)
-                return currentOutput * factory.LaborCostPerUnit + currentOutput *
-                       factory.productProduced.MaterialCostPerUnit +
-                       factory.MaintenancePerQuarter;
-            if (factory.FactoryType == FactoryType.Rent)
-                return currentOutput * factory.OutsourcingFeePerUnit + currentOutput *
-                       factory.productProduced.MaterialCostPerUnit +
-                       factory.MaintenancePerQuarter;
+        public int CalculateProductionCost()
+        {
+            if (factory.FactoryType == FactoryType.Build || factory.FactoryType == FactoryType.Rent)
+            {
+                int perUnitCost = currentOutput * factory.productProduced.MaterialCostPerUnit;
+                int costMultiplicator = factory.FactoryType == FactoryType.Build ? factory.LaborCostPerUnit : factory.OutsourcingFeePerUnit;
+                return currentOutput * costMultiplicator + perUnitCost + factory.MaintenancePerQuarter;
+            }
 
             return 0;
         }
 
-        public void ResetOutput() {
+        public void ResetOutput()
+        {
             currentOutput = 0;
         }
 
-        public int CalculateMaterialCost() {
+        public int GetMaterialCost()
+        {
             return currentOutput * Factory.productProduced.MaterialCostPerUnit;
         }
 
-        public float CalculateLaborCost() {
-            // 110€ per hour divided by 1000 to make everything in 1000s
-            float wage = 0.11f;
-            // 8 hours per day, 22 days per month, 3 months per quarter = 528 hours per quarter
-            int hoursPerQuarter = 528;
-            return Factory.LaborForce * hoursPerQuarter * wage;
+        public float GetLaborCost()
+        {
+            return Factory.LaborForce * HoursPerQuarter * WagePerHour;
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BT.Managers.BT.Scripts.Gameplay;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BT.Managers {
     public class GameManager : MonoBehaviour {
@@ -10,7 +11,8 @@ namespace BT.Managers {
 
         [Header("Gameplay")] [SerializeField] private List<Company> companies;
         [SerializeField] private Company companyPrefab;
-        [SerializeField] private CompanyPreset companyPreset;
+        [SerializeField] private CompanyPreset playerCompanyPreset;
+        [SerializeField] private CompanyPreset npcCompanyPreset;
         [SerializeField] private GameState currentState;
         [Header("Managers")] [SerializeField] private AIManager aiManager;
         [SerializeField] private PlayerManager playerManager;
@@ -58,28 +60,27 @@ namespace BT.Managers {
 
         private Company CreateCompany() {
             var newCompany = Instantiate(companyPrefab);
-            newCompany.Finance.Balance = companyPreset.startingBalance;
+            newCompany.Finance.Balance = playerCompanyPreset.startingBalance;
 
             // Deep copy of the ProductData list
-            newCompany.ProductInventory
-                    = new List<ProductData>(companyPreset.startingProductInventory);
+            foreach (var productData in playerCompanyPreset.startingProductInventory) newCompany.AddToProductInventory(productData);
 
             newCompany.FactoryInventory = new List<FactoryData>();
 
-            foreach (var factoryData in companyPreset.startingFactoryInventory) {
+            foreach (var factoryData in playerCompanyPreset.startingFactoryInventory) {
                 // Get the corresponding FactorySo from the FactoryData
                 var factorySo = factoryData.Factory;
 
                 // Create a new FactoryData instance and set its properties
                 var newFactoryData = new FactoryData(factorySo,
                                                      ManagerProvider.Current.TurnManager
-                                                             .CurrentTurn);
-                newFactoryData.CurrentOutput
-                        = factoryData.CurrentOutput; // Set the current output if necessary
+                                                             .CurrentTurn) {
+                    CurrentOutput = factoryData.CurrentOutput, // Set the current output if necessary
+                };
                 newCompany.FactoryInventory.Add(newFactoryData);
             }
 
-            newCompany.CompanyName = companyPreset.companyName;
+            newCompany.CompanyName = playerCompanyPreset.companyName;
             return newCompany;
         }
 
@@ -87,7 +88,7 @@ namespace BT.Managers {
             var npcCompanies = new List<Company>();
 
             for (int i = 0; i < count; i++) {
-                var npc = aiManager.CreateCompany(companyPrefab, i);
+                var npc = aiManager.CreateCompany(companyPrefab,npcCompanyPreset, i);
                 npcCompanies.Add(npc);
             }
 

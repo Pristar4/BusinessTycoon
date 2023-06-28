@@ -15,13 +15,11 @@ using UnityEngine;
 #endregion
 
 namespace BT {
-    [CreateAssetMenu(fileName = "new_factory", menuName = "Production/Factory",
-                     order = 0)]
+    [CreateAssetMenu(fileName = "new_factory", menuName = "Production/Factory", order = 0)]
     public class FactorySo : ScriptableObject {
         #region Serialized Fields
 
         [SerializeField] public ProductSo productProduced;
-
         [SerializeField] private int buildCost;
         [SerializeField] private string depreciationMethod;
         [SerializeField] private int depreciationTime;
@@ -48,7 +46,9 @@ namespace BT {
         public int DepreciationTime => depreciationTime;
         public string DepreciationMethod => depreciationMethod;
         public bool CanBenefitFromRD => FactoryType == FactoryType.Build;
+        public string FactoryName => name;
     }
+
     public enum FactoryType {
         Build,
         Rent,

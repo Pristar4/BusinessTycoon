@@ -40,7 +40,6 @@ namespace BT {
 
         private void EndTurn() {
             machine.SetTurnState(machine.ProductionTurnState());
-            Debug.Log("End Turn");
         }
     }
 
@@ -62,7 +61,12 @@ namespace BT {
         }
 
         public override void Update() {
-            foreach (var company in companies) company.Produce();
+            foreach (var company in companies) {
+                if (company.State == CompanyState.Active) {
+                    company.Produce();
+                    
+                }
+            }
 
             uiManager.UpdateUI(playerManager.PlayerCompany,
                                turnManager.CurrentTurn);
@@ -119,7 +123,9 @@ namespace BT {
 
         public override void Update() {
             foreach (var company in companies)
-                company.CreateOffer(marketManager);
+                if (company.State == CompanyState.Active) {
+                    company.CreateOffer(marketManager);
+                }
 
             uiManager.UpdateUI(playerManager.PlayerCompany,
                                turnManager.CurrentTurn);
@@ -176,18 +182,28 @@ namespace BT {
         private PlayerManager playerManager;
         private TurnManager turnManager;
         private UIManager uiManager;
+        private List<Company> companies;
 
         public DeconstructOfferTurnState(TurnManager turnManager,
                                          MarketManager marketManager,
                                          UIManager uiManager,
-                                         PlayerManager playerManager) {
+                                         PlayerManager playerManager, List<Company> companies) {
             this.turnManager = turnManager;
             this.marketManager = marketManager;
             this.uiManager = uiManager;
             this.playerManager = playerManager;
+            this.companies = companies;
         }
 
         public override void Update() {
+            // costs applied
+            foreach (var company in companies) {
+                if (company.State == CompanyState.Active) {
+                    company.ApplyCosts();
+                    
+                }
+            }
+
             turnManager.AdvanceTurn();
             marketManager.ClearOffers();
 

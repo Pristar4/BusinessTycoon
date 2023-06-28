@@ -11,6 +11,7 @@
 #region
 
 using System;
+using BT.Managers.BT.Scripts.Gameplay;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -23,6 +24,7 @@ namespace BT.Managers {
         private PanelManager panelManager;
         private PlayerManager playerManager;
         private TurnManager turnManager;
+        private UIManager uiManager;
 
         public InputManager InputManager
             => TryGetAndCacheObjectOfType(ref inputManager);
@@ -38,6 +40,9 @@ namespace BT.Managers {
 
         public TurnManager TurnManager
             => TryGetAndCacheObjectOfType(ref turnManager);
+
+        public UIManager UIManager 
+            => TryGetAndCacheObjectOfType(ref uiManager);
 
         private static T TryGetAndCacheObjectOfType<T>(ref T cache)
                 where T : MonoBehaviour {

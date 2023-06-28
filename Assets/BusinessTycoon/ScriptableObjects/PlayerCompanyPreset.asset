@@ -18,5 +18,9 @@ MonoBehaviour:
     initialOutput: 1000
     currentOutput: 1000
     turnBuilt: 0
+  - factory: {fileID: 11400000, guid: 7f500a0cfdac79d43863f3a1a4d1caf7, type: 2}
+    initialOutput: 1000
+    currentOutput: 1000
+    turnBuilt: 0
   startingBalance: 200000
   companyName: Phenix Corp.

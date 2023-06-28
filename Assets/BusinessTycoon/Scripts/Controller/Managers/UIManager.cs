@@ -23,7 +23,6 @@ namespace BT.Managers {
         public class UIManager : MonoBehaviour, IManager {
             #region Serialized Fields
 
-            //collapsable fields
             [Header("UI Elements")] [SerializeField]
             private TMP_Text companyNameText;
             [SerializeField] private TMP_Text balanceText;
@@ -38,7 +37,6 @@ namespace BT.Managers {
             [SerializeField] private OfferPanel offerPanel;
             [SerializeField] private MarketInfoPanel marketInfoPanel;
             [SerializeField] private ResearchPanel researchPanel;
-            // [FoldoutGroup("UI Elements/Panels")]
             [SerializeField] private ProductionPanel productionPanel;
             [SerializeField] private FinancingPanel financingPanel;
             [SerializeField] private ContractsPanel contractsPanel;
@@ -67,9 +65,13 @@ namespace BT.Managers {
                 budgetingPanel.Initialize();
                 inventoryPanel.Initialize();
                 offerPanel.Initialize();
-
+                repeatingTasksDropdown.onValueChanged.AddListener(OnDropdownValueChanged);
                 // Activate default panel (e.g. MarketInfo)
-                OnDropdownSelectionChanged(0);
+                SwitchPanel(0);
+            }
+
+            private void OnDestroy() {
+                repeatingTasksDropdown.onValueChanged.RemoveListener(OnDropdownValueChanged);
             }
 
             public void UpdateUI(Company company, int turn) {
@@ -77,14 +79,23 @@ namespace BT.Managers {
                 UpdateTurnUI(turn);
                 offerPanel.UpdatePanel();
             }
+            
+            public void OnDropdownValueChanged(int value) {
+                // Cast the value to UIPanel
+                
+                UIPanel panel = (UIPanel) value;
+                // Switch to the selected panel
+                
+                SwitchPanel(panel);
+            }
 
-            public void OnDropdownSelectionChanged(int selectedIndex) {
+            public void SwitchPanel(UIPanel panel) {
                 // Deactivate all other panels
                 DeactivateAllPanels();
 
                 // Activate the selected panel
-                switch (selectedIndex) {
-                    case 0:
+                switch (panel) {
+                    case UIPanel.MarketInfo:
                         // Market info
                         if (marketInfoPanel.TryGetComponent(
                                     out MarketInfoPanel marketInfoPanelComponent)) {
@@ -93,7 +104,7 @@ namespace BT.Managers {
                         }
 
                         break;
-                    case 1:
+                    case UIPanel.Research:
                         // Research
                         if (researchPanel.TryGetComponent(
                                     out ResearchPanel researchPanelComponent)) {
@@ -102,7 +113,7 @@ namespace BT.Managers {
                         }
 
                         break;
-                    case 2:
+                    case UIPanel.Production:
                         // Production
                         if (inventoryPanel.TryGetComponent(
                                     out InventoryPanel inventoryPanelComponent)) {
@@ -117,7 +128,7 @@ namespace BT.Managers {
                         }
 
                         break;
-                    case 3:
+                    case UIPanel.Contracts:
                         // Contracts
                         if (contractsPanel.TryGetComponent(
                                     out ContractsPanel contractsPanelComponent)) {
@@ -126,8 +137,7 @@ namespace BT.Managers {
                         }
 
                         break;
-
-                    case 4:
+                    case UIPanel.Financing:
                         // Financing
                         if (financingPanel.TryGetComponent(
                                     out FinancingPanel financingPanelComponent)) {
@@ -136,7 +146,7 @@ namespace BT.Managers {
                         }
 
                         break;
-                    case 5:
+                    case UIPanel.Budgeting:
                         // Budgeting
                         if (budgetingPanel.TryGetComponent(
                                     out BudgetingPanel budgetingPanelComponent)) {
@@ -187,6 +197,21 @@ namespace BT.Managers {
                     Debug.Log("Error deactivating panels: " + e);
                 }
             }
+
+            public void SellProduct(ProductData product) {
+                Debug.Log("Sell product: " + product.Type.name);
+            }
+        }
+
+        public enum UIPanel {
+            MarketInfo,
+            Research,
+            Production,
+            Contracts,
+            Financing,
+            Budgeting,
+            Inventory,
+
         }
     }
 }

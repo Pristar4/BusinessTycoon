@@ -78,9 +78,9 @@ namespace BT.Managers {
 
                     //remove offer if it is empty
                     if (offer.quantity <= 0) Offers.Remove(offer);
-                    Debug.Log(offer.company.CompanyName + " Sold " + quantityToBuy +
-                              " of " + offer.product.Type.name +
-                              " for " + offer.price + " each");
+                    // Debug.Log(offer.company.CompanyName + " Sold " + quantityToBuy +
+                    //           " of " + offer.product.Type.name +
+                    //           " for " + offer.price + " each");
 
                     if (remainingDemand <= 0) break;
                 }
@@ -89,7 +89,7 @@ namespace BT.Managers {
             }
 
             AdjustPrices();
-            Debug.Log("UpdateMarket");
+            // Debug.Log("UpdateMarket");
         }
 
         private void SortOffersByScore(List<Offer> offerList) {
