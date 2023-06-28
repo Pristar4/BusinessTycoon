@@ -8,10 +8,6 @@
 
 #endregion
 
-#region
-
-#endregion
-
 namespace BT.Panels {
     public class BudgetingPanel : BasePanel {
         public override void Initialize(PanelData data = null) {

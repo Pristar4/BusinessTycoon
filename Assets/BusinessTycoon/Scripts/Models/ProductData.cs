@@ -12,6 +12,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 #endregion
 
@@ -20,20 +21,20 @@ namespace BT {
     public class ProductData {
         #region Serialized Fields
 
-        [SerializeField] private int amount;
+        [FormerlySerializedAs("amount")] [SerializeField] private int quantity;
         [SerializeField] private ProductSo type;
 
         #endregion
 
-        public ProductData(ProductSo type, int amount) {
+        public ProductData(ProductSo type, int quantity) {
             this.type = type;
-            this.amount = amount;
+            this.quantity = quantity;
         }
 
-        public int Amount
+        public int Quantity
         {
-            get => amount;
-            set => amount = value;
+            get => quantity;
+            set => quantity = value;
         }
 
         public ProductSo Type => type;

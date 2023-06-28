@@ -52,7 +52,7 @@ namespace BT {
             offerResultTurnState.Initialize(this);
             deconstructOfferTurnState
                     = new DeconstructOfferTurnState(turnManager, marketManager, uiManager,
-                                                    playerManager);
+                                                    playerManager, companies);
             deconstructOfferTurnState.Initialize(this);
             currentState = idleTurnState;
         }

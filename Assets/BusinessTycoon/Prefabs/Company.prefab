@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &911420047338991372
 MonoBehaviour:
@@ -44,8 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a9e2d46797419e9d88ce8afed52e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productInventory:
-  - amount: 5
-    type: {fileID: 11400000, guid: 7d0909b6a370ced4dad4708dfbbdc495, type: 2}
+  finance:
+    balanceView: 0
+    incomeView: 0
+    expenseView: 0
+    netProfitView: 0
+  productInventory: []
   factoryInventory: []
   companyName: DefaultCompany

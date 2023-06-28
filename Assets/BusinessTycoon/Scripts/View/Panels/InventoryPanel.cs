@@ -43,7 +43,7 @@ namespace BT.Panels {
 
                 // Set product details in TMP Text component
                 var productText = product.GetComponentInChildren<TMP_Text>();
-                productText.text = item.Type.name + " X " + item.Amount;
+                productText.text = item.Type.name + " X " + item.Quantity;
             }
         }
     }
